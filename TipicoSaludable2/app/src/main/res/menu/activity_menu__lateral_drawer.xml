@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inicio"
+            android:icon="@drawable/iconoinicio"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Galeria de Comida" />
+        <item
+            android:id="@+id/nav_ejercicios"
+            android:icon="@drawable/iconsrunning"
+            android:title="Ejercicios" />
+
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_acercade"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Acerca de Nosotros" />
+            <item
+                android:id="@+id/nav_cerrar_sesion"
+                android:icon="@drawable/iconsapagar"
+                android:title="Cerrar Sesión" />
+
+        </menu>
+    </item>
+
+</menu>

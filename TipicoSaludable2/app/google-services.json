@@ -1,0 +1,55 @@
+    {
+  "project_info": {
+    "project_number": "159019297528",
+    "firebase_url": "https://tipico-saludable-50fb7.firebaseio.com",
+    "project_id": "tipico-saludable-50fb7",
+    "storage_bucket": "tipico-saludable-50fb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159019297528:android:e901fbe9a945d2af",
+        "android_client_info": {
+          "package_name": "com.sanchez.tipicosaludable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159019297528-10pa27si2uupsaral32ufu1rnuqisqro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sanchez.tipicosaludable",
+            "certificate_hash": "e650bd88bb3b29cb00e9de9d70fdd50512c20e8e"
+          }
+        },
+        {
+          "client_id": "159019297528-ffafbbmfg9unc366fnhh3uvaghor7242.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVWftvPyBdxGHNNwqOS14t1vmuIU5WbNE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159019297528-ffafbbmfg9unc366fnhh3uvaghor7242.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

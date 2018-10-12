@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sanchez.tipicosaludable.ActividadDetalle">
+    <ImageView
+        android:id="@+id/imagen_extendida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:transitionName="@string/nombre_transicion_imagen">
+
+    </ImageView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/infocalorias"
+                android:textSize="26sp"
+
+                android:background="@drawable/esquina_redonda"
+                android:textColor="@color/blanco"
+                />
+
+
+
+
+            <TextView
+                android:id="@+id/informacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:paddingLeft="10dp"
+
+
+                android:textSize="20sp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/carboinfo"
+                android:textSize="26dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/esquina_redonda"
+                android:textColor="@color/blanco"
+                />
+            <TextView
+                android:id="@+id/informacioncarbo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:paddingLeft="10dp"
+
+                android:textSize="20sp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/proteinfo"
+                android:textSize="26dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/esquina_redonda"
+                android:textColor="@color/blanco"
+                />
+            <TextView
+                android:id="@+id/informacionprote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:paddingLeft="10dp"
+
+                android:textSize="20sp"
+                />
+            <Button
+                android:id="@+id/btnconsumodealimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btnañadirplato"
+
+                android:textSize="20sp"
+                android:layout_marginBottom="8dp"
+                />
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>
