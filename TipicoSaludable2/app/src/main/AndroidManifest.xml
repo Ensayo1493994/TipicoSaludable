@@ -17,7 +17,11 @@
 
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".CaloriasActivity" />
+        <activity android:name=".CaloriasActivity" >
+
+
+        </activity>
+
         <activity
             android:name=".ActividadDetalle"
             android:label="@string/title_activity_actividad_detalle2"
@@ -35,11 +39,6 @@
         </activity>
         <activity android:name=".Splash"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".Deportes">
@@ -49,6 +48,12 @@
             android:name=".Menu_Lateral"
             android:label="@string/title_activity_menu__lateral"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
 
 
         </activity>

@@ -10,11 +10,11 @@
     <string name="title_activity_actividad_detalle2">ActividadDetalle2</string>
     <string name="btnañadirplato">Quiero Comer Esto</string>
     <string name="infocalorias">CALORIAS: </string>
-    <string name="title_activity_menu__lateral">Tradicional Fitness</string>
+    <string name="title_activity_menu__lateral">Tipico Saludable</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="NombreApp">Tradicional Fitness</string>
+    <string name="NombreApp">Tipico Saludable</string>
     <string name="caloriasinfo">CALORIAS:</string>
     <string name="carboinfo">CARBOHIDRATOS:</string>
     <string name="proteinfo">PROTEINAS:</string>
@@ -86,6 +86,10 @@
     <string name="error_login">Ocurrió un error al ingresar</string>
     <string name="logout">Cerrar sesión</string>
     <string name="firebase_error_login">Error al iniciar sesión en Firebase</string>
+
+    <string name="cantidad_a_consumir">¿Que Cantidad Quieres Comer?</string>
+    <string name="btnaceptar">Aceptar</string>
+    <string name="alimetosconsumidos">Hoy has comido los siguientes alimentos</string>
 
 
 </resources>

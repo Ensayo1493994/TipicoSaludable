@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,12 +28,14 @@ public class ActividadDetalle extends AppCompatActivity {
     private double canti;
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
+    int cantidaddelalimento=0;
     //-----------------------------
     //Agregar lo de las alertas
-    Dialog epicDialog;
+    Dialog epicDialog, cantidadaconsumir;
     ImageView cerrar, cerrarPasada;
-    Button btnContinuar,btnCancelar, btnContinuar2,btnCancelar2,btnok;
+    Button btnContinuar,btnCancelar, btnContinuar2,btnCancelar2,btnok, btnaceptar;
     TextView titleTope,mensajeTope,mensajePasada,titlePasada;
+    EditText edtxcantidad;
 
 
 
@@ -45,7 +48,10 @@ public class ActividadDetalle extends AppCompatActivity {
 
         imagenExtendida = (ImageView) findViewById(R.id.imagen_extendida);
 
+
+
         epicDialog = new Dialog(this);
+        cantidadaconsumir = new Dialog(this);
 
         informacion = findViewById(R.id.informacion);
         informacioncarbo = findViewById(R.id.informacioncarbo);
@@ -59,11 +65,12 @@ public class ActividadDetalle extends AppCompatActivity {
 
                 UltimoConsumo consumo1 = new UltimoConsumo();
                 consumo1.setIdDrawable(Fragment_galeria.n);
+                consumo1.setNombre(Fragment_galeria.nombrealimento);
                 ultimoconsumo.add(consumo1);
                 //Toast.makeText(ActividadDetalle.this, ""+itemDetallado.getIdDrawable(), Toast.LENGTH_SHORT).show();
-
+                showCalcularcantidad();
                 Calorias_consumidas=Calorias_consumidas+(consumo+ Integer.parseInt(informacion.getText().toString()));
-                x=((CaloriasActivity.actmb*90)/100);
+                /*x=((CaloriasActivity.actmb*90)/100);
                 if (Calorias_consumidas>CaloriasActivity.actmb){
 
                     canti= (itemDetallado.getCalorias()-CaloriasActivity.actmb);
@@ -83,7 +90,7 @@ public class ActividadDetalle extends AppCompatActivity {
                     Toast.makeText(ActividadDetalle.this, "Te faltan "+canti+" calorias",
                             Toast.LENGTH_LONG).show();
                     ShowTope();
-                }
+                }*/
 
 
 
@@ -99,6 +106,67 @@ public class ActividadDetalle extends AppCompatActivity {
 
         cargarImagenExtendida();
     }
+
+    private void showCalcularcantidad() {
+        cantidadaconsumir.setContentView(R.layout.popup_cantidad);
+        btnaceptar = cantidadaconsumir.findViewById(R.id.btnaceptarconsumir);
+        edtxcantidad = cantidadaconsumir.findViewById(R.id.edtxcantidad);
+
+        btnaceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cantidaddelalimento = Integer.parseInt(edtxcantidad.getText().toString());
+                if (cantidaddelalimento>=20){
+                    edtxcantidad.setError("No puedes comer tanto");
+                    edtxcantidad.setText("");
+
+                }
+                else {
+                    Calorias_consumidas = cantidaddelalimento*(consumo+ Integer.parseInt(informacion.getText().toString()));
+                    //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+                    x=((CaloriasActivity.actmb*90)/100);
+                    if (Calorias_consumidas>CaloriasActivity.actmb){
+
+                        canti= (Calorias_consumidas-CaloriasActivity.actmb);
+                        Toast.makeText(ActividadDetalle.this, "Te has pasado "+canti+" calorias",
+                                Toast.LENGTH_LONG).show();
+                        showPasada();
+                        cantidadaconsumir.dismiss();
+
+                    }
+                    else  if(Calorias_consumidas==CaloriasActivity.actmb){
+                        Toast.makeText(ActividadDetalle.this, "No debes comsumir mas alimentos",
+                                Toast.LENGTH_LONG).show();
+                        ShowTope();
+                        cantidadaconsumir.dismiss();
+
+                    }
+                    else if(Calorias_consumidas>=x && x<CaloriasActivity.actmb){
+                        canti= (CaloriasActivity.actmb-Calorias_consumidas);
+                        Toast.makeText(ActividadDetalle.this, "Te faltan "+canti+" calorias",
+                                Toast.LENGTH_LONG).show();
+                        ShowTope();
+                        cantidadaconsumir.dismiss();
+                    }
+                    else{
+                        Intent intent = new Intent(ActividadDetalle.this,Menu_Lateral.class);
+                        startActivity(intent);
+
+                    }
+
+                }
+
+
+
+
+            }
+        });
+        cantidadaconsumir.show();
+
+
+
+    }
+
     private void cargarImagenExtendida() {
         Glide.with(imagenExtendida.getContext())
                 .load(itemDetallado.getIdDrawable())
@@ -139,6 +207,7 @@ public class ActividadDetalle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 epicDialog.dismiss();
+                cantidadaconsumir.dismiss();
                 Toast.makeText(ActividadDetalle.this,"Cancelaste",Toast.LENGTH_SHORT).show();
 
             }
@@ -147,6 +216,7 @@ public class ActividadDetalle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 epicDialog.dismiss();
+                cantidadaconsumir.dismiss();
                 Toast.makeText(ActividadDetalle.this,"Ten cuidado... !!!",Toast.LENGTH_SHORT).show();
 
             }

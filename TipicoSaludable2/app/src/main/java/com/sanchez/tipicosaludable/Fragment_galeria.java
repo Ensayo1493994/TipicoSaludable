@@ -16,6 +16,8 @@ import android.widget.GridView;
 
 public class Fragment_galeria extends Fragment implements AdapterView.OnItemClickListener {
     public  static  int n;
+    public static String nombrealimento;
+
 
 
 
@@ -42,7 +44,10 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Comida item = (Comida) adapterView.getItemAtPosition(position);
-        n =item.getIdDrawable();
+        //n =item.getIdDrawable(),item.getNombre();
+
+        n = item.getIdDrawable();
+        nombrealimento = item.getNombre();
 
         Activity activity = getActivity();
         Intent intent = new Intent(getContext(), ActividadDetalle.class);
