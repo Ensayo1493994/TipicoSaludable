@@ -39,15 +39,13 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseUser firebaseUser;
-    public static int temp = 0;
+    public static int temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calorias);
-        if (AccessToken.getCurrentAccessToken() == null) {
-            goLogin();
-        }
+
 
 
         validar = (Button) findViewById(R.id.validar);
@@ -60,6 +58,8 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
 
                 validarTodo();
                 gastarKal();
+
+
 
             }
         });
@@ -217,21 +217,9 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
     protected void onStart() {
         super.onStart();
 
-        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
 
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
 
-        if (opr.isDone()){
-            GoogleSignInResult result = opr.get();
-            handleSignInRsult(result);
-        } else {
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
-                    handleSignInRsult(googleSignInResult);
-                }
-            });
-        }
 
     }
 
@@ -244,30 +232,10 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
 
     }
 
-    private void handleSignInRsult(GoogleSignInResult result) {
-
-        if (result.isSuccess()){
-
-            GoogleSignInAccount account =  result.getSignInAccount();
-
-            /*+XtxtNombre.setText(account.getDisplayName());
-            txtCorreo.setText(account.getEmail());
-            txtId.setText(account.getId());*/
-
-            Log.d("MIAPP",account.getPhotoUrl().toString());
-            //Glide.with(this).load(account.getPhotoUrl()).into(fotop);
-
-        } else {
-
-            goLogin();
-
-        }
-
-    }
 
     private void goLogin() {
 
-        Intent intent = new Intent(CaloriasActivity.this,MainActivity.class);
+        Intent intent = new Intent(CaloriasActivity.this,Login.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
@@ -279,41 +247,6 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
 
     }
 
-    public void LogOut(View view) {
-        firebaseAuth.signOut();
-        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (status.isSuccess()) {
-                    goLogin();
-                } else{
-                    Toast.makeText(CaloriasActivity.this, "No se pudo cerrar la sesion", Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
-        });
-    }
-
-    public void Revoke(View view) {
-
-        firebaseAuth.signOut();
-        Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                if (status.isSuccess()){
-                    goLogin();
-                }else {
-                    Toast.makeText(CaloriasActivity.this, "No se pudo revocar el acceso", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-
-
-
-    }
 
 
 }
