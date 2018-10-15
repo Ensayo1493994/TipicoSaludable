@@ -180,7 +180,11 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
             Intent intent = new Intent(CaloriasActivity.this,Menu_Lateral.class);
             startActivity(intent);
             finish();
-            Toast.makeText(CaloriasActivity.this, "" + temp, Toast.LENGTH_SHORT).show();
+            if (imc>=40){
+
+                Toast.makeText(CaloriasActivity.this, "Corres un riesgo alto de enfermedad cardiovascular visita tu mèdico..." + temp, Toast.LENGTH_LONG).show();
+
+            }
 
         }
     }
