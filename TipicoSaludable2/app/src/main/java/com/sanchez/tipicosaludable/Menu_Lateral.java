@@ -29,8 +29,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Menu_Lateral extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
+public class Menu_Lateral extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
     ImageView imageViewlogo;
     TextView txtNombre;
     private FirebaseUser firebaseUser;
@@ -47,13 +46,10 @@ public class Menu_Lateral extends AppCompatActivity
         setContentView(R.layout.activity_menu__lateral);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        imageViewlogo = findViewById(R.id.imageViewlogo);
         txtNombre = findViewById(R.id.txtNombre);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.contenedor, new Inicio()).commit();
-
-
-
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -64,7 +60,6 @@ public class Menu_Lateral extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        imageViewlogo = findViewById(R.id.imageViewlogo);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -94,7 +89,6 @@ public class Menu_Lateral extends AppCompatActivity
     }
     private void setUserData(FirebaseUser user) {
         txtNombre.setText(user.getDisplayName());
-
         Glide.with(this).load(user.getPhotoUrl()).into(imageViewlogo);
 
     }
@@ -213,4 +207,19 @@ public class Menu_Lateral extends AppCompatActivity
         startActivity(intent);
 
     }
+
+/*
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (firebaseAuthListener != null){
+            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+        }
+    }*/
 }

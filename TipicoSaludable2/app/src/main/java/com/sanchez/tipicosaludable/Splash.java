@@ -21,13 +21,13 @@ public class Splash extends AppCompatActivity {
         TimerTask tarea = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(Splash.this,CaloriasActivity.class);
+                Intent intent = new Intent(Splash.this,Menu_Lateral.class);
                 startActivity(intent);
                 finish();
             }
         };
 
         Timer timer = new Timer();
-        timer.schedule(tarea,4000);
+        timer.schedule(tarea,2000);
     }
 }

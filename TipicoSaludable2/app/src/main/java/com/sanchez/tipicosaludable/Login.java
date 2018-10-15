@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -57,22 +59,37 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private ProgressBar progressBar;
     private CallbackManager callbackManager;
     private LoginButton btnloginfb;
+    Animation smalltobig, nothingtocome;
+    ImageView logocir;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         progressBar = findViewById(R.id.progresBar);
+        //animacion login
+
+        smalltobig = AnimationUtils.loadAnimation(this,R.anim.smalltobig);
+        logocir = findViewById(R.id.logocir);
+        logocir.startAnimation(smalltobig);
+
+        nothingtocome = AnimationUtils.loadAnimation(this,R.anim.nothingtocome);
+        //btnlogin.startAnimation(nothingtocome);
+
+       // btnloginfb.startAnimation(nothingtocome);
+
+        if (CaloriasActivity.temp==1){
+            goMain();
+        }
+
+
+
+
+
+        //Login Facebook
         callbackManager = CallbackManager.Factory.create();
-
-
-
-
         btnloginfb =findViewById(R.id.btnloginfb);
-
-
         btnloginfb.setReadPermissions(Arrays.asList("email","public_profile"));
         btnloginfb.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -108,8 +125,11 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             public void onClick(View view) {
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
                 startActivityForResult(intent,CODE);
+                if (CaloriasActivity.temp==1){
+                    goMain();
+                }
 
-               Calorias();
+
             }
         });
 
@@ -125,8 +145,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
             }
         };
-
-
 
     }
     private void handleFacebookAccessToken(AccessToken accessToken) {
@@ -146,16 +164,12 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         });
     }
 
-    private void Calorias() {
-        switch (temp){
-            case (1):
-                goMainScreen();
-                break;
-            case  (0):
-                break;
 
-
-        }
+    private void goMain() {
+        Intent intent3 = new Intent(Login.this ,Menu_Lateral.class);
+        intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent3);
+        finish();
     }
 
     @Override
@@ -165,7 +179,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode,resultCode,data);
         if (requestCode == CODE){
@@ -210,7 +223,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     }
 
     private void goMainScreen() {
-        Intent intent2 = new Intent(Login.this ,Menu_Lateral.class);
+        Intent intent2 = new Intent(Login.this ,CaloriasActivity.class);
         intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent2);
     }
