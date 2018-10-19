@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name"></string>
+
+    <string name="app_realizar">REALIZAR</string>
+    <string name="app_cancelar">CANCELAR</string>
+
+    <string name="titulo_ejercicios">EJERCICIOS</string>
+    <string name="brazo">Flexion brazo</string>
+    <string name="saltos">Saltos</string>
+    <string name="sentadillas">Sentadillas</string>
+    <string name="titere">Titere</string>
+    <string name="abd">Abd</string>
+    <string name="burpes">Burpes</string>
+    <string name="climber">Climber</string>
+    <string name="salto">Salto impulso</string>
+
+    <string name="titulo_actividad_fisica">ACTIVIDAD FISICA</string>
+    <string name="marcha">Marcha</string>
+    <string name="zumba">Zumba</string>
+    <string name="pilates">Pilates</string>
+    <string name="yoga">Yoga</string>
+    <string name="step">Step</string>
+    <string name="caminar">Caminar</string>
+    <string name="trote">Trotar</string>
+    <string name="aerobicos">Aerobicos</string>
+    <string name="spininng">Spininng</string>
+
+    <string name="titulo_deportes">DEPORTES</string>
+    <string name="futbol">Futbol</string>
+    <string name="balocesto">Baloncesto</string>
+    <string name="natacion">Natacion</string>
+    <string name="ciclismo">Ciclismo</string>
+    <string name="patinaje">Patinaje</string>
+    
+    //--------------------------------------------------------------------------------- Ejercicios
+    <string name="txt_brazo">Realizando este ejercicio durante 30 min continuos obtendrás 171 cal perdidas aprox.</string>
+    <string name="txt_saltar">Realizando este ejercicio durante 30 min continuos obtendrás 204 cal perdidas aprox.</string>
+    <string name="txt_sentado">Realizando este ejercicio durante 30 min continuos obtendrás 153 cal perdidas aprox.</string>
+    <string name="txt_titere">= Realizando este ejercicio durante 30 min continuos obtendrás 240 cal perdidas aprox.</string>
+    <string name="txt_abd">Realizando este ejercicio durante 30 min continuos obtendrás 500 cal perdidas aprox.</string>
+    <string name="txt_burpes">Realizando este ejercicio durante 30 min continuos obtendrás 298 cal perdidas aprox.</string>
+    <string name="txt_climber">Realizando este ejercicio durante 30 min continuos obtendrás 300 cal perdidas aprox.</string>
+    <string name="txt_impulso">Realizando este ejercicio durante 30 min continuos obtendrás 209 cal perdidas aprox.</string>
+    
+    //------------------------------------------------------------------------------------ Actividad Fisica
+    <string name="txt_aerobicos">Realizando esta actividad física durante 30 min obtendrás 221 cal perdidas aprox.</string>
+    <string name="txt_caminar">Realizando esta actividad física durante 30 min obtendrás 150 cal perdidas aprox.</string>
+    <string name="txt_pilates">Realizando esta actividad física durante 30 min obtendrás 96 cal perdidas aprox.</string>
+    <string name="txt_marcha">Realizando esta actividad física durante 30 min obtendrás 230 cal perdidas aprox.</string>
+    <string name="txt_spininng">Realizando esta actividad física durante 30 min obtendrás 270 cal perdidas aprox.</string>
+    <string name="txt_step">Realizando esta actividad física durante 30 min obtendrás 250 cal perdidas aprox.</string>
+    <string name="txt_trotar">Realizando esta actividad física durante 30 min obtendrás 300 cal perdidas aprox.</string>
+    <string name="txt_yoga">Realizando esta actividad física durante 30 min obtendrás 230 cal perdidas aprox.</string>
+    <string name="txt_zumba">Realizando esta actividad física durante 30 min obtendrás 116 cal perdidas aprox.</string>
+        
+    //------------------------------------------------------------------------------------- Deportes
+    <string name="txt_futbol">Realizando este deporte durante 30 min obtendrás 260 cal perdidas aprox.</string>
+    <string name="txt_natacion">Realizando este deporte durante 30 min obtendrás:</string>
+    <string name="txt_natacion1">Hombre = 450 calorías perdidas aprox.</string>
+    <string name="txt_natacion2">Mujer = 410 calorías perdidas aprox.</string>
+    <string name="txt_ciclismo">Realizando este deporte durante 30 min obtendrás 466 cal perdidas aprox.</string>
+    <string name="txt_patinaje">Realizando este deporte durante 30 min obtendrás 300 cal perdidas aprox.</string>
+    <string name="txt_baloncesto">Realizando este deporte durante 30 min obtendrás:</string>
+    <string name="txt_baloncesto1">Peso de 50 kg calorías perdidas 181 cal aprox.</string>
+    <string name="txt_baloncesto2">Peso de 75 kg calorías perdidas 272 cal aprox. </string>
+    <string name="txt_baloncesto3">Peso de 100 kg calorías perdidas 363 cal aprox.</string>
+
+
+</resources>
