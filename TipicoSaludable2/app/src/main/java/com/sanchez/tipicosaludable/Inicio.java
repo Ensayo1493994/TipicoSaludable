@@ -26,8 +26,8 @@ public class Inicio extends Fragment {
         TextView textView = vista.findViewById(R.id.txtnoconsumo);
 
 
-        if (ActividadDetalle.ultimoconsumo.size()>0){
-            AdaptadorUltimoConsumo adaptador = new AdaptadorUltimoConsumo(getContext(),ActividadDetalle.ultimoconsumo);
+        if (ScrollingDetalle.ultimoconsumo.size()>0){
+            AdaptadorUltimoConsumo adaptador = new AdaptadorUltimoConsumo(getContext(),ScrollingDetalle.ultimoconsumo);
             gridView.setAdapter(adaptador);
 
         }
@@ -37,8 +37,7 @@ public class Inicio extends Fragment {
         }
 
 
-        AdaptadorUltimoConsumo adaptador = new AdaptadorUltimoConsumo(getContext(),ActividadDetalle.ultimoconsumo);
-        gridView.setAdapter(adaptador);
+
 
 
 

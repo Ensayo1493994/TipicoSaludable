@@ -32,6 +32,8 @@ public class ScrollingDetalle extends AppCompatActivity {
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
     int cantidaddelalimento=0,i =0;
+    int bound = ultimoconsumo.size(), imagenid, igual=0;
+    UltimoConsumo consumo1 = new UltimoConsumo();
     //-----------------------------
     //Agregar lo de las alertas
     Dialog epicDialog, cantidadaconsumir;
@@ -64,11 +66,43 @@ public class ScrollingDetalle extends AppCompatActivity {
             public void onClick(View view) {
                 //--------TERMINAR DE ARREGLARLO
 
-                UltimoConsumo consumo1 = new UltimoConsumo();
                 consumo1.setIdDrawable(Fragment_galeria.n);
                 consumo1.setNombre(Fragment_galeria.nombrealimento);
-                ultimoconsumo.add(consumo1);
-                //Toast.makeText(ActividadDetalle.this, ""+itemDetallado.getIdDrawable(), Toast.LENGTH_SHORT).show();
+
+
+
+
+               
+                if (bound>0){
+                    for ( imagenid = 0; imagenid < bound; imagenid= imagenid+1){
+
+
+                        if ((ultimoconsumo.get(imagenid).getIdDrawable()==Fragment_galeria.n) ){
+                            //Toast.makeText(ActividadDetalle.this, "encontro igual" + ultimoconsumo.get(imagenid).getIdDrawable()+ " "+ Fragment_galeria.n, Toast.LENGTH_SHORT).show();
+
+                            igual = igual+1;
+
+                        }
+
+
+
+                    }
+
+                    if(igual==0){
+
+                        ultimoconsumo.add(consumo1);
+
+                    }
+
+
+                }else {
+                    ultimoconsumo.add(consumo1);
+
+
+
+                }
+
+                bound = ultimoconsumo.size();//Toast.makeText(ActividadDetalle.this, ""+itemDetallado.getIdDrawable(), Toast.LENGTH_SHORT).show();
                 showCalcularcantidad();
                 Calorias_consumidas=Calorias_consumidas+(consumo+ Integer.parseInt(informacion.getText().toString()));
                 /*x=((CaloriasActivity.actmb*90)/100);
