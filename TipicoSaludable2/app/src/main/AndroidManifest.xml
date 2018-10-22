@@ -37,36 +37,17 @@
         <activity
             android:name=".Splash"
             android:theme="@style/AppTheme.NoActionBar">
-
-<<<<<<< HEAD
-
-        </activity>
-        <activity android:name=".Deportes">
-
-=======
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
->>>>>>> b5f75df2261ddf00357cb2254e864f2dee4bd14a
-        </activity>
-        <activity android:name=".Deportes"></activity>
-        <activity
-            android:name=".Menu_Lateral"
-            android:label="@string/title_activity_menu__lateral"
-<<<<<<< HEAD
-            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
-
-
         </activity>
-=======
+        <activity android:name=".Deportes"></activity>
+        <activity
+            android:name=".Menu_Lateral"
+            android:label="@string/title_activity_menu__lateral"
             android:theme="@style/AppTheme.NoActionBar"></activity>
->>>>>>> b5f75df2261ddf00357cb2254e864f2dee4bd14a
 
         <meta-data
             android:name="preloaded_fonts"
