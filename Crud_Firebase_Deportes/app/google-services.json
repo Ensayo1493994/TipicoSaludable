@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "456726163983",
+    "firebase_url": "https://crud-deportes.firebaseio.com",
+    "project_id": "crud-deportes",
+    "storage_bucket": "crud-deportes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456726163983:android:120f59cec478b8fd",
+        "android_client_info": {
+          "package_name": "com.example.saranghae.crud_firebase_deportes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456726163983-a7n8lbhdnvs8v7qlh02mdt7fu6elv2k3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.saranghae.crud_firebase_deportes",
+            "certificate_hash": "478dad28f42369d3da655e794034a3169644d9e7"
+          }
+        },
+        {
+          "client_id": "456726163983-1i4lth1v8b2213hafsa7kd63b020ddpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR9M35wrkn-aEd1RURPu8tKMn6HibyJv4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456726163983-1i4lth1v8b2213hafsa7kd63b020ddpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
