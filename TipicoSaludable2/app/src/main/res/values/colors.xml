@@ -3,6 +3,7 @@
     <!--<color name="colorPrimary">#24876D</color>-->
     <color name="colorPrimary">#FFB42E</color>
     <color name="colorPrimaryDark">#FFAA01</color>
+    <color name="colorPrimaryDark1">#c6ffaa01</color>
     <color name="colorAccent">#E3AC5B</color>
     <color name="backgroundColor">#fff</color>
     <color name="naranjafondo">#ba5e02</color>
@@ -15,8 +16,8 @@
 
     <color name="negro">#000</color>
     //COLORES TOPE
-    <color name="marcoTope">#F57C00</color>
-    <color name="fondoTope">#FFA000</color>
+    <color name="marcoTope">#f57c00</color>
+    <color name="fondoTope">#dfffa000</color>
     <color name="letraTope">#FDD835</color>
     <color name="textoTope">#FFEE58</color>
 

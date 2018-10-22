@@ -90,6 +90,6 @@
     <string name="cantidad_a_consumir">¿Que Cantidad Quieres Comer?</string>
     <string name="btnaceptar">Aceptar</string>
     <string name="alimetosconsumidos">Hoy has comido los siguientes alimentos</string>
-
+    <string name="title_activity_scrolling">ScrollingActivity</string>
 
 </resources>

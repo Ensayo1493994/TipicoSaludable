@@ -102,10 +102,6 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
     }*/
     }
 
-
-
-
-
     private void inicializar() {
 
         peso=findViewById(R.id.peso);
@@ -169,8 +165,6 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
             Toast.makeText(this, "Falta seleccionar", Toast.LENGTH_SHORT).show();
         }
 
-
-
         if (validar == 5){
         /* Formula Indice de Masa Corporal y discriminación tipo de obesidad*/
             double d=b/100;
@@ -180,7 +174,11 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
             Intent intent = new Intent(CaloriasActivity.this,Menu_Lateral.class);
             startActivity(intent);
             finish();
-            Toast.makeText(CaloriasActivity.this, "" + temp, Toast.LENGTH_SHORT).show();
+            if (imc>=40){
+
+                Toast.makeText(CaloriasActivity.this, "Corres un riesgo alto de enfermedad cardiovascular visita tu mèdico..." + temp, Toast.LENGTH_LONG).show();
+
+            }
 
         }
     }
@@ -208,19 +206,11 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
         }
     }
 
-
-
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
 
         firebaseAuth.addAuthStateListener(firebaseAuthListener);
-
-
-
     }
 
     @Override
@@ -232,7 +222,6 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
 
     }
 
-
     private void goLogin() {
 
         Intent intent = new Intent(CaloriasActivity.this,Login.class);
@@ -241,12 +230,9 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
 
     }
 
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
-
 
 }

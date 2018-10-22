@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.TextView;
 
 
 public class Inicio extends Fragment {
@@ -22,6 +21,7 @@ public class Inicio extends Fragment {
 
         View vista = inflater.inflate(R.layout.fragment_inicio, container, false);
         GridView gridView = (GridView) vista.findViewById(R.id.ultimoconsumo);
+<<<<<<< HEAD
         TextView textView = vista.findViewById(R.id.txtnoconsumo);
 
 
@@ -35,6 +35,10 @@ public class Inicio extends Fragment {
 
         }
 
+=======
+        AdaptadorUltimoConsumo adaptador = new AdaptadorUltimoConsumo(getContext(),ActividadDetalle.ultimoconsumo);
+        gridView.setAdapter(adaptador);
+>>>>>>> b5f75df2261ddf00357cb2254e864f2dee4bd14a
 
 
         return vista;

@@ -12,16 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+        <activity
+            android:name=".Login"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".CaloriasActivity" >
-
-
-        </activity>
-
+        <activity android:name=".CaloriasActivity" />
+        <activity
+            android:name=".ScrollingDetalle"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ActividadDetalle"
             android:label="@string/title_activity_actividad_detalle2"
@@ -34,20 +33,26 @@
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Splash"
             android:theme="@style/AppTheme.NoActionBar">
 
-        </activity>
-        <activity android:name=".Splash"
-            android:theme="@style/AppTheme.NoActionBar">
-
+<<<<<<< HEAD
 
         </activity>
         <activity android:name=".Deportes">
 
+=======
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+>>>>>>> b5f75df2261ddf00357cb2254e864f2dee4bd14a
         </activity>
+        <activity android:name=".Deportes"></activity>
         <activity
             android:name=".Menu_Lateral"
             android:label="@string/title_activity_menu__lateral"
+<<<<<<< HEAD
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,34 +64,35 @@
 
 
         </activity>
+=======
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+>>>>>>> b5f75df2261ddf00357cb2254e864f2dee4bd14a
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <!-- Login facebook -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-
-        <!--Login facebook -->
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
-
     </application>
-
 
 </manifest>

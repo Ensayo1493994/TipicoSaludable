@@ -105,7 +105,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         final TextView txtinfocalorias = dialog.findViewById(R.id.infopopup);
         txtinfocalorias.setText("Hoy has consumido "+ActividadDetalle.Calorias_consumidas+"calorias");
         dialog.show();*/
-        Toast.makeText(this, "Hoy has consumido un total de "+ActividadDetalle.Calorias_consumidas+" calorias", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Hoy has consumido un total de "+ActividadDetalle.Calorias_consumidas+" calorias hoy", Toast.LENGTH_LONG).show();
 
     }
 
