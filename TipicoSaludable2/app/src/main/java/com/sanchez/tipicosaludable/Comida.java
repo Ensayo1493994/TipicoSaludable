@@ -63,6 +63,8 @@ public class Comida {
         return nombre.hashCode();
     }
     public static Comida[] ITEMS = {
+            //HACERLO CON FIREBASE
+
        new Comida("Empanadas","las empanadas de pipián nos proporcionan 12% de proteínas.","las empanadas de pipián nos proporcionan un 40% De carbohidratos.",134
                , R.drawable.empanada),
        new Comida("Tamales de Pipian","Los tamales de pipián nos proporciona un 30% de carbohidratos ","los tamales de pipián nos proporcionan 17% de proteínas.",144, R.drawable.tamal),

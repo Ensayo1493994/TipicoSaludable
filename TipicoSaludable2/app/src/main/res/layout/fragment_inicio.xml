@@ -32,15 +32,33 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <GridView
-                    android:id="@+id/ultimoconsumo"
+                android:layout_height="wrap_content"
+                >
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <GridView
+                        android:id="@+id/ultimoconsumo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-                </GridView>
+
+
+
+                        >
+
+                    </GridView>
+
+
+
+                </LinearLayout>
+
 
             </ScrollView>
+
+
 
         </LinearLayout>
 
