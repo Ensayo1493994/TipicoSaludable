@@ -83,10 +83,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             goMain();
         }
 
-
-
-
-
         //Login Facebook
         callbackManager = CallbackManager.Factory.create();
         btnloginfb =findViewById(R.id.btnloginfb);

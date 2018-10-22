@@ -50,8 +50,8 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
         nombrealimento = item.getNombre();
 
         Activity activity = getActivity();
-        Intent intent = new Intent(getContext(), ActividadDetalle.class);
-        intent.putExtra(ActividadDetalle.EXTRA_PARAM_ID, item.getId());
+        Intent intent = new Intent(getContext(), ScrollingDetalle.class);
+        intent.putExtra(ScrollingDetalle.EXTRA_PARAM_ID, item.getId());
 
 /*        Fragment fragment = null;
         fragment = new Fragment_Detalle();
@@ -63,7 +63,7 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
 
             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    activity, new Pair<View, String>(view.findViewById(R.id.imagen_comida),ActividadDetalle.VIEW_NAME_HEADER_IMAGE)
+                    activity, new Pair<View, String>(view.findViewById(R.id.imagen_comida),ScrollingDetalle.VIEW_NAME_HEADER_IMAGE)
 
             );
             ActivityCompat.startActivity(activity, intent, activityOptionsCompat.toBundle());

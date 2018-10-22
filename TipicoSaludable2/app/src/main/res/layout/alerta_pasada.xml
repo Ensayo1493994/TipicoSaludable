@@ -15,10 +15,7 @@
         android:layout_marginTop="3dp"
         android:layout_marginRight="7dp"
         android:elevation="5dp"
-        android:layout_alignParentRight="true"
-        android:background="@color/letraPass"
-
-        />
+        android:layout_alignParentRight="true"/>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -27,14 +24,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         app:cardBackgroundColor="@color/marcoPass"
-        app:cardCornerRadius="15dp">
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,10 +47,9 @@
                     android:layout_marginRight="20dp"
                     android:text="@string/app_titlePasada"
                     android:textAlignment="center"
-                    android:textColor="@color/marcoPass"
+                    android:textColor="@color/blanco"
                     android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:background="@color/letraPass"/>
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:layout_marginTop="8sp"
@@ -78,9 +72,8 @@
                     android:layout_marginRight="20dp"
                     android:text="@string/app_textoPasada"
                     android:textAlignment="center"
-                    android:textColor="@color/marcoPass"
-                    android:textSize="18sp"
-                    android:background="@color/textoPass"/>
+                    android:textColor="@color/blanco"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -109,7 +102,7 @@
                         android:layout_marginTop="20sp"
                         android:background="@drawable/button_pasada"
                         android:text="@string/app_continuar"
-                        android:textColor="@color/verdePass" />
+                        android:textColor="@color/blanco" />
                     <Button
                         android:id="@+id/btnCancelar2"
                         android:layout_width="120sp"
@@ -118,7 +111,7 @@
                         android:layout_marginTop="20sp"
                         android:background="@drawable/button_pasada"
                         android:text="@string/app_cancelar"
-                        android:textColor="@color/rojo" />
+                        android:textColor="@color/blanco" />
 
 
 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sanchez.tipicosaludable.ScrollingDetalle"
+    tools:showIn="@layout/activity_scrolling_detalle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/text_margin" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/esquina_redonda"
+            android:text="@string/infocalorias"
+            android:textColor="@color/blanco"
+            android:textSize="26sp" />
+
+
+
+
+        <TextView
+            android:id="@+id/informacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:paddingLeft="10dp"
+
+
+            android:textSize="20sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/carboinfo"
+            android:textSize="26dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/esquina_redonda"
+            android:textColor="@color/blanco"
+            />
+        <TextView
+            android:id="@+id/informacioncarbo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:paddingLeft="10dp"
+
+            android:textSize="20sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/proteinfo"
+            android:textSize="26dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/esquina_redonda"
+            android:textColor="@color/blanco"
+            />
+        <TextView
+            android:id="@+id/informacionprote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:paddingLeft="10dp"
+
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:id="@+id/btnconsumodealimento"
+            style="@android:style/Widget.Button.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="8dp"
+            android:text="@string/btnañadirplato"
+            android:textSize="20sp"
+            android:padding="5dp"/>
+
+
+
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
