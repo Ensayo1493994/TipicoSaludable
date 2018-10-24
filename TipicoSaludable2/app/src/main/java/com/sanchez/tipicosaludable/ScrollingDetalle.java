@@ -152,46 +152,53 @@ public class ScrollingDetalle extends AppCompatActivity {
         btnaceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cantidaddelalimento = Integer.parseInt(edtxcantidad.getText().toString());
-                if (cantidaddelalimento>=20){
-                    edtxcantidad.setError("No puedes comer tanto");
-                    edtxcantidad.setText("");
+                if (edtxcantidad.length()>0){
+                    cantidaddelalimento = Integer.parseInt(edtxcantidad.getText().toString());
+                    if (cantidaddelalimento>=20){
+                        edtxcantidad.setError("No puedes comer tanto");
+                        edtxcantidad.setText("");
+
+                    }
+                    else {
+                        Calorias_consumidas = cantidaddelalimento*(consumo+ Integer.parseInt(informacion.getText().toString()));
+                        //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+                        x=((CaloriasActivity.actmb*90)/100);
+                        if (Calorias_consumidas>CaloriasActivity.actmb){
+
+                            canti= (Calorias_consumidas-CaloriasActivity.actmb);
+                            Toast.makeText(ScrollingDetalle.this, "Te has pasado "+canti+" calorias",
+                                    Toast.LENGTH_LONG).show();
+                            showPasada();
+                            cantidadaconsumir.dismiss();
+
+                        }
+                        else  if(Calorias_consumidas==CaloriasActivity.actmb){
+                            Toast.makeText(ScrollingDetalle.this, "No debes comsumir mas alimentos",
+                                    Toast.LENGTH_LONG).show();
+                            ShowTope();
+                            cantidadaconsumir.dismiss();
+
+                        }
+                        else if(Calorias_consumidas>=x && x<CaloriasActivity.actmb){
+                            canti= (CaloriasActivity.actmb-Calorias_consumidas);
+                            Toast.makeText(ScrollingDetalle.this, "Te faltan "+canti+" calorias",
+                                    Toast.LENGTH_LONG).show();
+                            ShowTope();
+                            cantidadaconsumir.dismiss();
+                        }
+                        else{
+                            Intent intent = new Intent(ScrollingDetalle.this,Menu_Lateral.class);
+                            startActivity(intent);
+
+                        }
+
+                    }
+
+                }else{
+                    edtxcantidad.setError("Campo Vacio");
 
                 }
-                else {
-                    Calorias_consumidas = cantidaddelalimento*(consumo+ Integer.parseInt(informacion.getText().toString()));
-                    //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
-                    x=((CaloriasActivity.actmb*90)/100);
-                    if (Calorias_consumidas>CaloriasActivity.actmb){
 
-                        canti= (Calorias_consumidas-CaloriasActivity.actmb);
-                        Toast.makeText(ScrollingDetalle.this, "Te has pasado "+canti+" calorias",
-                                Toast.LENGTH_LONG).show();
-                        showPasada();
-                        cantidadaconsumir.dismiss();
-
-                    }
-                    else  if(Calorias_consumidas==CaloriasActivity.actmb){
-                        Toast.makeText(ScrollingDetalle.this, "No debes comsumir mas alimentos",
-                                Toast.LENGTH_LONG).show();
-                        ShowTope();
-                        cantidadaconsumir.dismiss();
-
-                    }
-                    else if(Calorias_consumidas>=x && x<CaloriasActivity.actmb){
-                        canti= (CaloriasActivity.actmb-Calorias_consumidas);
-                        Toast.makeText(ScrollingDetalle.this, "Te faltan "+canti+" calorias",
-                                Toast.LENGTH_LONG).show();
-                        ShowTope();
-                        cantidadaconsumir.dismiss();
-                    }
-                    else{
-                        Intent intent = new Intent(ScrollingDetalle.this,Menu_Lateral.class);
-                        startActivity(intent);
-
-                    }
-
-                }
 
 
 

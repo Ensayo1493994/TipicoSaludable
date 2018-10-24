@@ -11,7 +11,7 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Galeria de Comida" />
+            android:title="Antojos" />
         <item
             android:id="@+id/nav_ejercicios"
             android:icon="@drawable/iconsrunning"
