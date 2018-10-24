@@ -1,9 +1,12 @@
 package com.sanchez.tipicosaludable;
 
 import android.app.Dialog;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -41,11 +44,33 @@ public class ScrollingDetalle extends AppCompatActivity {
     Button btnContinuar,btnCancelar, btnContinuar2,btnCancelar2,btnok, btnaceptar;
     TextView titleTope,mensajeTope,mensajePasada,titlePasada;
     EditText edtxcantidad;
+    //DESCARGA DE PDF
+    DownloadManager downloadManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling_detalle);
+        //DESCARGAR PDF
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //DESCARGA DE PDF
+                downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+                Uri uri = Uri.parse("https://www.hogaruniversal.com/sites/default/files/Aborrajado.pdf");
+                DownloadManager.Request request=new DownloadManager.Request(uri);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                Long reference = downloadManager.enqueue(request);
+
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         //usarToolbar();
         itemDetallado = Comida.getItem(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
 
@@ -68,37 +93,20 @@ public class ScrollingDetalle extends AppCompatActivity {
 
                 consumo1.setIdDrawable(Fragment_galeria.n);
                 consumo1.setNombre(Fragment_galeria.nombrealimento);
-
-
-
-
-               
                 if (bound>0){
                     for ( imagenid = 0; imagenid < bound; imagenid= imagenid+1){
 
 
                         if ((ultimoconsumo.get(imagenid).getIdDrawable()==Fragment_galeria.n) ){
                             //Toast.makeText(ActividadDetalle.this, "encontro igual" + ultimoconsumo.get(imagenid).getIdDrawable()+ " "+ Fragment_galeria.n, Toast.LENGTH_SHORT).show();
-
                             igual = igual+1;
-
                         }
-
-
-
                     }
-
                     if(igual==0){
-
                         ultimoconsumo.add(consumo1);
-
                     }
-
-
                 }else {
                     ultimoconsumo.add(consumo1);
-
-
 
                 }
 
@@ -126,12 +134,6 @@ public class ScrollingDetalle extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     ShowTope();
                 }*/
-
-
-
-
-
-
             }
         });
 
@@ -256,7 +258,7 @@ public class ScrollingDetalle extends AppCompatActivity {
 
             }
         });
-        //hace k el fondo de la alerta sea trasnparente
+        //hace que el fondo de la alerta sea trasnparente
         epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         epicDialog.show();
 
@@ -304,7 +306,7 @@ public class ScrollingDetalle extends AppCompatActivity {
 
             }
         });
-        //hace k el fondo de la alerta sea trasnparente
+        //hace que el fondo de la alerta sea trasnparente
         epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         epicDialog.show();
 
