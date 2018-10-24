@@ -32,7 +32,7 @@
             <ImageView
                 android:id="@+id/imagen_extendida"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:transitionName="@string/nombre_transicion_imagen">
             </ImageView>
         </android.support.design.widget.CollapsingToolbarLayout>
