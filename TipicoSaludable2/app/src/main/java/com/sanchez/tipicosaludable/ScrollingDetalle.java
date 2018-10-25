@@ -52,8 +52,8 @@ public class ScrollingDetalle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling_detalle);
         //DESCARGAR PDF
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +140,7 @@ public class ScrollingDetalle extends AppCompatActivity {
         informacion.setText(""+itemDetallado.getCalorias());
         informacioncarbo.setText(itemDetallado.getCarbohidratos());
         informacionprote.setText(itemDetallado.getProteinas());
-
+        toolbar.setTitle(itemDetallado.getNombre());
         cargarImagenExtendida();
     }
 
