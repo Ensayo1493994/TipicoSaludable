@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_marginLeft="5dp"
@@ -8,7 +9,7 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/Xpatinaje"
+        android:id="@+id/Xspinning"
         android:layout_width="25sp"
         android:layout_height="25sp"
         android:src="@drawable/ic_cancelar"
@@ -45,12 +46,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tituloPat"
+                    android:id="@+id/tituloSpn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:text="@string/patinaje"
+                    android:text="@string/spininng"
                     android:textAlignment="center"
                     android:textColor="@color/blanco"
                     android:textSize="25dp"
@@ -58,7 +59,7 @@
                     android:background="@color/colorPrimaryDark"/>
 
                 <ImageView
-                    android:id="@+id/GifPatinaje"
+                    android:id="@+id/GifSpinning"
                     android:layout_marginTop="9sp"
                     android:layout_gravity="center"
                     android:layout_width="210sp"
@@ -74,7 +75,7 @@
                     android:layout_marginTop="10sp"
                     >
                     <TextView
-                        android:id="@+id/mensajePat"
+                        android:id="@+id/mensajeSpn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Tiempo_duracion"
@@ -82,7 +83,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         />
                     <TextView
-                        android:id="@+id/Patinaje_Min"
+                        android:id="@+id/Spininng_Min"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="30"
@@ -107,10 +108,10 @@
                         android:textColor="@color/colorPrimaryDark"
                         />
                     <TextView
-                        android:id="@+id/Patinaje_Cal"
+                        android:id="@+id/Spininng_Cal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="300"
+                        android:text="270"
                         android:textSize="18sp"
                         android:textColor="@color/negro"
                         android:layout_marginLeft="5sp"
@@ -126,7 +127,7 @@
                     android:layout_marginTop="10sp"
                     >
                     <Button
-                        android:id="@+id/btnPat1"
+                        android:id="@+id/btnSpn1"
                         android:layout_width="120sp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20sp"
@@ -135,7 +136,7 @@
                         android:text="@string/app_realizar"
                         android:textColor="@color/blanco" />
                     <Button
-                        android:id="@+id/btnPat2"
+                        android:id="@+id/btnSpn2"
                         android:layout_width="120sp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -143,7 +144,11 @@
                         android:background="@drawable/cancelar"
                         android:text="@string/app_cancelar"
                         android:textColor="@color/blanco" />
+
+
+
                 </LinearLayout>
+
 
             </LinearLayout>
 

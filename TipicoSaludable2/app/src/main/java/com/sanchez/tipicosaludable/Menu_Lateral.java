@@ -173,6 +173,10 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.nav_acercade) {
 
+        } else if(id == R.id.nav_actividad){
+
+        }else if(id == R.id.nav_deportes){
+
         } else if (id == R.id.nav_cerrar_sesion) {
             firebaseAuth.signOut();
             Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {

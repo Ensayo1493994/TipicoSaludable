@@ -31,4 +31,7 @@
     <color name="rojo">#780009</color>
     <color name="verde">#0B9900</color>
     <color name="verdePass">#69C22F</color>
+    //Color de botones
+    <color name="realizar">#FFCA28</color>
+    <color name="cancelar">#EF6C00</color>
 </resources>
