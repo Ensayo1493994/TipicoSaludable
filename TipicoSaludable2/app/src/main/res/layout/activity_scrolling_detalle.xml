@@ -33,14 +33,11 @@
             <ImageView
                 android:id="@+id/imagen_extendida"
                 android:layout_width="match_parent"
-<<<<<<< HEAD
                 android:layout_height="wrap_content"
-                android:transitionName="@string/nombre_transicion_imagen"></ImageView>
-=======
-                android:layout_height="match_parent"
                 android:transitionName="@string/nombre_transicion_imagen">
             </ImageView>
->>>>>>> 5f44719a65eb7f0527311c356180ea704f64e323
+
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
