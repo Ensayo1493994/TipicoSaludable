@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Deportes"
+    android:orientation="vertical"
+    android:background="@color/fondo"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="3sp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1sp"
+            android:background="@drawable/text"
+            android:gravity="center"
+
+            >
+
+            <TextView
+
+                android:layout_width="270sp"
+                android:layout_height="40sp"
+                android:gravity="center"
+                android:text="@string/titulo_deportes"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/Titulo"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_margin="6sp"
+                android:layout_marginLeft="4sp"
+                android:src="@mipmap/ic_launcher" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="7sp"
+            >
+
+            <ImageButton
+                android:id="@+id/futbol"
+                android:layout_width="130sp"
+                android:layout_height="130sp"
+                android:layout_margin="3sp"
+                android:background="@drawable/deportes"
+                />
+
+            <ImageButton
+                android:id="@+id/baloncesto"
+                android:layout_width="130sp"
+                android:layout_height="130sp"
+                android:background="@drawable/deportes"
+                android:layout_marginLeft="20sp"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="130sp"
+                android:layout_height="28sp"
+                android:background="@drawable/deportes"
+                android:text="@string/futbol"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_margin="3sp"
+                />
+
+            <TextView
+                android:layout_width="130sp"
+                android:layout_height="28sp"
+                android:background="@drawable/deportes"
+                android:text="@string/balocesto"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_marginLeft="20sp"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="12sp"
+            >
+
+            <ImageButton
+                android:id="@+id/natacion"
+                android:layout_width="130sp"
+                android:layout_height="130sp"
+                android:layout_margin="3sp"
+                android:background="@drawable/deportes"
+                />
+
+            <ImageButton
+                android:id="@+id/ciclismo"
+                android:layout_width="130sp"
+                android:layout_height="130sp"
+                android:background="@drawable/deportes"
+                android:layout_marginLeft="20sp"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="130sp"
+                android:layout_height="28sp"
+                android:background="@drawable/deportes"
+                android:text="@string/natacion"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_margin="3sp"
+
+                />
+
+            <TextView
+                android:layout_width="130sp"
+                android:layout_height="28sp"
+                android:background="@drawable/deportes"
+                android:text="@string/ciclismo"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_marginLeft="20sp"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="12sp"
+            >
+
+            <ImageButton
+                android:id="@+id/patinaje"
+                android:layout_width="130sp"
+                android:layout_height="130sp"
+                android:layout_margin="3sp"
+                android:background="@drawable/deportes"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="130sp"
+                android:layout_height="28sp"
+                android:background="@drawable/deportes"
+                android:text="@string/patinaje"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_margin="3sp"
+
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blanco"
+            android:layout_marginTop="30sp"
+            >
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

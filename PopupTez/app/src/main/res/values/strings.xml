@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name"></string>
+
+    <string name="app_realizar">REALIZAR</string>
+    <string name="app_cancelar">CANCELAR</string>
+
+    <string name="titulo_ejercicios">EJERCICIOS</string>
+    <string name="brazo">Flexion brazo</string>
+    <string name="saltos">Saltos</string>
+    <string name="sentadillas">Sentadillas</string>
+    <string name="titere">Titere</string>
+    <string name="abd">Abd</string>
+    <string name="burpes">Burpes</string>
+    <string name="climber">Climber</string>
+    <string name="salto">Salto impulso</string>
+
+    <string name="titulo_actividad_fisica">ACTIVIDAD FISICA</string>
+    <string name="marcha">Marcha</string>
+    <string name="zumba">Zumba</string>
+    <string name="pilates">Pilates</string>
+    <string name="yoga">Yoga</string>
+    <string name="step">Step</string>
+    <string name="caminar">Caminar</string>
+    <string name="trote">Trotar</string>
+    <string name="aerobicos">Aerobicos</string>
+    <string name="spininng">Spininng</string>
+
+    <string name="titulo_deportes">DEPORTES</string>
+    <string name="futbol">Futbol</string>
+    <string name="balocesto">Baloncesto</string>
+    <string name="natacion">Natacion</string>
+    <string name="ciclismo">Ciclismo</string>
+    <string name="patinaje">Patinaje</string>
+
+    <string name="Tiempo_duracion">Duracion en minutos :</string>
+    <string name="Calorias">Calorias :</string>
+    <string name="Hombre">Hombre -></string>
+    <string name="Mujer">Mujer -></string>
+
+
+</resources>
