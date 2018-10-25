@@ -277,6 +277,9 @@ public class Deportes2 extends Fragment {
 
 
     public void recomendarEjercicios(){
+
+
+        /*
         if (restante>=1 && restante<=vsentadilla){
             ShowSentadilla();
         }
@@ -297,7 +300,7 @@ public class Deportes2 extends Fragment {
         }
         else if(restante>vclimber){
             ShowABD();
-        }
+        }*/
 
     }
     public void ShowBrazo(){

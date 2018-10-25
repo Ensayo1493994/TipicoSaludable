@@ -152,6 +152,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
         Fragment fragment2 = null;
         Fragment fragment3 = null;
+        Fragment fragment4 = null;
 
 
         if (id == R.id.nav_ejercicios) {
@@ -174,8 +175,12 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.nav_acercade) {
 
         } else if(id == R.id.nav_actividad){
+            fragment4 = new Actividad_Fisica();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment4).commit();
 
         }else if(id == R.id.nav_deportes){
+            fragment4 = new Deportesfinal();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment4).commit();
 
         } else if (id == R.id.nav_cerrar_sesion) {
             firebaseAuth.signOut();

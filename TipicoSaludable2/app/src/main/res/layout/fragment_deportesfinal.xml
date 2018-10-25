@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sanchez.tipicosaludable.Actidad_Fisica"
-    android:orientation="vertical"
+    tools:context="com.sanchez.tipicosaludable.Deportesfinal">
 
-    >
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="3sp"
         >
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +31,7 @@
                 android:layout_width="270sp"
                 android:layout_height="40sp"
                 android:gravity="center"
-                android:text="@string/titulo_actividad_fisica"
+                android:text="@string/titulo_deportes"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="22sp" />
 
@@ -40,7 +41,7 @@
                 android:layout_height="30sp"
                 android:layout_margin="6sp"
                 android:layout_marginLeft="4sp"
-                />
+                android:src="@mipmap/ic_launcher" />
 
         </LinearLayout>
 
@@ -52,7 +53,7 @@
             >
 
             <ImageButton
-                android:id="@+id/marcha"
+                android:id="@+id/futbol"
                 android:layout_width="130sp"
                 android:layout_height="130sp"
                 android:layout_margin="3sp"
@@ -60,7 +61,7 @@
                 />
 
             <ImageButton
-                android:id="@+id/zumba"
+                android:id="@+id/baloncesto"
                 android:layout_width="130sp"
                 android:layout_height="130sp"
                 android:background="@drawable/deportes"
@@ -80,139 +81,19 @@
                 android:layout_width="130sp"
                 android:layout_height="28sp"
                 android:background="@drawable/deportes"
-                android:text="@string/marcha"
+                android:text="@string/futbol"
                 android:gravity="center"
                 android:textSize="17sp"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:layout_margin="3sp"
-
-
                 />
 
             <TextView
                 android:layout_width="130sp"
                 android:layout_height="28sp"
                 android:background="@drawable/deportes"
-                android:text="@string/zumba"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:layout_marginLeft="20sp"
-
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="12sp"
-            >
-
-            <ImageButton
-                android:id="@+id/pilates"
-                android:layout_width="130sp"
-                android:layout_height="130sp"
-                android:layout_margin="3sp"
-                android:background="@drawable/deportes"
-                />
-
-            <ImageButton
-                android:id="@+id/yoga"
-                android:layout_width="130sp"
-                android:layout_height="130sp"
-                android:layout_marginLeft="20sp"
-                android:background="@drawable/deportes"
-
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            >
-
-            <TextView
-                android:layout_width="130sp"
-                android:layout_height="28sp"
-                android:background="@drawable/deportes"
-                android:text="@string/pilates"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:layout_margin="3sp"
-
-                />
-
-            <TextView
-                android:layout_width="130sp"
-                android:layout_height="28sp"
-                android:background="@drawable/deportes"
-                android:text="@string/yoga"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:layout_marginLeft="20sp"
-
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="12sp"
-            >
-
-            <ImageButton
-                android:id="@+id/step"
-                android:layout_width="130sp"
-                android:layout_height="130sp"
-                android:layout_margin="3sp"
-                android:background="@drawable/deportes"
-                />
-
-            <ImageButton
-                android:id="@+id/caminar"
-                android:layout_width="130sp"
-                android:layout_height="130sp"
-                android:background="@drawable/deportes"
-                android:layout_marginLeft="20sp"
-
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            >
-
-            <TextView
-                android:layout_width="130sp"
-                android:layout_height="28sp"
-                android:background="@drawable/deportes"
-                android:text="@string/step"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:layout_margin="3sp"
-
-
-                />
-
-            <TextView
-                android:layout_width="130sp"
-                android:layout_height="28sp"
-                android:background="@drawable/deportes"
-                android:text="@string/caminar"
+                android:text="@string/balocesto"
                 android:gravity="center"
                 android:textSize="17sp"
                 android:textColor="@color/colorAccent"
@@ -230,7 +111,7 @@
             >
 
             <ImageButton
-                android:id="@+id/trotar"
+                android:id="@+id/natacion"
                 android:layout_width="130sp"
                 android:layout_height="130sp"
                 android:layout_margin="3sp"
@@ -238,7 +119,7 @@
                 />
 
             <ImageButton
-                android:id="@+id/aerobicos"
+                android:id="@+id/ciclismo"
                 android:layout_width="130sp"
                 android:layout_height="130sp"
                 android:background="@drawable/deportes"
@@ -258,7 +139,7 @@
                 android:layout_width="130sp"
                 android:layout_height="28sp"
                 android:background="@drawable/deportes"
-                android:text="@string/trote"
+                android:text="@string/natacion"
                 android:gravity="center"
                 android:textSize="17sp"
                 android:textColor="@color/colorAccent"
@@ -271,7 +152,7 @@
                 android:layout_width="130sp"
                 android:layout_height="28sp"
                 android:background="@drawable/deportes"
-                android:text="@string/aerobicos"
+                android:text="@string/ciclismo"
                 android:gravity="center"
                 android:textSize="17sp"
                 android:textColor="@color/colorAccent"
@@ -280,7 +161,6 @@
 
                 />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -289,7 +169,7 @@
             >
 
             <ImageButton
-                android:id="@+id/spininng"
+                android:id="@+id/patinaje"
                 android:layout_width="130sp"
                 android:layout_height="130sp"
                 android:layout_margin="3sp"
@@ -308,7 +188,7 @@
                 android:layout_width="130sp"
                 android:layout_height="28sp"
                 android:background="@drawable/deportes"
-                android:text="@string/spininng"
+                android:text="@string/patinaje"
                 android:gravity="center"
                 android:textSize="17sp"
                 android:textColor="@color/colorAccent"
@@ -330,6 +210,6 @@
         </LinearLayout>
 
     </LinearLayout>
+    </ScrollView>
 
-
-</ScrollView>
+</FrameLayout>
