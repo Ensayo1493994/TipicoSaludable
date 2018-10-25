@@ -16,6 +16,14 @@
             android:id="@+id/nav_ejercicios"
             android:icon="@drawable/iconsrunning"
             android:title="Ejercicios" />
+        <item
+            android:id="@+id/nav_actividad"
+            android:icon="@drawable/iconsrunning"
+            android:title="Actividad Fisica" />
+        <item
+            android:id="@+id/nav_deportes"
+            android:icon="@drawable/iconsrunning"
+            android:title="Deportes" />
 
 
     </group>

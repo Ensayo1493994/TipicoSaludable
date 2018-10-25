@@ -8,7 +8,7 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/Xpatinaje"
+        android:id="@+id/Xbrazo"
         android:layout_width="25sp"
         android:layout_height="25sp"
         android:src="@drawable/ic_cancelar"
@@ -45,53 +45,55 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tituloPat"
+                    android:id="@+id/tituloBrazo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:text="@string/patinaje"
+                    android:text="@string/brazo"
                     android:textAlignment="center"
                     android:textColor="@color/blanco"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:background="@color/colorPrimaryDark"/>
 
+
                 <ImageView
-                    android:id="@+id/GifPatinaje"
-                    android:layout_marginTop="9sp"
+                    android:id="@+id/GifFlexion_Brazo"
+                    android:layout_marginTop="7sp"
                     android:layout_gravity="center"
                     android:layout_width="210sp"
                     android:layout_height="130sp"
-                    android:background="@android:color/background_dark"
+
                     />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="10sp"
-                    >
-                    <TextView
-                        android:id="@+id/mensajePat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Tiempo_duracion"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        />
-                    <TextView
-                        android:id="@+id/Patinaje_Min"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="30"
-                        android:textSize="18sp"
-                        android:textColor="@color/negro"
-                        android:layout_marginLeft="5sp"
-                        />
-                </LinearLayout>
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:gravity="center"
+                  android:layout_marginTop="10sp"
+                  >
 
+                  <TextView
+                      android:id="@+id/mensajeBrazo"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/Tiempo_duracion"
+                      android:textSize="18sp"
+                      android:textColor="@color/colorPrimaryDark"
+                      />
+                  <TextView
+                      android:id="@+id/Flexion_Brazo_Min"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="30"
+                      android:textSize="18sp"
+                      android:textColor="@color/negro"
+                      android:layout_marginLeft="5sp"
+                      />
+
+              </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,6 +101,7 @@
                     android:gravity="center"
                     android:layout_marginTop="5sp"
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -107,26 +110,26 @@
                         android:textColor="@color/colorPrimaryDark"
                         />
                     <TextView
-                        android:id="@+id/Patinaje_Cal"
+                        android:id="@+id/Flexion_Brazo_Cal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="300"
+                        android:text="171"
                         android:textSize="18sp"
                         android:textColor="@color/negro"
                         android:layout_marginLeft="5sp"
                         />
+
                 </LinearLayout>
 
-
                 <LinearLayout
+                    android:layout_marginTop="10sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="10sp"
                     >
                     <Button
-                        android:id="@+id/btnPat1"
+                        android:id="@+id/btnBra1"
                         android:layout_width="120sp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20sp"
@@ -135,7 +138,7 @@
                         android:text="@string/app_realizar"
                         android:textColor="@color/blanco" />
                     <Button
-                        android:id="@+id/btnPat2"
+                        android:id="@+id/btnBra2"
                         android:layout_width="120sp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -144,6 +147,7 @@
                         android:text="@string/app_cancelar"
                         android:textColor="@color/blanco" />
                 </LinearLayout>
+
 
             </LinearLayout>
 
