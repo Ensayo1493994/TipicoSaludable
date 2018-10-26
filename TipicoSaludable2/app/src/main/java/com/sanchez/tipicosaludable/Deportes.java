@@ -73,6 +73,7 @@ public class Deportes extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Toast.makeText(Deportes.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+
             epicDialog.dismiss();
         }
     });

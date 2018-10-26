@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single" android:id="@+id/menuinicio">
         <item
             android:id="@+id/nav_inicio"
             android:icon="@drawable/iconoinicio"
@@ -12,6 +12,11 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/iconstortilla"
             android:title="Antojos" />
+
+
+
+    </group>
+    <group android:id="@+id/menunormal">
         <item
             android:id="@+id/nav_ejercicios"
             android:icon="@drawable/iconsrunning"
@@ -25,8 +30,15 @@
             android:icon="@drawable/iconsrunning"
             android:title="Deportes" />
 
+    </group>
+    <group android:id="@+id/menugordos">
+        <item
+            android:id="@+id/nav_deportesgordos"
+            android:icon="@drawable/iconsrunning"
+            android:title="Deportes" />
 
     </group>
+
 
     <item android:title="Communicate">
         <menu>
