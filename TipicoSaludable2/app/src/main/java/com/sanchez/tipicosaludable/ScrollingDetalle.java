@@ -296,7 +296,7 @@ public class ScrollingDetalle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 epicDialog.dismiss();
-                Intent intent = new Intent(ScrollingDetalle.this,Deportes.class);
+                Intent intent = new Intent(ScrollingDetalle.this,Lista_Ejercicios2.class);
                 startActivity(intent);
                 finish();
 

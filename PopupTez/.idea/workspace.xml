@@ -117,8 +117,8 @@
       <file leaf-file-name="Menu_Obesos.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tez/popuptez/Menu_Obesos.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="1663" column="5" lean-forward="false" selection-start-line="614" selection-start-column="4" selection-end-line="1663" selection-end-column="5" />
+            <state relative-caret-position="293">
+              <caret line="1663" column="5" lean-forward="true" selection-start-line="613" selection-start-column="4" selection-end-line="1663" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -130,8 +130,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="683" column="0" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="683" selection-end-column="0" />
+            <state relative-caret-position="281">
+              <caret line="686" column="19" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="686" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -2154,6 +2154,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/tez/popuptez/Menu_Obesos.java" />
       </list>
     </option>
   </component>
@@ -2358,7 +2359,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1540586507855" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1540593698169" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2458,7 +2459,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1540586507856" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1540593698169" />
       </method>
     </configuration>
     <list size="1">
@@ -2502,7 +2503,7 @@
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2849,16 +2850,16 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="683" column="0" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="683" selection-end-column="0" />
+        <state relative-caret-position="281">
+          <caret line="686" column="19" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="686" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tez/popuptez/Menu_Obesos.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="1663" column="5" lean-forward="false" selection-start-line="614" selection-start-column="4" selection-end-line="1663" selection-end-column="5" />
+        <state relative-caret-position="293">
+          <caret line="1663" column="5" lean-forward="true" selection-start-line="613" selection-start-column="4" selection-end-line="1663" selection-end-column="5" />
           <folding />
         </state>
       </provider>
