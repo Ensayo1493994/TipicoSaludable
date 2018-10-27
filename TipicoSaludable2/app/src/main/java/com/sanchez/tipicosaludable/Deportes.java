@@ -6,13 +6,32 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bakerj.infinitecards.InfiniteCardView;
+import com.bakerj.infinitecards.transformer.DefaultTransformerToBack;
+import com.bakerj.infinitecards.transformer.DefaultTransformerToFront;
+import com.bakerj.infinitecards.transformer.DefaultZIndexTransformerCommon;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Deportes extends AppCompatActivity {
+
+
+    //Infinitecard
+    AdapterCard adapterCard;
+    Button btn1,btn2;
+    InfiniteCardView infiniteCardView;
+    List<Integer> Images = new ArrayList<>();
+
+
+
 
     Dialog epicDialog;
 
@@ -22,7 +41,7 @@ public class Deportes extends AppCompatActivity {
                     ;
 
     //para mostrar el titulo y texto de cada alerta
-    TextView tituloFutbol, mensajeFutbol,
+    TextView tituloFutbol, mensajeFutbol,tituloreco,
             titlelNatacion, messeageNatacion
                     ;
 
@@ -51,14 +70,62 @@ public class Deportes extends AppCompatActivity {
         futbol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowFutbol();
+                //ShowFutbol();
+                Toast.makeText(Deportes.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                ShowRecomendacion();
             }
         });
 
 
         //-----------------------------------------------------------------------------------------------------------------------
 
+
+
+
     }
+    //recomendacion
+
+    public void ShowRecomendacion(){
+
+        epicDialog.setContentView(R.layout.recomendacion_alert);
+        tituloreco = (TextView) epicDialog.findViewById(R.id.tituloreco);
+        infiniteCardView = (InfiniteCardView) epicDialog.findViewById(R.id.view);
+        btn1 = (Button) epicDialog.findViewById(R.id.btnFut1);
+        btn2 = (Button) epicDialog.findViewById(R.id.btnFut2);
+
+        Images.add (R.drawable.logo1);
+        Images.add (R.drawable.logo2);
+        Images.add(R.drawable.logoredondo);
+        Images.add(R.drawable.logor);
+
+        adapterCard = new AdapterCard(this, Images);
+
+        infiniteCardView.setClickable(true);
+        infiniteCardView.setAnimType(InfiniteCardView.ANIM_TYPE_FRONT);
+        infiniteCardView.setAnimInterpolator(new LinearInterpolator());
+        infiniteCardView.setTransformerToFront(new DefaultTransformerToFront());
+        infiniteCardView.setTransformerToBack(new DefaultTransformerToBack());
+        infiniteCardView.setZIndexTransformerToBack(new DefaultZIndexTransformerCommon());
+        infiniteCardView.setAdapter(adapterCard);
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                infiniteCardView.bringCardToFront(adapterCard.getCount()-1);
+            }
+        });
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                infiniteCardView.bringCardToFront(1);
+            }
+        });
+
+        epicDialog.show();
+    }
+
+
     //Shows
     public void ShowFutbol(){
         epicDialog.setContentView(R.layout.futbol_alert);
