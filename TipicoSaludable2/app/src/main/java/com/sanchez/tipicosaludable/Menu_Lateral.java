@@ -1,6 +1,7 @@
 package com.sanchez.tipicosaludable;
 
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -40,6 +41,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,14 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION-----------------------------------
+        if (CaloriasActivity.imc<=40){
+            navigationView.getMenu().setGroupVisible(R.id.menugordos,false);
+
+        }else{
+            navigationView.getMenu().setGroupVisible(R.id.menunormal,false);
+        }
+        //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION FIN-----------------------------------
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -87,6 +97,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
 
     }
+    
+
     private void setUserData(FirebaseUser user) {
         txtNombre.setText(user.getDisplayName());
         Glide.with(this).load(user.getPhotoUrl()).into(imageViewlogo);
@@ -174,7 +186,12 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.nav_acercade) {
 
-        } else if(id == R.id.nav_actividad){
+        }else if (id == R.id.nav_deportesgordos) {
+            fragment3 = new Lista_Ejercicios();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment3).commit();
+
+        }
+        else if(id == R.id.nav_actividad){
             fragment4 = new Actividad_Fisica();
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment4).commit();
 
