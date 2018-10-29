@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ public class ScrollingDetalle extends AppCompatActivity {
     private Button btnconsumodealimeto;
     private double consumo=0, x;
     private double canti;
+    int a;
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
     int cantidaddelalimento=0,i =0;
@@ -65,7 +67,7 @@ public class ScrollingDetalle extends AppCompatActivity {
             public void onClick(View view) {
                 //DESCARGA DE PDF
                 downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
-                Uri uri = Uri.parse("https://www.hogaruniversal.com/sites/default/files/Aborrajado.pdf");
+                Uri uri = Uri.parse(itemDetallado.getReceta());
                 DownloadManager.Request request=new DownloadManager.Request(uri);
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                 Long reference = downloadManager.enqueue(request);
@@ -115,8 +117,17 @@ public class ScrollingDetalle extends AppCompatActivity {
                 }
 
                 bound = ultimoconsumo.size();//Toast.makeText(ActividadDetalle.this, ""+itemDetallado.getIdDrawable(), Toast.LENGTH_SHORT).show();
+
+
+                try{
+
+                    Calorias_consumidas=Calorias_consumidas+(consumo + Double.parseDouble(informacion.getText().toString()));
+                }catch (Exception e){
+                    Log.e("Error Calorias",e.getMessage());
+                }
+
                 showCalcularcantidad();
-                Calorias_consumidas=Calorias_consumidas+(consumo+ Integer.parseInt(informacion.getText().toString()));
+
                 /*x=((CaloriasActivity.actmb*90)/100);
                 if (Calorias_consumidas>CaloriasActivity.actmb){
 
@@ -165,12 +176,15 @@ public class ScrollingDetalle extends AppCompatActivity {
 
                     }
                     else {
-                        Calorias_consumidas = cantidaddelalimento*(consumo+ Integer.parseInt(informacion.getText().toString()));
+                        Calorias_consumidas = cantidaddelalimento*(consumo+ Double.parseDouble(informacion.getText().toString()));
                         //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
                         x=((CaloriasActivity.actmb*90)/100);
                         if (Calorias_consumidas>CaloriasActivity.actmb){
 
                             canti= (Calorias_consumidas-CaloriasActivity.actmb);
+
+                            Math.round(canti);
+
                             Toast.makeText(ScrollingDetalle.this, "Te has pasado "+canti+" calorias",
                                     Toast.LENGTH_LONG).show();
                             showPasada();

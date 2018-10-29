@@ -35,5 +35,7 @@ dependencies {
     implementation 'com.github.clans:fab:1.6.4'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.bakerj:infinite-cards:1.0.3'
+    //BASE DE DATOS
+    compile 'com.google.firebase:firebase-database:16.0.1'
 }
 apply plugin: 'com.google.gms.google-services'

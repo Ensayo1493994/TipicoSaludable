@@ -32,6 +32,7 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
     RadioButton masc,fem,act1,act2,act3,act4,act5;
     RadioGroup genero,contex,actividad;
     public static double imc,mb,actmb;
+    public static  int check;
     double a,b,c;
 
     //google
@@ -151,8 +152,11 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
             validar++;
             /* Formula Tasa Metabolica Basal segùn genero*/
             if (masc.isChecked()){
+                check = 1;
+
                 mb= (66.4730 + (13.7516 * a) + (5.0033 * b) - (6.7759 * c));
             }else {
+                check =0;
                 mb= (665.0955 + (9.5634 * a) + (1.8496 * b) - (4.6756 * c));
             }
         }else{

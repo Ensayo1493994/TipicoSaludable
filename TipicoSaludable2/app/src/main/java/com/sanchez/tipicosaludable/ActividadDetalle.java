@@ -64,7 +64,7 @@ public class ActividadDetalle extends AppCompatActivity {
                 //--------TERMINAR DE ARREGLARLO
 
                 UltimoConsumo consumo1 = new UltimoConsumo();
-                consumo1.setIdDrawable(Fragment_galeria.n);
+                //consumo1.setIdDrawable(Fragment_galeria.n);
                 consumo1.setNombre(Fragment_galeria.nombrealimento);
                 ultimoconsumo.add(consumo1);
                 //Toast.makeText(ActividadDetalle.this, ""+itemDetallado.getIdDrawable(), Toast.LENGTH_SHORT).show();

@@ -18,6 +18,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class Lista_Ejercicios2 extends AppCompatActivity {
     Dialog epicDialog;
+    int resta=0, calentero;
+    Double a = ScrollingDetalle.Calorias_consumidas;
 
     //botones (1=aceptar) y (2=cancelar) segun su layaut
     Button btnBra1;     Button btnBra2;
@@ -65,49 +67,50 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
     Button btnBal1;     Button btnBal2;
 
     //para mostrar el titulo y texto de cada alerta
-    TextView tituloBrazo;       TextView mensajeBrazo;
+    TextView tituloBrazo, calbrazo;       TextView mensajeBrazo;
 
-    TextView tituloSalto;       TextView mensajeSalto;
+    TextView tituloSalto, calsalto;       TextView mensajeSalto;
 
-    TextView tituloSenta;       TextView mensajeSenta;
+    TextView tituloSenta, calsenta;       TextView mensajeSenta;
 
-    TextView tituloTit;         TextView mensajeTit;
+    TextView tituloTit, caltit;         TextView mensajeTit;
 
-    TextView tituloAbd;         TextView mensajeAbd;
+    TextView tituloAbd, calabd;         TextView mensajeAbd;
 
-    TextView tituloBurp;        TextView mensajeBurp;
+    TextView tituloBurp, calburp;        TextView mensajeBurp;
 
-    TextView tituloCmb;         TextView mensajeCmb;
+    TextView tituloCmb, calcmb;         TextView mensajeCmb;
 
-    TextView tituloImp;         TextView mensajeImp;
+    TextView tituloImp, calimp;         TextView mensajeImp;
 
-    TextView tituloAero;        TextView mensajeAero;
+    TextView tituloAero, calaero;        TextView mensajeAero;
 
-    TextView tituloCam;         TextView mensajeCam;
+    TextView tituloCam, calcaminar;         TextView mensajeCam;
 
-    TextView tituloPilat;       TextView mensajePilat;
+    TextView tituloPilat, calpilates;       TextView mensajePilat;
 
-    TextView tituloMarcha;      TextView mensajeMarcha;
+    TextView tituloMarcha, calmarcha;      TextView mensajeMarcha;
 
-    TextView tituloSpn;         TextView mensajeSpn;
+    TextView tituloSpn, calspin;         TextView mensajeSpn;
 
-    TextView tituloSlp;         TextView mensajeSlp;
+    TextView tituloSlp, calslp;         TextView mensajeSlp;
 
-    TextView tituloTrotar;      TextView mensajeTrotar;
+    TextView tituloTrotar, caltrotar;      TextView mensajeTrotar;
 
-    TextView tituloYoga;        TextView mensajeYoga;
+    TextView tituloYoga, calyoga;        TextView mensajeYoga;
 
-    TextView tituloZumba;       TextView mensajeZumba;
+    TextView tituloZumba, calzumba;       TextView mensajeZumba;
 
-    TextView tituloFutbol;      TextView mensajeFutbol;
+    TextView tituloFutbol, calfutbol;      TextView mensajeFutbol;
 
-    TextView tituloNatacion;    TextView mensajeNatacion;
+    TextView tituloNatacion, calnatacion;    TextView mensajeNatacion;
 
     TextView tituloCicli;       TextView mensajeCicli;
 
     TextView tituloaPat;        TextView mensajePat;
 
-    TextView tituloBal;         TextView mensajeBal;
+    TextView tituloBal,calbaloncesto;         TextView mensajeBal;
+
 
     //cierra la alerta segun su layaut
     ImageView Xbrazo;
@@ -618,6 +621,8 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnBra2= (Button) epicDialog.findViewById(R.id.btnBra2);
         tituloBrazo = (TextView) epicDialog.findViewById(R.id.tituloBrazo);
         mensajeBrazo = (TextView) epicDialog.findViewById(R.id.mensajeBrazo);
+        calbrazo = epicDialog.findViewById(R.id.Flexion_Brazo_Cal);
+
 
         GifFlexion_Brazo=(ImageView)epicDialog.findViewById(R.id.GifFlexion_Brazo);
         String url ="https://firebasestorage.googleapis.com/v0/b/popuptez.appspot.com/o/gif_brazo.gif?alt=media&token=20d7c498-87b9-4fe8-87f4-832af0626eb0";
@@ -635,6 +640,11 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calbrazo.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -665,6 +675,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnSalt2= (Button) epicDialog.findViewById(R.id.btnSalt2);
         tituloSalto = (TextView) epicDialog.findViewById(R.id.tituloSalto);
         mensajeSalto = (TextView) epicDialog.findViewById(R.id.mensajeSalto);
+        calsalto = epicDialog.findViewById(R.id.Salto_Impulso_Cal);
 
         GifSaltos=(ImageView)epicDialog.findViewById(R.id.GifSaltos);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -682,6 +693,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calsalto.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -712,6 +727,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnSen2= (Button) epicDialog.findViewById(R.id.btnSen2);
         tituloSenta = (TextView) epicDialog.findViewById(R.id.tituloSenta);
         mensajeSenta = (TextView) epicDialog.findViewById(R.id.mensajeSenta);
+        calsenta = epicDialog.findViewById(R.id.Sentadilla_Cal);
 
         GifSentadillas=(ImageView)epicDialog.findViewById(R.id.GifSentadillas);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -729,6 +745,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calsenta.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -759,6 +779,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnTit2= (Button) epicDialog.findViewById(R.id.btnTit2);
         tituloTit = (TextView) epicDialog.findViewById(R.id.tituloTit);
         mensajeTit = (TextView) epicDialog.findViewById(R.id.mensajeTit);
+        caltit = epicDialog.findViewById(R.id.Titere_Cal);
 
         GifTitere=(ImageView)epicDialog.findViewById(R.id.GifTitere);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -776,6 +797,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(caltit.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -806,6 +831,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnAbd2= (Button) epicDialog.findViewById(R.id.btnAbd2);
         tituloAbd = (TextView) epicDialog.findViewById(R.id.tituloAbd);
         mensajeAbd = (TextView) epicDialog.findViewById(R.id.mensajeAbd);
+        calabd = epicDialog.findViewById(R.id.Abd_Cal);
 
         GifAbd=(ImageView)epicDialog.findViewById(R.id.GifAbd);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -823,6 +849,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calabd.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -853,6 +883,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnBurp2= (Button) epicDialog.findViewById(R.id.btnBurp2);
         tituloBurp = (TextView) epicDialog.findViewById(R.id.tituloBurp);
         mensajeBurp = (TextView) epicDialog.findViewById(R.id.mensajeBurp);
+        calburp = epicDialog.findViewById(R.id.Burpes_Cal);
 
         GifBurpes=(ImageView)epicDialog.findViewById(R.id.GifBurpes);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -872,6 +903,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calburp.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -902,6 +937,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnCmb2= (Button) epicDialog.findViewById(R.id.btnCmb2);
         tituloCmb = (TextView) epicDialog.findViewById(R.id.tituloCmb);
         mensajeCmb = (TextView) epicDialog.findViewById(R.id.mensajeCmb);
+        calcmb = epicDialog.findViewById(R.id.Climber_Cal);
 
         GifClimber=(ImageView)epicDialog.findViewById(R.id.GifClimber);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -919,6 +955,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calcmb.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -949,6 +989,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnImp2= (Button) epicDialog.findViewById(R.id.btnImp2);
         tituloImp = (TextView) epicDialog.findViewById(R.id.tituloImp);
         mensajeImp = (TextView) epicDialog.findViewById(R.id.mensajeImp);
+        calimp = findViewById(R.id.Salto_Impulso_Cal);
 
         GifSalto_impulso=(ImageView)epicDialog.findViewById(R.id.GifSalto_Impulso);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -966,6 +1007,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calimp.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -996,6 +1041,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnMar2= (Button) epicDialog.findViewById(R.id.btnMar2);
         tituloMarcha = (TextView) epicDialog.findViewById(R.id.tituloMarchar);
         mensajeMarcha = (TextView) epicDialog.findViewById(R.id.mensajeMarchar);
+        calmarcha = epicDialog.findViewById(R.id.Marcha_Cal);
 
         GifMarcha = (ImageView)epicDialog.findViewById(R.id.GifMarcha);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1013,6 +1059,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calmarcha.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1043,6 +1093,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnZum2= (Button) epicDialog.findViewById(R.id.btnZum2);
         tituloZumba = (TextView) epicDialog.findViewById(R.id.tituloZumba);
         mensajeZumba = (TextView) epicDialog.findViewById(R.id.mensajeZumba);
+        calzumba = epicDialog.findViewById(R.id.Zumba_Cal);
 
         GifZumba = (ImageView)epicDialog.findViewById(R.id.GifZumba);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1060,6 +1111,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calzumba.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1090,6 +1145,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnPilat2= (Button) epicDialog.findViewById(R.id.btnPilat2);
         tituloPilat = (TextView) epicDialog.findViewById(R.id.tituloPilat);
         mensajePilat = (TextView) epicDialog.findViewById(R.id.mensajePilat);
+        calpilates = epicDialog.findViewById(R.id.Patinaje_Cal);
 
         GifPilates = (ImageView)epicDialog.findViewById(R.id.GifPilates);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1107,6 +1163,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calpilates.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1137,6 +1197,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnYoga2= (Button) epicDialog.findViewById(R.id.btnYoga2);
         tituloYoga = (TextView) epicDialog.findViewById(R.id.tituloYoga);
         mensajeYoga = (TextView) epicDialog.findViewById(R.id.mensajeYoga);
+        calyoga = epicDialog.findViewById(R.id.Yoga_Cal);
 
         GifYoga = (ImageView)epicDialog.findViewById(R.id.GifYoga);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1154,6 +1215,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calyoga.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1184,6 +1249,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnSlp2= (Button) epicDialog.findViewById(R.id.btnSlp2);
         tituloSlp = (TextView) epicDialog.findViewById(R.id.tituloSlp);
         mensajeSlp = (TextView) epicDialog.findViewById(R.id.mensajeSlp);
+        calslp = epicDialog.findViewById(R.id.Step_Cal);
 
         GifStep = (ImageView)epicDialog.findViewById(R.id.GifStep);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1201,6 +1267,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calslp.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1231,6 +1301,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnCam2 = (Button) epicDialog.findViewById(R.id.btnCam2);
         tituloCam = (TextView) epicDialog.findViewById(R.id.tituloCam);
         mensajeCam = (TextView) epicDialog.findViewById(R.id.mensajeCam);
+        calcaminar = epicDialog.findViewById(R.id.Cminar_Cal);
 
         GifCaminar = (ImageView)epicDialog.findViewById(R.id.GifCaminar);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1249,6 +1320,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calcaminar.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1279,6 +1354,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnTrote2= (Button) epicDialog.findViewById(R.id.btnTrote2);
         tituloTrotar = (TextView) epicDialog.findViewById(R.id.tituloTrotar);
         mensajeTrotar = (TextView) epicDialog.findViewById(R.id.mensajeTrotar);
+        caltrotar = epicDialog.findViewById(R.id.Trotar_Cal);
 
         GifTrotar = (ImageView)epicDialog.findViewById(R.id.GifTrotar);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1296,6 +1372,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(caltrotar.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1326,6 +1406,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnAero2 = (Button) epicDialog.findViewById(R.id.btnAero2);
         tituloAero = (TextView) epicDialog.findViewById(R.id.tituloAero);
         mensajeAero = (TextView) epicDialog.findViewById(R.id.mensajeAero);
+        calaero = epicDialog.findViewById(R.id.Aerobicos_Cal);
 
         GifAerobicos = (ImageView)epicDialog.findViewById(R.id.GifAerobicos);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1344,6 +1425,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calaero.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1374,6 +1459,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnSpn2= (Button) epicDialog.findViewById(R.id.btnSpn2);
         tituloSpn = (TextView) epicDialog.findViewById(R.id.tituloSpn);
         mensajeSpn = (TextView) epicDialog.findViewById(R.id.mensajeSpn);
+        calspin = epicDialog.findViewById(R.id.Spininng_Cal);
 
         GifSpinning = (ImageView)epicDialog.findViewById(R.id.GifSpinning);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1391,6 +1477,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calspin.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1421,6 +1511,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnFut2 = (Button) epicDialog.findViewById(R.id.btnFut2);
         tituloFutbol = (TextView) epicDialog.findViewById(R.id.tituloFutbol);
         mensajeFutbol = (TextView) epicDialog.findViewById(R.id.mensajeFutbol);
+        calfutbol = epicDialog.findViewById(R.id.Futbol_Cal);
 
         GifFutbol = (ImageView)epicDialog.findViewById(R.id.GifFutbol);
         String url ="https://firebasestorage.googleapis.com/v0/b/popuptez.appspot.com/o/futbol.gif?alt=media&token=49374665-0c56-4c63-b816-ecb8689bdb6f";
@@ -1438,6 +1529,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calfutbol.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1469,6 +1564,14 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnNata2 = (Button) epicDialog.findViewById(R.id.btnNata2);
         tituloNatacion = (TextView) epicDialog.findViewById(R.id.tituloNatacion);
         mensajeNatacion = (TextView) epicDialog.findViewById(R.id.mensajeNatacion);
+        if (CaloriasActivity.check == 1){
+            calnatacion = epicDialog.findViewById(R.id.Natacion_Cal_Hombre);
+
+        }else {
+            calnatacion = epicDialog.findViewById(R.id.Natacion_Cal_Mujer);
+
+        }
+
 
         GifNatacion = (ImageView)epicDialog.findViewById(R.id.GifNatacion);
         String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
@@ -1620,6 +1723,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnBal2 = (Button) epicDialog.findViewById(R.id.btnBal2);
         tituloBal = (TextView) epicDialog.findViewById(R.id.tituloBal);
         mensajeBal = (TextView) epicDialog.findViewById(R.id.mensajeBal);
+        calbaloncesto = epicDialog.findViewById(R.id.Baloncesto_Cal);
 
 
         GifBaloncesto = (ImageView)epicDialog.findViewById(R.id.GifBaloncesto);
@@ -1639,6 +1743,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                resta= calentero - Integer.parseInt(calbaloncesto.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
