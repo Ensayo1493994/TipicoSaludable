@@ -91,7 +91,7 @@
     <string name="btnaceptar">Aceptar</string>
     <string name="alimetosconsumidos">Hoy has comido los siguientes alimentos</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="ultimoconsumo">Hoy has consumido los siguiemtes alimentos</string>
+    <string name="ultimoconsumo">Hoy has consumido los siguientes alimentos</string>
     <string name="noconsumo">No has consumido nada hoy</string>
     <string name="app_realizar">REALIZAR</string>
 
