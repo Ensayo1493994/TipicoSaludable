@@ -234,7 +234,6 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
     }
 
-/*
     @Override
     protected void onStart() {
         super.onStart();
@@ -247,5 +246,5 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         if (firebaseAuthListener != null){
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
-    }*/
+    }
 }

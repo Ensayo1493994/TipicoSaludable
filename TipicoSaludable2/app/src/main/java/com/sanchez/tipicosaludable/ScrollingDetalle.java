@@ -173,10 +173,16 @@ public class ScrollingDetalle extends AppCompatActivity {
                     if (cantidaddelalimento>=20){
                         edtxcantidad.setError("No puedes comer tanto");
                         edtxcantidad.setText("");
-
                     }
                     else {
+
                         //Toast.makeText(ScrollingDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+
+                        //---------------------ASI ESTA COSA ESTA FUNCIONANDO :V-.-----------------
+                        //Calorias_consumidas = cantidaddelalimento*(consumo+Double.parseDouble(informacion.getText().toString()));
+                        //Toast.makeText(ScrollingDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+                       //Toast.makeText(ScrollingDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+
                         Calorias_consumidas = cantidaddelalimento*(consumo+ Double.parseDouble(informacion.getText().toString()));
                         //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
                         x=((CaloriasActivity.actmb*90)/100);
