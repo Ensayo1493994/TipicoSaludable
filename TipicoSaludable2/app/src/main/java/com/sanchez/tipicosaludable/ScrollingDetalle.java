@@ -31,7 +31,7 @@ public class ScrollingDetalle extends AppCompatActivity {
     private TextView informacion, informacionprote, informacioncarbo;
     private Button btnconsumodealimeto;
     private double consumo=0, x;
-    private double canti;
+    public static double canti;
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
     int cantidaddelalimento=0,i =0;
@@ -166,7 +166,7 @@ public class ScrollingDetalle extends AppCompatActivity {
                     }
                     else {
                         Calorias_consumidas = cantidaddelalimento*(consumo+ Integer.parseInt(informacion.getText().toString()));
-                        //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ScrollingDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
                         x=((CaloriasActivity.actmb*90)/100);
                         if (Calorias_consumidas>CaloriasActivity.actmb){
 

@@ -11,18 +11,31 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bakerj.infinitecards.InfiniteCardView;
+import com.bakerj.infinitecards.transformer.DefaultTransformerToBack;
+import com.bakerj.infinitecards.transformer.DefaultTransformerToFront;
+import com.bakerj.infinitecards.transformer.DefaultZIndexTransformerCommon;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Lista_Ejercicios extends Fragment {
     Dialog epicDialog;
+    AdapterCard adapterCard;
+    Button btn1,btn2;
+    InfiniteCardView infiniteCardView;
+    List<Integer> Images = new ArrayList<>();
+
 
     //botones (1=aceptar) y (2=cancelar) segun su layaut
     Button btnBra1;     Button btnBra2;
@@ -112,7 +125,8 @@ public class Lista_Ejercicios extends Fragment {
 
     TextView tituloaPat;        TextView mensajePat;
 
-    TextView tituloBal;         TextView mensajeBal;
+    TextView tituloBal;         TextView mensajeBal,
+            tituloreco;
 
     //cierra la alerta segun su layaut
     ImageView Xbrazo;

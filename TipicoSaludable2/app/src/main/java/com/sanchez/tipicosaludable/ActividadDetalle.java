@@ -25,7 +25,7 @@ public class ActividadDetalle extends AppCompatActivity {
     private TextView informacion, informacionprote, informacioncarbo;
     private Button btnconsumodealimeto;
     private double consumo=0, x;
-    private double canti;
+    public static double canti;
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
     int cantidaddelalimento=0;

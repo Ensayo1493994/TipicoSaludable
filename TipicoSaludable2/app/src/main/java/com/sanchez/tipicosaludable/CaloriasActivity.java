@@ -39,7 +39,7 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseUser firebaseUser;
-    public static int temp;
+    public static int temp =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

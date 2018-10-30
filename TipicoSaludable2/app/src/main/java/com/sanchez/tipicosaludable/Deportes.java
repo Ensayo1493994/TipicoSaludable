@@ -72,7 +72,6 @@ public class Deportes extends AppCompatActivity {
             public void onClick(View v) {
                 //ShowFutbol();
                 Toast.makeText(Deportes.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                ShowRecomendacion();
             }
         });
 
@@ -83,48 +82,6 @@ public class Deportes extends AppCompatActivity {
 
 
     }
-    //recomendacion
-
-    public void ShowRecomendacion(){
-
-        epicDialog.setContentView(R.layout.recomendacion_alert);
-        tituloreco = (TextView) epicDialog.findViewById(R.id.tituloreco);
-        infiniteCardView = (InfiniteCardView) epicDialog.findViewById(R.id.view);
-        btn1 = (Button) epicDialog.findViewById(R.id.btnFut1);
-        btn2 = (Button) epicDialog.findViewById(R.id.btnFut2);
-
-        Images.add (R.drawable.logo1);
-        Images.add (R.drawable.logo2);
-        Images.add(R.drawable.logoredondo);
-        Images.add(R.drawable.logor);
-
-        adapterCard = new AdapterCard(this, Images);
-
-        infiniteCardView.setClickable(true);
-        infiniteCardView.setAnimType(InfiniteCardView.ANIM_TYPE_FRONT);
-        infiniteCardView.setAnimInterpolator(new LinearInterpolator());
-        infiniteCardView.setTransformerToFront(new DefaultTransformerToFront());
-        infiniteCardView.setTransformerToBack(new DefaultTransformerToBack());
-        infiniteCardView.setZIndexTransformerToBack(new DefaultZIndexTransformerCommon());
-        infiniteCardView.setAdapter(adapterCard);
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                infiniteCardView.bringCardToFront(adapterCard.getCount()-1);
-            }
-        });
-
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                infiniteCardView.bringCardToFront(1);
-            }
-        });
-
-        epicDialog.show();
-    }
-
 
     //Shows
     public void ShowFutbol(){

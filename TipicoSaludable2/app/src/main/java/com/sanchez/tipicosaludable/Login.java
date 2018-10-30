@@ -81,6 +81,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         if (CaloriasActivity.temp==1){
             goMain();
+        }else {
+
         }
 
         //Login Facebook
