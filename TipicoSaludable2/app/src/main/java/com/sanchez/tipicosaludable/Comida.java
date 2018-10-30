@@ -1,68 +1,91 @@
 package com.sanchez.tipicosaludable;
 
+import android.support.annotation.NonNull;
+import android.widget.ArrayAdapter;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 /**
  * Created by lenovo on 3/09/2018.
  */
 
 public class Comida {
-    private String nombre, carbohidratos, proteinas;
-    private int idDrawable,calorias;
+    private String Nombre, Carbohidratos, Proteinas, Receta,idDrawable;
+    private float Calorias;
 
-
-
-    public Comida(String nombre, String carbohidratos, String proteinas, int calorias, int idDrawable) {
-        this.nombre = nombre;
-        this.calorias = calorias;
+    public Comida(String nombre, String carbohidratos, String proteinas, String receta, String idDrawable, float calorias) {
+        Nombre = nombre;
+        Carbohidratos = carbohidratos;
+        Proteinas = proteinas;
+        Receta = receta;
         this.idDrawable = idDrawable;
-        this.carbohidratos = carbohidratos;
-        this.proteinas = proteinas;
+        Calorias = calorias;
+    }
 
+    public Comida() {
     }
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        Nombre = nombre;
     }
 
-    public void setCalorias(int calorias) {
-        this.calorias = calorias;
-    }
-
-    public void setIdDrawable(int idDrawable) {
-        this.idDrawable = idDrawable;
-    }
-
-    public int getCalorias() {
-
-        return calorias;
-    }
     public String getCarbohidratos() {
-        return carbohidratos;
+        return Carbohidratos;
     }
 
     public void setCarbohidratos(String carbohidratos) {
-        this.carbohidratos = carbohidratos;
+        Carbohidratos = carbohidratos;
     }
 
     public String getProteinas() {
-        return proteinas;
+        return Proteinas;
     }
 
     public void setProteinas(String proteinas) {
-        this.proteinas = proteinas;
+        Proteinas = proteinas;
     }
 
-    public int getIdDrawable() {
+    public String getReceta() {
+        return Receta;
+    }
+
+    public void setReceta(String receta) {
+        Receta = receta;
+    }
+
+    public String getIdDrawable() {
         return idDrawable;
     }
 
-    public int getId() {
-        return nombre.hashCode();
+    public void setIdDrawable(String idDrawable) {
+        this.idDrawable = idDrawable;
     }
+
+    public float getCalorias() {
+        return Calorias;
+    }
+
+    public void setCalorias(float calorias) {
+        Calorias = calorias;
+    }
+
+    public int getId() {
+        return Nombre.hashCode();
+    }
+
+    /*
+
     public static Comida[] ITEMS = {
+
        new Comida("Empanadas","las empanadas de pipián nos proporcionan 12% de proteínas.","las empanadas de pipián nos proporcionan un 40% De carbohidratos.",134
                , R.drawable.empanada),
        new Comida("Tamales de Pipian","Los tamales de pipián nos proporciona un 30% de carbohidratos ","los tamales de pipián nos proporcionan 17% de proteínas.",144, R.drawable.tamal),
@@ -82,14 +105,19 @@ public class Comida {
        new Comida("Manjar Blanco","el manjar banco nos brinda el 35% de carbohidratos. ","el manjar blanco nos proporciona un 4% de proteínas",292,R.drawable.manjarblanco),
        new Comida("Huevos Pericos","los huevos pericos nos brindan un 8% de carbohidratos.","los huevos nos brindan un 29% de proteínas",185,R.drawable.huevoperico),
        new Comida("Hojaldras","las hojaldras nos proporcionan un 64% de carbohidratos.","las hojaldras nos proporcionan un 12% de proteínas.",185,R.drawable.hojaldras),
-    };
+
+
+
+    };*/
 
     public static Comida getItem(int id){
-        for (Comida item : ITEMS){
+        for (Comida item : Fragment_galeria.listacomida){
             if (item.getId() == id){
                 return item;
             }
         }
         return null;
     }
+
+
 }

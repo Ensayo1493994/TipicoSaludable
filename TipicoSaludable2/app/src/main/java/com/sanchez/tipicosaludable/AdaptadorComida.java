@@ -10,25 +10,31 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
 /**
  * Created by lenovo on 3/09/2018.
  */
 
 public class AdaptadorComida extends BaseAdapter {
     private Context context;
+    ArrayList<Comida> list;
+    //-----AQUI HAY QU ECAMBIAR "ITEMS" POR EL ARRAY QUE SE TRAE DESDE FIREBASE
 
-    public AdaptadorComida(Context context) {
+    public AdaptadorComida(Context context, ArrayList<Comida> list  ) {
         this.context = context;
+        this.list = list;
+
     }
 
     @Override
     public int getCount() {
-        return Comida.ITEMS.length;
+        return list.size();
     }
 
     @Override
     public Comida getItem(int position) {
-        return Comida.ITEMS[position];
+        return list.get(position);
     }
 
     @Override

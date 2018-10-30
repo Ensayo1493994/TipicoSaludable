@@ -24,7 +24,7 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
 
 
         gridView = findViewById(R.id.grid);
-        adaptador = new AdaptadorComida(this);
+        adaptador = new AdaptadorComida(this, Fragment_galeria.listacomida);
         gridView .setAdapter(adaptador);
         gridView.setOnItemClickListener(this);
     }

@@ -36,7 +36,6 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.bakerj:infinite-cards:1.0.3'
 
-
     //recyclerview
     compile "com.android.support:recyclerview-v7:27.0.2"
 
@@ -47,5 +46,8 @@ dependencies {
 
     //circle imageview
     compile 'de.hdodenhof:circleimageview:2.2.0'
+    //BASE DE DATOS
+    compile 'com.google.firebase:firebase-database:16.0.1'
+
 }
 apply plugin: 'com.google.gms.google-services'

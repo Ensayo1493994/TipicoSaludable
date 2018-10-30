@@ -5,36 +5,37 @@ package com.sanchez.tipicosaludable;
  */
 
 public class UltimoConsumo {
-    public  String nombre;
-    public int idDrawable;
+    public  String Nombre,idDrawable;
 
 
     public UltimoConsumo() {
     }
 
-    public UltimoConsumo(String nombre, int idDrawable){
-        this.nombre=nombre;
+    public UltimoConsumo(String nombre, String idDrawable) {
+        Nombre = nombre;
         this.idDrawable = idDrawable;
     }
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        Nombre = nombre;
     }
 
-    public int getIdDrawable() {
+    public String getIdDrawable() {
         return idDrawable;
     }
 
-    public void setIdDrawable(int idDrawable) {
+    public void setIdDrawable(String idDrawable) {
         this.idDrawable = idDrawable;
     }
+
     public int getId() {
-        return nombre.hashCode();
+        return Nombre.hashCode();
     }
+    /*
     public static UltimoConsumo[] ITEMS = {
             new UltimoConsumo("Empanadas",R.drawable.empanada),
             new UltimoConsumo("Tamales de Pipian", R.drawable.tamal),
@@ -54,10 +55,10 @@ public class UltimoConsumo {
             new UltimoConsumo("Manjar Blanco",R.drawable.manjarblanco),
             new UltimoConsumo("Huevos Pericos",R.drawable.huevoperico),
             new UltimoConsumo("Hojaldras",R.drawable.hojaldras),
-    };
+    };*/
 
     public static UltimoConsumo getItem(int id){
-        for (UltimoConsumo item : ITEMS){
+        for (UltimoConsumo item : ScrollingDetalle.ultimoconsumo){
             if (item.getId() == id){
                 return item;
             }
