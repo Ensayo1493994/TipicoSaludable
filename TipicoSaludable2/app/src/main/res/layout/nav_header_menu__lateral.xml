@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <ImageView
-        android:id="@+id/imageViewlogo"
+        android:id="@+id/imageViewlogo1"
         android:src="@drawable/logor"
         android:layout_width="56dp"
         android:layout_height="56dp"
@@ -19,7 +19,7 @@
         />
 
     <TextView
-        android:id="@+id/txtNombre"
+        android:id="@+id/txtNombre1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
@@ -27,7 +27,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtCorreo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="android.studio@android.com" />

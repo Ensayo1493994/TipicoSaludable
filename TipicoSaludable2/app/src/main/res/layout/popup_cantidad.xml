@@ -43,11 +43,11 @@
 
             <Button
                 android:id="@+id/btnaceptarconsumir"
+                style="@android:style/Widget.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btnaceptar"
 
-                />
+                android:text="@string/btnaceptar" />
 
 
         </LinearLayout>

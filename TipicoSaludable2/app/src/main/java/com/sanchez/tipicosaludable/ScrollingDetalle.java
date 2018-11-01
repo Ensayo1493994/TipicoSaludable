@@ -72,7 +72,7 @@ public class ScrollingDetalle extends AppCompatActivity {
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
                 Long reference = downloadManager.enqueue(request);
 
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Descargando...", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -170,7 +170,7 @@ public class ScrollingDetalle extends AppCompatActivity {
             public void onClick(View view) {
                 if (edtxcantidad.length()>0){
                     cantidaddelalimento = Integer.parseInt(edtxcantidad.getText().toString());
-                    if (cantidaddelalimento>=20){
+                    if (cantidaddelalimento>20){
                         edtxcantidad.setError("No puedes comer tanto");
                         edtxcantidad.setText("");
                     }
@@ -186,11 +186,13 @@ public class ScrollingDetalle extends AppCompatActivity {
                         Calorias_consumidas = cantidaddelalimento*(consumo+ Double.parseDouble(informacion.getText().toString()));
                         //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
                         x=((CaloriasActivity.actmb*90)/100);
+                       // Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
                         if (Calorias_consumidas>CaloriasActivity.actmb){
+
 
                             canti= (Calorias_consumidas-CaloriasActivity.actmb);
 
-                            Math.round(canti);
+
 
                             Toast.makeText(ScrollingDetalle.this, "Te has pasado "+canti+" calorias",
                                     Toast.LENGTH_LONG).show();
@@ -215,6 +217,7 @@ public class ScrollingDetalle extends AppCompatActivity {
                         else{
                             Intent intent = new Intent(ScrollingDetalle.this,Menu_Lateral.class);
                             startActivity(intent);
+                            finish();
 
                         }
 

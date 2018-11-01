@@ -25,7 +25,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class CaloriasActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class CaloriasActivity extends AppCompatActivity {
 
     EditText peso,talla,edad;
     Button validar;
@@ -48,7 +48,6 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
         setContentView(R.layout.activity_calorias);
 
 
-
         validar = (Button) findViewById(R.id.validar);
 
         inicializar();
@@ -61,46 +60,10 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
                 gastarKal();
 
 
-
             }
         });
 
 
-        //Google signin
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    setUserData(user);
-                }else {
-                    goLogin();
-                }
-
-            }
-
-            private void setUserData(FirebaseUser user) {
-
-            }
-        };
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
-
-   /* private void setUserData(FirebaseUser user) {
-        txtNombre.setText(user.getDisplayName());
-        txtCorreo.setText(user.getEmail());
-        txtId.setText(user.getUid());
-
-
-    }*/
     }
 
     private void inicializar() {
@@ -178,7 +141,7 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
             Intent intent = new Intent(CaloriasActivity.this,Menu_Lateral.class);
             startActivity(intent);
             finish();
-            Toast.makeText(CaloriasActivity.this, "" + temp, Toast.LENGTH_SHORT).show();
+            //6Toast.makeText(CaloriasActivity.this, "" + imc, Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -206,33 +169,6 @@ public class CaloriasActivity extends AppCompatActivity implements GoogleApiClie
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        firebaseAuth.addAuthStateListener(firebaseAuthListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (firebaseAuthListener != null){
-            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
-        }
-
-    }
-
-    private void goLogin() {
-
-        Intent intent = new Intent(CaloriasActivity.this,Login.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 
 }

@@ -31,8 +31,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Menu_Lateral extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
-    ImageView imageViewlogo;
-    TextView txtNombre;
+    ImageView imageViewlogo1;
+    TextView txtNombre1;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -48,8 +48,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_menu__lateral);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        imageViewlogo = findViewById(R.id.imageViewlogo);
-        txtNombre = findViewById(R.id.txtNombre);
+        imageViewlogo1 = findViewById(R.id.imageViewlogo1);
+        txtNombre1 = findViewById(R.id.txtNombre1);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.contenedor, new Inicio()).commit();
 
@@ -63,11 +63,11 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION-----------------------------------
-        if (CaloriasActivity.imc<=40){
-            navigationView.getMenu().setGroupVisible(R.id.menugordos,false);
+        if (CaloriasActivity.imc>=40){
+            navigationView.getMenu().setGroupVisible(R.id.menunormal,false);
 
         }else{
-            navigationView.getMenu().setGroupVisible(R.id.menunormal,false);
+            navigationView.getMenu().setGroupVisible(R.id.menugordos,false);
         }
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION FIN-----------------------------------
 
@@ -100,8 +100,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     
 
     private void setUserData(FirebaseUser user) {
-        txtNombre.setText(user.getDisplayName());
-        Glide.with(this).load(user.getPhotoUrl()).into(imageViewlogo);
+        txtNombre1.setText(user.getDisplayName());
+        Glide.with(this).load(user.getPhotoUrl()).into(imageViewlogo1);
 
     }
 
@@ -233,7 +233,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
 
     }
-
+    /*
     @Override
     protected void onStart() {
         super.onStart();
@@ -246,5 +246,5 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         if (firebaseAuthListener != null){
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
-    }
+    }*/
 }
