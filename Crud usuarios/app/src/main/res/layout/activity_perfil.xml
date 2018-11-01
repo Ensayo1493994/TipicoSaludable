@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.admin.myfirebaseapp.PerfilActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/actividadF"
+            android:layout_width="match_parent"
+            android:hint="@string/actividad"
+            android:inputType="text"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/calo_maxima"
+            android:layout_width="match_parent"
+            android:hint="@string/calors_max1"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/contexturaF"
+            android:layout_width="match_parent"
+            android:hint="@string/contextura"
+            android:inputType="text"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edad1"
+            android:layout_width="match_parent"
+            android:hint="@string/edad2"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/genero1"
+            android:layout_width="match_parent"
+            android:hint="@string/genero1"
+            android:inputType="text"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/nom_indice"
+            android:layout_width="match_parent"
+            android:hint="@string/imc"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/peso1"
+            android:layout_width="match_parent"
+            android:hint="@string/peso"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/talla1"
+            android:layout_width="match_parent"
+            android:hint="@string/talla"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:text="@string/lista2"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="26sp"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <ListView
+            android:id="@+id/lista1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+    </LinearLayout>
+</LinearLayout>

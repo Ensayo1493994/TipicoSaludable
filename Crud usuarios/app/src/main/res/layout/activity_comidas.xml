@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.admin.myfirebaseapp.ComidasActivity">
+
+
+    <EditText
+        android:id="@+id/edtxnombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nombre2"
+        />
+    <EditText
+        android:id="@+id/edtxcalorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/calorias1"
+        android:inputType="number"
+        />
+    <EditText
+        android:id="@+id/edtxproteinas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/proteinas1"
+        android:inputType="number"
+        />
+    <EditText
+        android:id="@+id/edtxcaloriasconsumidas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/calori_consu"
+        android:inputType="number"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/btninsert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/insertar1"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/btnactualizar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/actualizar1"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btneliminar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/eliminar1"
+        />
+    <ListView
+        android:id="@+id/lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+
+
+</LinearLayout>

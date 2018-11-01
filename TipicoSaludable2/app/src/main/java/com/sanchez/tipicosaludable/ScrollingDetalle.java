@@ -188,6 +188,7 @@ public class ScrollingDetalle extends AppCompatActivity {
                         x=((CaloriasActivity.actmb*90)/100);
                        // Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
                         if (Calorias_consumidas>CaloriasActivity.actmb){
+                            Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
 
 
                             canti= (Calorias_consumidas-CaloriasActivity.actmb);

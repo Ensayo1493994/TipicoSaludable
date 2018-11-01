@@ -22,8 +22,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.sanchez.tipicosaludable.model.Perfil;
+
+import java.util.UUID;
 
 public class CaloriasActivity extends AppCompatActivity {
 
@@ -41,6 +47,9 @@ public class CaloriasActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseUser firebaseUser;
     public static int temp =0;
+    FirebaseDatabase firebaseDatabase;
+    FirebaseApp firebaseApp;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,7 @@ public class CaloriasActivity extends AppCompatActivity {
 
 
         validar = (Button) findViewById(R.id.validar);
+        inicializarFirebase();
 
         inicializar();
 
@@ -60,10 +70,60 @@ public class CaloriasActivity extends AppCompatActivity {
                 gastarKal();
 
 
+
+                Perfil p = new Perfil();
+                p.setUid(UUID.randomUUID().toString());
+                if (act1.isChecked()){
+                    p.setActividad(act1.getText().toString());
+                }
+
+                if (act2.isChecked()){
+                    p.setActividad(act2.getText().toString());
+                }
+
+                if (act3.isChecked()){
+                    p.setActividad(act3.getText().toString());
+                }
+
+                if (act4.isChecked()){
+                    p.setActividad(act4.getText().toString());
+                }
+
+                if (act5.isChecked()){
+                    p.setActividad(act5.getText().toString());
+                }
+
+                p.setCalorías_maximas(actmb);
+                p.setContextura("sedentario");
+
+                p.setEdad(edad.getText().toString());
+                if (masc.isChecked()){
+                    p.setGenero(masc.getText().toString());
+
+                }else if (fem.isChecked()){
+                    p.setGenero(fem.getText().toString());
+
+                }
+                p.setImc(imc);
+                p.setPeso(peso.getText().toString());
+                p.setTalla(talla.getText().toString());
+                databaseReference.child("Perfil").child(p.getUid()).setValue(p);
+
+
+
+
+
             }
         });
 
 
+    }
+
+    private void inicializarFirebase() {
+        firebaseApp.initializeApp(this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        //firebaseDatabase.setPersistenceEnabled(true);
+        databaseReference = firebaseDatabase.getReference();
     }
 
     private void inicializar() {

@@ -1,0 +1,69 @@
+<resources>
+
+    //Strings Crud Usuarios //
+    <string name="app_name">MyFirebaseApp</string>
+    <string name="nombres">Nombre</string>
+    <string name="correo">Correo</string>
+    <string name="fecha">Fecha Nac</string>
+    <string name="foto">Foto</string>
+    <string name="lista">Lista de Administradores</string>
+
+    //Strings Intents//
+
+    <string name="mensaje">Menu de todos los cruds</string>
+    <string name="crud_usuarios">Crud usuarios</string>
+    <string name="crud_historial">Crud historial</string>
+    <string name="crud_deportes">Crud deportes</string>
+    <string name="crud_comidas">Crud Comidas</string>
+    <string name="curd_perfil">Crud Perfil</string>
+
+    //Strings Crud Deportes//
+
+    <string name="app_titulo">Deportes</string>
+    <string name="app_nombre">Nombre</string>
+    <string name="app_calorias">Calorias</string>
+    <string name="app_descripcion">Descripcion</string>
+    <string name="app_duracion">Duracion</string>
+    <string name="app_guardar">Guardar</string>
+    <string name="app_eliminar">Eliminar</string>
+    <string name="app_actualizar">Actualizar</string>
+    <string name="app_deporte">Guardar Deporte</string>
+    <string name="app_consulta">Consultar Deporte</string>
+    <string name="app_volver">Volver</string>
+    <string name="foto1">Imagen</string>
+    <string name="app_buscar">Buscar</string>
+
+    //Strings Crud Historial//
+
+    <string name="calors_cons">Calorías consumídas</string>
+    <string name="calors_exceden">Calorías excedentes</string>
+    <string name="calors_fin">Calorías finales</string>
+    <string name="calors_max">Calorías máximas</string>
+    <string name="fecha1">Fecha</string>
+    <string name="user">Usuario</string>
+    <string name="lista1">Historial de usuarios</string>
+
+    //Strings Crud Comidas //
+
+    <string name="nombre2">Nombre</string>
+    <string name="calorias1">Calorias</string>
+    <string name="proteinas1">Proteinas</string>
+    <string name="calori_consu">Calorias Consumidas</string>
+    <string name="insertar1">Insertar</string>
+    <string name="actualizar1">Actualizar</string>
+    <string name="eliminar1">Eliminar</string>
+
+    //Strings Crud Perfil //
+
+    <string name="actividad">Actividad</string>
+    <string name="calors_max1">Calorías máximas</string>
+    <string name="contextura">Contextura</string>
+    <string name="edad2">Edad</string>
+    <string name="genero1">Genero</string>
+    <string name="imc">Imc</string>
+    <string name="peso">Peso</string>
+    <string name="talla">Talla</string>
+    <string name="lista2">Lista de perfiles</string>
+
+
+</resources>
