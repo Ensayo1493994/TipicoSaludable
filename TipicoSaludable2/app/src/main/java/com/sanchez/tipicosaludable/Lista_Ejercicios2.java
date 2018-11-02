@@ -48,7 +48,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
     //------------------------------
 
     Dialog epicDialog;
-    int resta=0, calentero;
+    public static  int resta, calentero, caloriasacumuladas=0;
     Double a = ScrollingDetalle.Calorias_consumidas;
 
 
@@ -159,10 +159,10 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
 
     TextView tituloNatacion, calnatacion;    TextView mensajeNatacion;
 
-    TextView tituloCicli;
+    TextView tituloCicli, calciclismo;
     TextView mensajeCicli;
 
-    TextView tituloaPat;
+    TextView tituloaPat, calpatinaje;
     TextView mensajePat;
 
     TextView tituloreco;
@@ -703,6 +703,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
 
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calbrazo.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -756,6 +757,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calsalto.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -809,6 +811,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calsenta.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -862,6 +865,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(caltit.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -916,6 +920,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
                 resta= calentero - Integer.parseInt(calabd.getText().toString());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
@@ -969,6 +974,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calburp.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1022,6 +1028,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calcmb.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1075,6 +1082,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calimp.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1128,6 +1136,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calmarcha.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1181,6 +1190,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calzumba.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1234,6 +1244,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calpilates.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1287,6 +1298,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calyoga.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1340,6 +1352,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calslp.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1394,6 +1407,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calcaminar.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1447,6 +1461,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(caltrotar.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1501,6 +1516,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calaero.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1554,6 +1570,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calspin.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1607,6 +1624,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
                 resta= calentero - Integer.parseInt(calfutbol.getText().toString());
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
@@ -1668,6 +1686,11 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calnatacion.getText().toString());
+                resta= calentero - Integer.parseInt(calnatacion.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1701,6 +1724,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnCicli2 = (Button) epicDialog.findViewById(R.id.btnCicli2);
         tituloCicli = (TextView) epicDialog.findViewById(R.id.tituloCicli);
         mensajeCicli = (TextView) epicDialog.findViewById(R.id.mensajeCicli);
+        calciclismo = epicDialog.findViewById(R.id.Ciclismo_Cal);
 
 
         GifCiclismo = (ImageView) epicDialog.findViewById(R.id.GifCiclismo);
@@ -1719,6 +1743,11 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calciclismo.getText().toString());
+                resta= calentero - Integer.parseInt(calciclismo.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });
@@ -1752,6 +1781,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
         btnPat2 = (Button) epicDialog.findViewById(R.id.btnPat2);
         tituloaPat = (TextView) epicDialog.findViewById(R.id.tituloPat);
         mensajePat = (TextView) epicDialog.findViewById(R.id.mensajePat);
+        calpatinaje = epicDialog.findViewById(R.id.Patinaje_Cal);
 
 
         GifPatinaje = (ImageView) epicDialog.findViewById(R.id.GifPatinaje);
@@ -1770,6 +1800,11 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
+                calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calpatinaje.getText().toString());
+                resta= calentero - Integer.parseInt(calpatinaje.getText().toString());
+                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
+                ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
             }
         });

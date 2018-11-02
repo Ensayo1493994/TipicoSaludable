@@ -6,13 +6,13 @@ package com.sanchez.tipicosaludable.model;
 
 public class Historial {
     private String uid;
-    private String Calorías_consumidas;
-    private String Calorías_excedentes;
-    private String Calorías_finales;
-    private String Calorías_máximas;
+    private Double Calorías_consumidas;
+    private Double Calorías_excedentes;
+    private int Calorías_finales;
+    private Double Calorías_máximas;
     private String Fecha;
-    private String Nombre_usuario;
-    private String conten;
+    private String usuario;
+    private int calorias_acumuladas;
     public Historial() {
 
     }
@@ -25,35 +25,35 @@ public class Historial {
         this.uid = uid;
     }
 
-    public String getCalorías_consumidas() {
+    public Double getCalorías_consumidas() {
         return Calorías_consumidas;
     }
 
-    public void setCalorías_consumidas(String calorías_consumidas) {
+    public void setCalorías_consumidas(Double calorías_consumidas) {
         Calorías_consumidas = calorías_consumidas;
     }
 
-    public String getCalorías_excedentes() {
+    public Double getCalorías_excedentes() {
         return Calorías_excedentes;
     }
 
-    public void setCalorías_excedentes(String calorías_excedentes) {
+    public void setCalorías_excedentes(Double calorías_excedentes) {
         Calorías_excedentes = calorías_excedentes;
     }
 
-    public String getCalorías_finales() {
+    public int getCalorías_finales() {
         return Calorías_finales;
     }
 
-    public void setCalorías_finales(String calorías_finales) {
+    public void setCalorías_finales(int calorías_finales) {
         Calorías_finales = calorías_finales;
     }
 
-    public String getCalorías_máximas() {
+    public Double getCalorías_máximas() {
         return Calorías_máximas;
     }
 
-    public void setCalorías_máximas(String calorías_máximas) {
+    public void setCalorías_máximas(Double calorías_máximas) {
         Calorías_máximas = calorías_máximas;
     }
 
@@ -65,29 +65,26 @@ public class Historial {
         Fecha = fecha;
     }
 
-    public String getNombre_usuario() {
-        return Nombre_usuario;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setNombre_usuario(String nombre_usuario) {
-        Nombre_usuario = nombre_usuario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public String getConten() {
-        return conten;
+    public int getCalorias_acumuladas() {
+        return calorias_acumuladas;
     }
 
-    public void setConten(String conten) {
-        this.conten = conten;
-
-
+    public void setCalorias_acumuladas(int calorias_acumuladas) {
+        this.calorias_acumuladas = calorias_acumuladas;
     }
-
 
     @Override
     public String toString() {
         return "Historial{" +
-                "Nombre_usuario='" + Nombre_usuario + '\'' +
+                "usuario='" + usuario + '\'' +
                 '}';
     }
 }

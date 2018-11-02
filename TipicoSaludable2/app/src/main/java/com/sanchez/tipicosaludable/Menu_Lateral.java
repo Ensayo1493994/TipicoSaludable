@@ -62,6 +62,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION-----------------------------------
         if (CaloriasActivity.imc<=40){
             navigationView.getMenu().setGroupVisible(R.id.menugordos,false);
@@ -71,7 +73,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         }
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION FIN-----------------------------------
 
-
+        /*
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -93,7 +95,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
+                .build();*/
 
 
     }
@@ -200,6 +202,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment4).commit();
 
         } else if (id == R.id.nav_cerrar_sesion) {
+            /*
             firebaseAuth.signOut();
             Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
                 @Override
@@ -212,7 +215,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
                     }
                 }
-            });
+            });*/
 
 
         }
@@ -226,25 +229,29 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+    /*
     private void goLogin() {
 
         Intent intent = new Intent(Menu_Lateral.this,Login.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
-    }
+    }*/
 
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+
+        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        /*
         if (firebaseAuthListener != null){
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
-        }
+        }*/
     }
 }

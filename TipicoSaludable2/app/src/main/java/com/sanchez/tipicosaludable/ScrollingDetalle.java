@@ -1,5 +1,6 @@
 package com.sanchez.tipicosaludable;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -15,14 +16,21 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.sanchez.tipicosaludable.model.Historial;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.UUID;
 
 public class ScrollingDetalle extends AppCompatActivity {
     public static final String EXTRA_PARAM_ID = "com.herprogramacion.coches2015.extra.ID";
@@ -33,7 +41,7 @@ public class ScrollingDetalle extends AppCompatActivity {
     private Button btnconsumodealimeto;
     private double consumo=0, x;
     public static double canti;
-    int a;
+    int dia, mes, año;
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
     int cantidaddelalimento=0,i =0;
@@ -48,6 +56,9 @@ public class ScrollingDetalle extends AppCompatActivity {
     EditText edtxcantidad;
     //DESCARGA DE PDF
     DownloadManager downloadManager;
+    FirebaseDatabase firebaseDatabase;
+    FirebaseApp firebaseApp;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +93,7 @@ public class ScrollingDetalle extends AppCompatActivity {
 
         imagenExtendida = (ImageView) findViewById(R.id.imagen_extendida);
 
-
+        inicializarFirebase();
 
         epicDialog = new Dialog(this);
         cantidadaconsumir = new Dialog(this);
@@ -96,28 +107,6 @@ public class ScrollingDetalle extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //--------TERMINAR DE ARREGLARLO
-
-                consumo1.setIdDrawable(Fragment_galeria.n);
-                consumo1.setNombre(Fragment_galeria.nombrealimento);
-                if (bound>0){
-                    for ( imagenid = 0; imagenid < bound; imagenid= imagenid+1){
-
-
-                        if ((ultimoconsumo.get(imagenid).getIdDrawable()==Fragment_galeria.n) ){
-                            //Toast.makeText(ActividadDetalle.this, "encontro igual" + ultimoconsumo.get(imagenid).getIdDrawable()+ " "+ Fragment_galeria.n, Toast.LENGTH_SHORT).show();
-                            igual = igual+1;
-                        }
-                    }
-                    if(igual==0){
-                        ultimoconsumo.add(consumo1);
-                    }
-                }else {
-                    ultimoconsumo.add(consumo1);
-
-                }
-
-                bound = ultimoconsumo.size();//Toast.makeText(ActividadDetalle.this, ""+itemDetallado.getIdDrawable(), Toast.LENGTH_SHORT).show();
-
 
                 try{
 
@@ -160,6 +149,13 @@ public class ScrollingDetalle extends AppCompatActivity {
         cargarImagenExtendida();
     }
 
+    private void inicializarFirebase() {
+        firebaseApp.initializeApp(this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        //firebaseDatabase.setPersistenceEnabled(true);
+        databaseReference = firebaseDatabase.getReference();
+    }
+
     private void showCalcularcantidad() {
         cantidadaconsumir.setContentView(R.layout.popup_cantidad);
         btnaceptar = cantidadaconsumir.findViewById(R.id.btnaceptarconsumir);
@@ -176,14 +172,64 @@ public class ScrollingDetalle extends AppCompatActivity {
                     }
                     else {
 
-                        //Toast.makeText(ScrollingDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+                        //---------------------- AGREGAR LA IMAGEN AL INICIO -----------------
+                        consumo1.setIdDrawable(Fragment_galeria.n);
+                        consumo1.setNombre(Fragment_galeria.nombrealimento);
+                        if (bound>0){
+                            for ( imagenid = 0; imagenid < bound; imagenid= imagenid+1){
 
-                        //---------------------ASI ESTA COSA ESTA FUNCIONANDO :V-.-----------------
+
+                                if ((ultimoconsumo.get(imagenid).getIdDrawable()==Fragment_galeria.n) ){
+                                    //Toast.makeText(ActividadDetalle.this, "encontro igual" + ultimoconsumo.get(imagenid).getIdDrawable()+ " "+ Fragment_galeria.n, Toast.LENGTH_SHORT).show();
+                                    igual = igual+1;
+                                }
+                            }
+                            if(igual==0){
+                                ultimoconsumo.add(consumo1);
+                            }
+                        }else {
+                            ultimoconsumo.add(consumo1);
+
+                        }
+
+                        bound = ultimoconsumo.size();//Toast.makeText(ActividadDetalle.this, ""+itemDetallado.getIdDrawable(), Toast.LENGTH_SHORT).show();
+
+                        //--------------------- FIN -----------------
+
+
                         //Calorias_consumidas = cantidaddelalimento*(consumo+Double.parseDouble(informacion.getText().toString()));
                         //Toast.makeText(ScrollingDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
                        //Toast.makeText(ScrollingDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
 
+
+                        //----Agregar DATOS HISTORIAL FIREBASE---------
                         Calorias_consumidas = cantidaddelalimento*(consumo+ Double.parseDouble(informacion.getText().toString()));
+                        final Calendar c = Calendar.getInstance();
+                        dia = c.get(Calendar.DAY_OF_MONTH);
+                        mes = c.get(Calendar.MONTH);
+                        año = c.get(Calendar.YEAR);
+                        //Toast.makeText(ScrollingDetalle.this, ""+dia+"/"+mes+"/"+año, Toast.LENGTH_SHORT).show();
+
+
+                        Historial p = new Historial();
+                        p.setUid(UUID.randomUUID().toString());
+                        p.setCalorias_acumuladas(Lista_Ejercicios2.caloriasacumuladas);
+                        p.setCalorías_consumidas(Calorias_consumidas);
+                        p.setCalorías_excedentes(canti);
+                        p.setCalorías_finales(Lista_Ejercicios2.resta);
+                        p.setCalorías_máximas(CaloriasActivity.actmb);
+                        p.setFecha(""+dia+"-"+mes+"-"+año);
+                        p.setUsuario("Mamo");
+                        databaseReference.child("Historial").child(p.getUid()).setValue(p);
+
+                        //sin termiinar
+
+
+
+
+                        //----Agregar DATOS HISTORIAL FIREBASE---------
+
+
                         //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
                         x=((CaloriasActivity.actmb*90)/100);
                         if (Calorias_consumidas>CaloriasActivity.actmb){

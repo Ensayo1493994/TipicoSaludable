@@ -61,12 +61,7 @@ public class ActividadDetalle extends AppCompatActivity {
         btnconsumodealimeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //--------TERMINAR DE ARREGLARLO
 
-                UltimoConsumo consumo1 = new UltimoConsumo();
-                //consumo1.setIdDrawable(Fragment_galeria.n);
-                consumo1.setNombre(Fragment_galeria.nombrealimento);
-                ultimoconsumo.add(consumo1);
                 //Toast.makeText(ActividadDetalle.this, ""+itemDetallado.getIdDrawable(), Toast.LENGTH_SHORT).show();
                 showCalcularcantidad();
                 Calorias_consumidas=Calorias_consumidas+(consumo+ Integer.parseInt(informacion.getText().toString()));
@@ -115,6 +110,7 @@ public class ActividadDetalle extends AppCompatActivity {
         btnaceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 cantidaddelalimento = Integer.parseInt(edtxcantidad.getText().toString());
                 if (cantidaddelalimento>=20){
                     edtxcantidad.setError("No puedes comer tanto");
@@ -122,6 +118,15 @@ public class ActividadDetalle extends AppCompatActivity {
 
                 }
                 else {
+                    //-----AGREGAR LA IMAGEN AL INICIO----------------
+
+                    UltimoConsumo consumo1 = new UltimoConsumo();
+                    //consumo1.setIdDrawable(Fragment_galeria.n);
+                    consumo1.setNombre(Fragment_galeria.nombrealimento);
+                    ultimoconsumo.add(consumo1);
+
+                    //------FIN---------------------------------------
+
                     Calorias_consumidas = cantidaddelalimento*(consumo+ Integer.parseInt(informacion.getText().toString()));
                     //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
                     x=((CaloriasActivity.actmb*90)/100);
@@ -155,6 +160,7 @@ public class ActividadDetalle extends AppCompatActivity {
                     }
 
                 }
+
 
 
 
