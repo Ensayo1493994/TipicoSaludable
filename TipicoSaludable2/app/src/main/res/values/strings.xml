@@ -132,6 +132,7 @@
     <string name="app_Omitir">Omitir</string>
     <string name="Limite_cal">Calorias maximas por dia:</string>
     <string name="cal_per">0000.00</string>
+    <string name="btncalcular">Calcular</string>
 
 
 </resources>

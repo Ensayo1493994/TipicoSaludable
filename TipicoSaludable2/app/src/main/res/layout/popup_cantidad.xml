@@ -25,6 +25,8 @@
 
 
             >
+
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,14 +42,66 @@
                     />
 
             </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/btnaceptarconsumir"
-                style="@android:style/Widget.Button.Small"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <Button
+                    android:id="@+id/btnaceptarconsumir"
+                    style="@android:style/Widget.Button.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-                android:text="@string/btnaceptar" />
+                    android:text="@string/btnaceptar" />
+                <Button
+                    android:id="@+id/btncalcular"
+                    style="@android:style/Widget.Button.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/btncalcular" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                >
+                <TextView
+                    android:id="@+id/txtcantidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:layout_marginLeft="20dp"
+                    />
+                <TextView
+                    android:id="@+id/signosuma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="30sp"
+
+                    />
+                <ImageView
+                    android:id="@+id/imgcalculo"
+                    android:layout_width="140dp"
+                    android:layout_height="60dp" />
+                <TextView
+                    android:id="@+id/signoigual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    />
+                <TextView
+                    android:id="@+id/resultado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    />
+            </LinearLayout>
 
 
         </LinearLayout>

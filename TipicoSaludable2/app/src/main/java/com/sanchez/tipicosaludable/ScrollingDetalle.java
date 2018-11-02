@@ -36,16 +36,17 @@ public class ScrollingDetalle extends AppCompatActivity {
     public static final String EXTRA_PARAM_ID = "com.herprogramacion.coches2015.extra.ID";
     public static final String VIEW_NAME_HEADER_IMAGE = "imagen_compartida";
     private Comida itemDetallado;
-    private ImageView imagenExtendida;
-    private TextView informacion, informacionprote, informacioncarbo;
-    private Button btnconsumodealimeto;
+    private ImageView imagenExtendida, imgcalculo;
+    private TextView informacion, informacionprote, informacioncarbo, txtcantidad, resultado, signosuma, signoigual;
+    private Button btnconsumodealimeto, btncalcular;
     private double consumo=0, x;
     public static double canti;
     int dia, mes, año;
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
-    int cantidaddelalimento=0,i =0;
-    int bound = ultimoconsumo.size(), imagenid, igual=0;
+    int cantidaddelalimento=0;
+    int bound = ultimoconsumo.size(), imagenid, igual=0, caster;
+    String i;
     UltimoConsumo consumo1 = new UltimoConsumo();
     //-----------------------------
     //Agregar lo de las alertas
@@ -160,10 +161,44 @@ public class ScrollingDetalle extends AppCompatActivity {
         cantidadaconsumir.setContentView(R.layout.popup_cantidad);
         btnaceptar = cantidadaconsumir.findViewById(R.id.btnaceptarconsumir);
         edtxcantidad = cantidadaconsumir.findViewById(R.id.edtxcantidad);
+        txtcantidad = cantidadaconsumir.findViewById(R.id.txtcantidad);
+        resultado = cantidadaconsumir.findViewById(R.id.resultado);
+        imgcalculo = cantidadaconsumir.findViewById(R.id.imgcalculo);
+        btncalcular = cantidadaconsumir.findViewById(R.id.btncalcular);
+        signosuma = cantidadaconsumir.findViewById(R.id.signosuma);
+        signoigual = cantidadaconsumir.findViewById(R.id.signoigual);
+
+        btncalcular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //-----------------------MOSTRAR EL ALIMENTO Y LA CANTIDAD DE CAORIAS QUE COMERA---------------
+                if (edtxcantidad.length()>0){
+                    txtcantidad.setText(edtxcantidad.getText().toString());
+                    signoigual.setText("=");
+                    signosuma.setText("+");
+                    Glide.with(imgcalculo.getContext()).load(itemDetallado.getIdDrawable()).into(imgcalculo);
+                    Double resultadocal = itemDetallado.getCalorias()*Double.parseDouble(edtxcantidad.getText().toString());
+                    caster = Integer.valueOf(resultadocal.intValue());
+
+                    resultado.setText(""+caster);
+
+                }else{
+                    edtxcantidad.setError("Campo Vacio");
+                }
+
+
+
+            }
+        });
+
+
+
 
         btnaceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 if (edtxcantidad.length()>0){
                     cantidaddelalimento = Integer.parseInt(edtxcantidad.getText().toString());
                     if (cantidaddelalimento>20){
@@ -171,6 +206,8 @@ public class ScrollingDetalle extends AppCompatActivity {
                         edtxcantidad.setText("");
                     }
                     else {
+
+
 
                         //---------------------- AGREGAR LA IMAGEN AL INICIO -----------------
                         consumo1.setIdDrawable(Fragment_galeria.n);

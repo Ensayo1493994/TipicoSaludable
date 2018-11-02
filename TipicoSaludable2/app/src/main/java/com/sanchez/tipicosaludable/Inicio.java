@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 
 public class Inicio extends Fragment {
-    int size;
+    int size, entero;
 
 
     @Override
@@ -26,8 +26,11 @@ public class Inicio extends Fragment {
 
         TextView textView = vista.findViewById(R.id.txtnoconsumo);
         TextView textView2 = vista.findViewById(R.id.cal_per);
-        double x = CaloriasActivity.actmb;
-        textView2.setText(""+x);
+        Double x = CaloriasActivity.actmb;
+
+        //------------------- REDONDEAR DECIMAL------------
+        entero = Integer.valueOf(x.intValue());
+        textView2.setText(""+entero);
 
 
 
