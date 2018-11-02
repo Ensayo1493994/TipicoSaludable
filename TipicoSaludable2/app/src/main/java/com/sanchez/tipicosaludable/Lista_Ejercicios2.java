@@ -1889,6 +1889,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
     //<ALERTA RECOMENDADOS------------------------->
     public void ShowRecomendacion() {
         epicDialog.setContentView(R.layout.recomendacion_alert);
+        Xfutbol= (ImageView) epicDialog.findViewById(R.id.Xfutbol);
         tituloreco = (TextView) epicDialog.findViewById(R.id.tituloreco);
         btn1 = (Button) epicDialog.findViewById(R.id.btnFut1);
         btn2 = (Button) epicDialog.findViewById(R.id.btnFut2);
@@ -1931,9 +1932,22 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
             }
         });
 
-            getImages();
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                epicDialog.dismiss();
+            }
+        });
+        Xfutbol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                epicDialog.dismiss();
 
-            epicDialog.show();
+            }
+        });
+        getImages();
+
+        epicDialog.show();
         }
 
     private void getImages(){

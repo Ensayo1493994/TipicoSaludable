@@ -75,6 +75,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         logocir.startAnimation(smalltobig);
 
         nothingtocome = AnimationUtils.loadAnimation(this,R.anim.nothingtocome);
+
         //btnlogin.startAnimation(nothingtocome);
 
        // btnloginfb.startAnimation(nothingtocome);

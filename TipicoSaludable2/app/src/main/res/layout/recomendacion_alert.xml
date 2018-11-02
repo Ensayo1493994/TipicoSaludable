@@ -74,23 +74,13 @@
                     android:gravity="center_horizontal"
                     >
                     <Button
-                        android:id="@+id/btnFut1"
-                        android:layout_width="120sp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="40sp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20sp"
-                        android:background="@drawable/aceptar"
-                        android:text="@string/app_realizar_ejercicio"
-                        android:textColor="@color/blanco" />
-                    <Button
                         android:id="@+id/btnFut2"
                         android:layout_width="120sp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20sp"
                         android:background="@drawable/cancelar"
-                        android:text="@string/app_cancelar"
+                        android:text="@string/app_Omitir"
                         android:textColor="@color/blanco" />
 
 
