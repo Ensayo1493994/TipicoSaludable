@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sanchez.tipicosaludable.model.Historial;
@@ -32,8 +37,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class ScrollingDetalle extends AppCompatActivity {
-    public static final String EXTRA_PARAM_ID = "com.herprogramacion.coches2015.extra.ID";
+public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+    private  FirebaseAuth firebaseAuth;
+    public static final String EXTRA_PARAM_ID = "com.herprogramacion.comidas20184K.extra.ID";
     public static final String VIEW_NAME_HEADER_IMAGE = "imagen_compartida";
     private Comida itemDetallado;
     private ImageView imagenExtendida, imgcalculo;
@@ -60,12 +66,17 @@ public class ScrollingDetalle extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     FirebaseApp firebaseApp;
     DatabaseReference databaseReference;
+    String nombreusuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling_detalle);
         //DESCARGAR PDF
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        nombreusuario=  user.getDisplayName();
 
 
 
@@ -255,8 +266,12 @@ public class ScrollingDetalle extends AppCompatActivity {
                         p.setCalorías_excedentes(canti);
                         p.setCalorías_finales(Lista_Ejercicios2.resta);
                         p.setCalorías_máximas(CaloriasActivity.actmb);
-                        p.setFecha(""+dia+"-"+mes+"-"+año);
-                        p.setUsuario("Mamo");
+                        p.setFecha(""+dia+"-"+(mes+1)+"-"+año);
+
+                        //FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+                        p.setUsuario(nombreusuario);
                         databaseReference.child("Historial").child(p.getUid()).setValue(p);
 
                         //sin termiinar
@@ -432,4 +447,8 @@ public class ScrollingDetalle extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

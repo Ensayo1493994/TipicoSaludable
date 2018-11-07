@@ -75,7 +75,7 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
 
                 }*/
                 GenericTypeIndicator<ArrayList<Comida>> t = new GenericTypeIndicator<ArrayList<Comida>>(){};
-                listacomida = dataSnapshot.getValue(t);
+                 listacomida = dataSnapshot.getValue(t);
                 adaptador = new ArrayAdapter<Comida>(getContext(),android.R.layout.simple_list_item_1,listacomida);
                 AdaptadorComida adaptadorComida = new AdaptadorComida(getContext(),listacomida);
                 gridView.setAdapter(adaptadorComida);
