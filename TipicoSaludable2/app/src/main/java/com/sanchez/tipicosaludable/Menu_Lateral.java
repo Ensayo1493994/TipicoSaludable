@@ -33,9 +33,11 @@ import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Menu_Lateral extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
-    ImageView imageViewlogo1;
-    TextView txtNombre1;
+    CircleImageView imageViewlogo1;
+    TextView txtNombre1,txtCorreo1;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -67,16 +69,19 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         View view = navigationView.getHeaderView(0);
         imageViewlogo1 = view.findViewById(R.id.imageViewlogo1);
         txtNombre1 = view.findViewById(R.id.txtNombre1);
+        txtCorreo1 = view.findViewById(R.id.txtCorreo1);
 
-        /*FirebaseUser user = firebaseAuth.getCurrentUser();
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
             View view1 = navigationView.getHeaderView(0);
             txtNombre1.setText(user.getDisplayName());
+            txtCorreo1.setText(user.getEmail());
             Glide.with(this).load(user.getPhotoUrl()).into(imageViewlogo1);
 
         }else {
             goLogin();
-        }*/
+        }
 
 
 
