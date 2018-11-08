@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sanchez.tipicosaludable.DetalleDeportes">
+    <LinearLayout
+        android:id="@+id/contenedorimg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:id="@+id/imgdeporte"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher_background"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/duracion"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10sp"
+        android:layout_below="@id/contenedorimg">
+        <TextView
+            android:id="@+id/mensajeBal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Tiempo_duracion"
+            android:textSize="22sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+        <TextView
+            android:id="@+id/duracion_depor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:text="30"
+            android:textColor="@color/negro"
+            android:textSize="22sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/calo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="5sp"
+        android:layout_below="@id/duracion"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Calorias"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+        <TextView
+            android:id="@+id/calorias_depor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:text="181"
+            android:textColor="@color/negro"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/contencrono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="20sp"
+        android:layout_below="@id/calo"
+        >
+
+        <TextView
+            android:id="@+id/crono"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="41dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/Crono"
+            android:textSize="40dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/crono"
+            android:layout_marginTop="5sp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/playbuttom"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/playbutton" />
+
+            <ImageView
+                android:id="@+id/stopbuttom"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/stopbutton" />
+
+            <ImageView
+                android:id="@+id/rewindbuttom"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/rewindbutton" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnrealizado"
+        style="@android:style/Widget.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:text="@string/app_realizar"
+        android:textSize="18dp" />
+
+
+</RelativeLayout>
