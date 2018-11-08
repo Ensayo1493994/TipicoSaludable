@@ -15,18 +15,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Limite_cal"
-            android:textSize="20sp" />
+            android:textSize="26sp"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cal_per"
-            android:id="@+id/cal_per"/>
+            android:id="@+id/cal_per"
+            android:textSize="40sp"
+            android:layout_gravity="center"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ultimoconsumo"
-            android:textSize="20sp"
+            android:textSize="26sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="14dp"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:layout_gravity="center"
                 />
             <ScrollView
                 android:layout_width="match_parent"

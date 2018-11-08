@@ -109,10 +109,6 @@ public class CaloriasActivity extends AppCompatActivity {
                 p.setTalla(talla.getText().toString());
                 databaseReference.child("Perfil").child(p.getUid()).setValue(p);
 
-
-
-
-
             }
         });
 

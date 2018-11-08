@@ -17,6 +17,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import com.example.admin.myfirebaseapp.model.Persona;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +45,7 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
     List<Persona> listPerson = new ArrayList<>();
     ArrayAdapter<Persona> arrayAdapterPersona;
+    private AdView mAdView;
 
     EditText nomp, corre, fecha;
     Button subirFoto;
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         nomp = findViewById(R.id.nombre_Persona);
         corre = findViewById(R.id.correo_Persona);
@@ -67,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
         inicializarFirebase();
         listarDatos();
 
+        MobileAds.initialize(this, "ca-app-pub-9548195311189355/7003037295");
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         subirFoto.setOnClickListener(new View.OnClickListener() {
             @Override

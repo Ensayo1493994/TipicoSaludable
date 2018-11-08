@@ -15,7 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,16 +33,15 @@ import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Menu_Lateral extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
-    ImageView imageViewlogo1;
-    TextView txtNombre1;
+    CircleImageView imageViewlogo1;
+    TextView txtNombre1,txtCorreo1;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private GoogleApiClient googleApiClient;
-
-
-
 
 
     @Override
@@ -48,10 +50,11 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_menu__lateral);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        imageViewlogo1 = findViewById(R.id.imageViewlogo1);
-        txtNombre1 = findViewById(R.id.txtNombre1);
+
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.contenedor, new Inicio()).commit();
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -60,9 +63,37 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View view = navigationView.getHeaderView(0);
+        imageViewlogo1 = view.findViewById(R.id.imageViewlogo1);
+        txtNombre1 = view.findViewById(R.id.txtNombre1);
+        txtCorreo1 = view.findViewById(R.id.txtCorreo1);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user != null){
+            View view1 = navigationView.getHeaderView(0);
+            txtNombre1.setText(user.getDisplayName());
+            txtCorreo1.setText(user.getEmail());
+            Glide.with(this).load(user.getPhotoUrl()).into(imageViewlogo1);
+
+        }else {
+            goLogin();
+        }
+
+
+
+        imageViewlogo1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  =  new Intent(Menu_Lateral.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION-----------------------------------
         if (CaloriasActivity.imc>=40){
@@ -73,13 +104,18 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         }
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION FIN-----------------------------------
 
-        /*
+
         firebaseAuth = FirebaseAuth.getInstance();
+        navigationView.setNavigationItemSelectedListener(this);
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
+                    View view = navigationView.getHeaderView(0);
+                    imageViewlogo1 = view.findViewById(R.id.imageViewlogo1);
+                    txtNombre1 = view.findViewById(R.id.txtNombre1);
                     setUserData(user);
 
                 }else {
@@ -95,7 +131,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();*/
+                .build();
 
 
     }
@@ -106,6 +142,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         Glide.with(this).load(user.getPhotoUrl()).into(imageViewlogo1);
 
     }
+
 
 
 
@@ -254,11 +291,10 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStop() {
         super.onStop();
-
-        /*if (firebaseAuthListener != null){
+        if (firebaseAuthListener != null){
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
 
-        }*/
+        }
     }
 
 
