@@ -41,7 +41,7 @@ public class ScrollingDetalle extends AppCompatActivity {
     private Button btnconsumodealimeto, btncalcular;
     private double consumo=0, x;
     public static double canti;
-    int dia, mes, año;
+    int dia, mes, año, diadespues;
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
     int cantidaddelalimento=0;
@@ -107,7 +107,6 @@ public class ScrollingDetalle extends AppCompatActivity {
         btnconsumodealimeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //--------TERMINAR DE ARREGLARLO
 
                 try{
 
@@ -245,6 +244,7 @@ public class ScrollingDetalle extends AppCompatActivity {
                         dia = c.get(Calendar.DAY_OF_MONTH);
                         mes = c.get(Calendar.MONTH);
                         año = c.get(Calendar.YEAR);
+
                         //Toast.makeText(ScrollingDetalle.this, ""+dia+"/"+mes+"/"+año, Toast.LENGTH_SHORT).show();
 
 
@@ -255,11 +255,16 @@ public class ScrollingDetalle extends AppCompatActivity {
                         p.setCalorías_excedentes(canti);
                         p.setCalorías_finales(Lista_Ejercicios2.resta);
                         p.setCalorías_máximas(CaloriasActivity.actmb);
-                        p.setFecha(""+dia+"-"+mes+"-"+año);
+                        p.setFecha(""+dia+"-"+(mes+1)+"-"+año);
                         p.setUsuario("Mamo");
                         databaseReference.child("Historial").child(p.getUid()).setValue(p);
 
-                        //sin termiinar
+                        //------VALIDACION 1 DIA DESPUES --------------------
+                        diadespues = dia+1;
+                        Toast.makeText(ScrollingDetalle.this, "dia despues"+diadespues, Toast.LENGTH_SHORT).show();
+                        if (dia==diadespues){
+                            Toast.makeText(ScrollingDetalle.this, "un dia despues", Toast.LENGTH_SHORT).show();
+                        }
 
 
 
