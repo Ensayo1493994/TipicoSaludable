@@ -43,7 +43,6 @@ dependencies {
     compile 'com.github.bumptech.glide:annotations:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
-
     //circle imageview
     compile 'de.hdodenhof:circleimageview:2.2.0'
     //BASE DE DATOS
