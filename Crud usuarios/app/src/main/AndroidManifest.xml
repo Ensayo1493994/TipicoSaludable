@@ -29,8 +29,13 @@
         <activity android:name=".DeportesActivity" />
         <activity android:name=".HistorialActivity" />
         <activity android:name=".ComidasActivity" />
-        <activity android:name=".PerfilActivity"></activity>
+        <activity android:name=".PerfilActivity">
 
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9548195311189355~9876612649"/>
     </application>
 
 </manifest>
