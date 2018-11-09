@@ -282,7 +282,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
                         //------VALIDACION 1 DIA DESPUES --------------------
                         diadespues = dia+1;
-                        Toast.makeText(ScrollingDetalle.this, "dia despues"+diadespues, Toast.LENGTH_SHORT).show();
+                        
                         if (dia==diadespues){
                             Toast.makeText(ScrollingDetalle.this, "un dia despues", Toast.LENGTH_SHORT).show();
                         }
