@@ -17,6 +17,17 @@ public class Historial {
 
     }
 
+    public Historial(String uid, Double calorías_consumidas, Double calorías_excedentes, int calorías_finales, Double calorías_máximas, String fecha, String usuario, int calorias_acumuladas) {
+        this.uid = uid;
+        Calorías_consumidas = calorías_consumidas;
+        Calorías_excedentes = calorías_excedentes;
+        Calorías_finales = calorías_finales;
+        Calorías_máximas = calorías_máximas;
+        Fecha = fecha;
+        this.usuario = usuario;
+        this.calorias_acumuladas = calorias_acumuladas;
+    }
+
     public String getUid() {
         return uid;
     }
@@ -85,6 +96,6 @@ public class Historial {
     public String toString() {
         return "Historial{" +
                 "usuario='" + usuario + '\'' +
-                '}';
+                '}'+ "calmaximas"+ Calorías_máximas;
     }
 }

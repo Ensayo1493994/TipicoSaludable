@@ -63,6 +63,8 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
     EditText edtxcantidad;
     //DESCARGA DE PDF
     DownloadManager downloadManager;
+
+    //FIREBASE
     FirebaseDatabase firebaseDatabase;
     FirebaseApp firebaseApp;
     DatabaseReference databaseReference;
@@ -268,7 +270,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                         p.setCalorías_máximas(CaloriasActivity.actmb);
                         p.setFecha(""+dia+"-"+(mes+1)+"-"+año);
 
-                        
+
 
 
                         //FirebaseUser user = firebaseAuth.getCurrentUser();

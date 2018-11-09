@@ -71,7 +71,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         txtNombre1 = view.findViewById(R.id.txtNombre1);
         txtCorreo1 = view.findViewById(R.id.txtCorreo1);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        /*firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
             View view1 = navigationView.getHeaderView(0);
@@ -81,7 +81,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         }else {
             goLogin();
-        }
+        }*/
 
 
 
@@ -104,8 +104,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         }
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION FIN-----------------------------------
 
-
-        firebaseAuth = FirebaseAuth.getInstance();
+        //------------------------------DESCOMENTAR LO DEL INICIO DE SESION AL HACR PUSH
+        /*firebaseAuth = FirebaseAuth.getInstance();
         navigationView.setNavigationItemSelectedListener(this);
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -131,7 +131,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
+                .build();*/
 
 
     }
@@ -291,10 +291,10 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStop() {
         super.onStop();
-        if (firebaseAuthListener != null){
+        /*if (firebaseAuthListener != null){
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
 
-        }
+        }*/
     }
 
 
