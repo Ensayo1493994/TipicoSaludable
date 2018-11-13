@@ -59,7 +59,6 @@ public class Inicio extends Fragment {
 
 
 
-        //--------------SIN CONSULTAR EN FIREBASE---------------
 
 
         //-------------CONSULTAR INFO POR USUARIO--------------

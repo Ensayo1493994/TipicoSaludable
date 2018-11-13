@@ -56,7 +56,7 @@ public class CaloriasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calorias);
 
-
+        firebaseAuth = FirebaseAuth.getInstance();
         validar = (Button) findViewById(R.id.validar);
         inicializarFirebase();
 
@@ -107,6 +107,8 @@ public class CaloriasActivity extends AppCompatActivity {
                 p.setImc(imc);
                 p.setPeso(peso.getText().toString());
                 p.setTalla(talla.getText().toString());
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                p.setNombre(user.getDisplayName());
                 databaseReference.child("Perfil").child(p.getUid()).setValue(p);
 
             }

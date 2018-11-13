@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -34,6 +35,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
@@ -43,9 +45,18 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.sanchez.tipicosaludable.model.Historial;
+import com.sanchez.tipicosaludable.model.Perfil;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.sanchez.tipicosaludable.CaloriasActivity.temp;
@@ -61,6 +72,11 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private LoginButton btnloginfb;
     Animation smalltobig, nothingtocome;
     ImageView logocir;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    ArrayList<Perfil> perfil_lista = new ArrayList<Perfil>();
+    ArrayAdapter<Perfil> adaptadorperfil;
+    int a=0;
 
 
     @Override
@@ -75,14 +91,42 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         logocir.startAnimation(smalltobig);
 
         nothingtocome = AnimationUtils.loadAnimation(this,R.anim.nothingtocome);
+        inicializarfirebase();
 
         //btnlogin.startAnimation(nothingtocome);
 
        // btnloginfb.startAnimation(nothingtocome);
 
-        if (CaloriasActivity.temp==1){
+        //----------------------MOSTRAR FORMULARIO UNA SOLA VEZ--------------------
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        Query q =databaseReference.orderByChild("usuario").equalTo(user.getDisplayName());
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
+                    Perfil p = objSnapshot.getValue(Perfil.class);
+                    perfil_lista.add(p);
+                    //adaptadorperfil = new ArrayAdapter<Perfil>(Login.this,android.R.layout.simple_list_item_1,perfil_lista);
+                    adaptadorperfil = new ArrayAdapter<Perfil>(Login.this,android.R.layout.simple_list_item_1,perfil_lista);
+                    //Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();
+                    a=1;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        if (a==1){
             goMain();
         }else {
+            Intent intent = new Intent(Login.this,CaloriasActivity.class);
+            startActivity(intent);
+
 
         }
 
@@ -146,6 +190,13 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         };
 
     }
+
+    private void inicializarfirebase() {
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase= FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Perfil");
+    }
+
     private void handleFacebookAccessToken(AccessToken accessToken) {
         progressBar.setVisibility(View.VISIBLE);
         btnloginfb.setVisibility(View.GONE);

@@ -14,9 +14,7 @@ public class Perfil {
     private Double Imc;
     private String Peso;
     private String Talla;
-    public Perfil() {
-
-    }
+    private String nombre;
 
     public String getUid() {
         return uid;
@@ -90,8 +88,11 @@ public class Perfil {
         Talla = talla;
     }
 
-    @Override
-    public String toString() {
-        return Actividad;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
