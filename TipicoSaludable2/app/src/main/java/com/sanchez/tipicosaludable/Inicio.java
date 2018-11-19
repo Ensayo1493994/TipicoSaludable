@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,20 +29,28 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.sanchez.tipicosaludable.model.Historial;
+import com.sanchez.tipicosaludable.model.Perfil;
 import com.sanchez.tipicosaludable.model.Usuarios;
 
 import java.util.ArrayList;
 
 
-public class Inicio extends Fragment {
+public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
     int size, entero;
     Double caloriasmaximas;
+    FirebaseApp firebaseApp;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference, tablahistorial;
+    DatabaseReference databaseReference, tablaperfil;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseAuth firebaseAuth;
     ArrayList<Historial> historial_lista = new ArrayList<Historial>();
-    ArrayAdapter<Historial> adaptadorhistorial;
+
     Historial usuariofound;
+    ArrayList<Perfil> perfil_lista = new ArrayList<Perfil>();
+    ArrayAdapter<Perfil> adaptadorperfil;
+    public  static int temp=0;
+    String nombreusuario;
+
 
 
 
@@ -52,23 +62,63 @@ public class Inicio extends Fragment {
         View vista = inflater.inflate(R.layout.fragment_inicio, container, false);
         GridView gridView = (GridView) vista.findViewById(R.id.ultimoconsumo);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        //nombreusuario=  user.getDisplayName();
+        //Toast.makeText(getContext(), ""+user.getDisplayName(), Toast.LENGTH_SHORT).show();
+
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    //nombreusuario=  user.getDisplayName();
+                    Toast.makeText(getContext(), ""+user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                }else {
+
+                }
+
+            }
+        };
+
+
+
         TextView textView = vista.findViewById(R.id.txtnoconsumo);
 
         final TextView textView2 = vista.findViewById(R.id.cal_per);
         inicializarfirebase();
 
+        /*Query q = tablaperfil.orderByChild("nombre").equalTo(nombreusuario);
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
+                    Perfil p = objSnapshot.getValue(Perfil.class);
+                    perfil_lista.add(p);
+                    //adaptadorperfil = new ArrayAdapter<Perfil>(Login.this,android.R.layout.simple_list_item_1,perfil_lista);
+                    adaptadorperfil = new ArrayAdapter<Perfil>(getContext(),android.R.layout.simple_list_item_1,perfil_lista);
+                    //Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();
+                    temp=1;
 
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
 
 
 
         //-------------CONSULTAR INFO POR USUARIO--------------
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+
         if(user != null){
-            Query q =databaseReference.orderByChild("usuario").equalTo(user.getDisplayName());
+            Query q2 = tablaperfil.orderByChild("nombre").equalTo(user.getDisplayName());
             //Query q =databaseReference.orderByChild("usuario").equalTo("INGRID KATERINE VELASCO LOPEZ");
-            q.addListenerForSingleValueEvent(new ValueEventListener() {
+            q2.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     /*GenericTypeIndicator<ArrayList<Historial>> t = new GenericTypeIndicator<ArrayList<Historial>>(){};
@@ -80,12 +130,12 @@ public class Inicio extends Fragment {
 
 
                     for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
-                        Historial p = objSnapshot.getValue(Historial.class);
-                        historial_lista.add(p);
-                        adaptadorhistorial = new ArrayAdapter<Historial>(getContext(),android.R.layout.simple_list_item_1,historial_lista);
+                        Perfil p = objSnapshot.getValue(Perfil.class);
+                        perfil_lista.add(p);
+                        adaptadorperfil = new ArrayAdapter<Perfil>(getContext(),android.R.layout.simple_list_item_1,perfil_lista);
                         //Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();
 
-                        caloriasmaximas = p.getCalorías_máximas();
+                        caloriasmaximas = p.getCalorías_maximas();
 
 
 
@@ -142,11 +192,17 @@ public class Inicio extends Fragment {
     }
 
     private void inicializarfirebase() {
-        FirebaseApp.initializeApp(getContext());
+        firebaseApp.initializeApp(getContext());
         firebaseDatabase= FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Historial");
+        tablaperfil = firebaseDatabase.getReference("Perfil");
+
 
 
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

@@ -59,7 +59,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.sanchez.tipicosaludable.CaloriasActivity.temp;
+
 
 public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient googleApiClient;
@@ -76,7 +76,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     DatabaseReference databaseReference;
     ArrayList<Perfil> perfil_lista = new ArrayList<Perfil>();
     ArrayAdapter<Perfil> adaptadorperfil;
-    int a=0;
+
 
 
     @Override
@@ -84,6 +84,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         progressBar = findViewById(R.id.progresBar);
+
         //animacion login
 
         smalltobig = AnimationUtils.loadAnimation(this,R.anim.smalltobig);
@@ -95,39 +96,13 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         //btnlogin.startAnimation(nothingtocome);
 
-       // btnloginfb.startAnimation(nothingtocome);
+        // btnloginfb.startAnimation(nothingtocome);
 
         //----------------------MOSTRAR FORMULARIO UNA SOLA VEZ--------------------
-
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        Query q =databaseReference.orderByChild("usuario").equalTo(user.getDisplayName());
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
-                    Perfil p = objSnapshot.getValue(Perfil.class);
-                    perfil_lista.add(p);
-                    //adaptadorperfil = new ArrayAdapter<Perfil>(Login.this,android.R.layout.simple_list_item_1,perfil_lista);
-                    adaptadorperfil = new ArrayAdapter<Perfil>(Login.this,android.R.layout.simple_list_item_1,perfil_lista);
-                    //Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();
-                    a=1;
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        if (a==1){
+        if (Inicio.temp==1){
             goMain();
-        }else {
-            Intent intent = new Intent(Login.this,CaloriasActivity.class);
-            startActivity(intent);
-
-
         }
 
         //Login Facebook
@@ -168,7 +143,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             public void onClick(View view) {
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
                 startActivityForResult(intent,CODE);
-                if (CaloriasActivity.temp==1){
+                if (Inicio.temp==1){
                     goMain();
                 }
 

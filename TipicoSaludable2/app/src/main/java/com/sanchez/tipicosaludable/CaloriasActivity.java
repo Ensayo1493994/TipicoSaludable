@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -25,10 +26,15 @@ import com.google.android.gms.common.api.Status;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.sanchez.tipicosaludable.model.Perfil;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class CaloriasActivity extends AppCompatActivity {
@@ -40,16 +46,19 @@ public class CaloriasActivity extends AppCompatActivity {
     public static double imc,mb,actmb;
     public static  int check;
     double a,b,c;
+    String nombreusuario;
 
     //google
     private GoogleApiClient googleApiClient;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseUser firebaseUser;
-    public static int temp =0;
+
     FirebaseDatabase firebaseDatabase;
     FirebaseApp firebaseApp;
     DatabaseReference databaseReference;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +66,23 @@ public class CaloriasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calorias);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    nombreusuario=  user.getDisplayName();
+
+                }else {
+                    goLogin();
+                }
+
+
+
+
+
+
+
+
         validar = (Button) findViewById(R.id.validar);
         inicializarFirebase();
 
@@ -68,7 +94,6 @@ public class CaloriasActivity extends AppCompatActivity {
 
                 validarTodo();
                 gastarKal();
-
 
 
                 Perfil p = new Perfil();
@@ -107,14 +132,20 @@ public class CaloriasActivity extends AppCompatActivity {
                 p.setImc(imc);
                 p.setPeso(peso.getText().toString());
                 p.setTalla(talla.getText().toString());
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                p.setNombre(user.getDisplayName());
+
+                p.setNombre(nombreusuario);
                 databaseReference.child("Perfil").child(p.getUid()).setValue(p);
 
             }
         });
 
 
+    }
+
+    private void goLogin() {
+        Intent intent = new Intent(CaloriasActivity.this,Login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void inicializarFirebase() {
@@ -195,7 +226,7 @@ public class CaloriasActivity extends AppCompatActivity {
             double d=b/100;
             imc=a/(d*d);
 
-            temp =1;
+
             Intent intent = new Intent(CaloriasActivity.this,Menu_Lateral.class);
             startActivity(intent);
             finish();

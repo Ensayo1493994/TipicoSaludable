@@ -14,7 +14,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <android.support.v4.widget.CircleImageView
                 android:id="@+id/fotop"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
@@ -40,7 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
@@ -58,7 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Revoke"
-            android:onClick="Revoke"/>
+            android:onClick="Revoke"
+            android:visibility="gone"/>
 
  </LinearLayout>
 

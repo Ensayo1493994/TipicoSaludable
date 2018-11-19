@@ -29,10 +29,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     TextView txtNombre,txtCorreo,txtId;
-    ImageView fotop;
+    CircleImageView fotop;
     Button btnlogout,revoke;
     private GoogleApiClient googleApiClient;
     private FirebaseAuth firebaseAuth;

@@ -1,11 +1,15 @@
 package com.sanchez.tipicosaludable;
 
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class DetalleDeportes extends AppCompatActivity implements View.OnClickListener {
     TextView crono,caloriras_depor,duracion_depor;
@@ -14,6 +18,7 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
     int min=0,seg=0,mili=0;
     Handler h = new Handler();
     Thread cronos;
+    MediaPlayer alarma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +32,21 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
         imgdeporte = findViewById(R.id.imgdeporte);
         caloriras_depor = findViewById(R.id.calorias_depor);
         duracion_depor = findViewById(R.id.duracion_depor);
+        alarma  = MediaPlayer.create(this,R.raw.alarma);
 
         playbuttom.setOnClickListener(this);
         stopbuttom.setOnClickListener(this);
         rewindbuttom.setOnClickListener(this);
+
+        String url ="https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
+        Glide.with(this)
+                .load(url)
+                .crossFade()
+                .centerCrop()
+                .placeholder(R.drawable.imagen)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .thumbnail(0.5f)
+                .into(imgdeporte);
 
 
         cronos = new Thread(new Runnable() {
@@ -83,7 +99,13 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
             }
         });
         cronos.start();
+        if (seg==30){
+            starsonido();
+        }
+    }
 
+    private void starsonido(){
+        alarma.start();
     }
 
     @Override
@@ -105,4 +127,5 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
         }
 
     }
+
 }

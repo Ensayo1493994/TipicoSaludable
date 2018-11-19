@@ -1,6 +1,7 @@
 package com.sanchez.tipicosaludable;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -708,6 +709,8 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
+                Intent intent = new Intent(Lista_Ejercicios2.this,DetalleDeportes.class);
+                startActivity(intent);
             }
         });
 
@@ -762,6 +765,8 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
+                Intent intent = new Intent(Lista_Ejercicios2.this,DetalleDeportes.class);
+                startActivity(intent);
             }
         });
 
@@ -816,6 +821,8 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
+                Intent intent = new Intent(Lista_Ejercicios2.this,DetalleDeportes.class);
+                startActivity(intent);
             }
         });
 
@@ -870,6 +877,8 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
                 //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
                 ScrollingDetalle.Calorias_consumidas = resta;
                 epicDialog.dismiss();
+                Intent intent = new Intent(Lista_Ejercicios2.this,DetalleDeportes.class);
+                startActivity(intent);
             }
         });
 

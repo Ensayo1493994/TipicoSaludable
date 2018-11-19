@@ -1,6 +1,7 @@
 package com.sanchez.tipicosaludable;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -328,6 +329,7 @@ public class Deportes2 extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "!! Muyy Bien ¡¡", Toast.LENGTH_SHORT).show();
                 epicDialog.dismiss();
+
             }
         });
 
@@ -337,6 +339,7 @@ public class Deportes2 extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
                 epicDialog.dismiss();
+
             }
         });
         //Cerrar-------------------------------------------------------------------------------
