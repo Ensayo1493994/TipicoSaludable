@@ -47,6 +47,7 @@ public class CaloriasActivity extends AppCompatActivity {
     public static  int check;
     double a,b,c;
     String nombreusuario;
+    public static int encontrousuario=0;
 
     //google
     private GoogleApiClient googleApiClient;
@@ -64,18 +65,8 @@ public class CaloriasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calorias);
-
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    nombreusuario=  user.getDisplayName();
-
-                }else {
-                    goLogin();
-                }
-
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
 
@@ -85,6 +76,38 @@ public class CaloriasActivity extends AppCompatActivity {
 
         validar = (Button) findViewById(R.id.validar);
         inicializarFirebase();
+
+        //--------------------------  VALIDACION FORMULARIO UNA VEZ  -----------------
+        Query q = databaseReference.orderByChild("nombre").equalTo(user.getDisplayName());
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                encontrousuario = encontrousuario+1;
+                if (encontrousuario==1){
+                    Intent intent = new Intent(CaloriasActivity.this,Menu_Lateral.class);
+                    startActivity(intent);
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        if(user != null){
+            nombreusuario=  user.getDisplayName();
+
+        }else {
+            goLogin();
+        }
+
+
 
         inicializar();
 
@@ -138,6 +161,8 @@ public class CaloriasActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
     }
@@ -257,6 +282,7 @@ public class CaloriasActivity extends AppCompatActivity {
             actmb=mb*1.2;
         }
     }
+
 
 
 
