@@ -48,6 +48,7 @@
             android:name=".Menu_Lateral"
             android:label="@string/title_activity_menu__lateral"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
