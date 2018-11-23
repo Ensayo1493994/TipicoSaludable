@@ -76,7 +76,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     DatabaseReference databaseReference;
     ArrayList<Perfil> perfil_lista = new ArrayList<Perfil>();
     ArrayAdapter<Perfil> adaptadorperfil;
-    int encontrousuario;
+    int encontrousuario=0;
+
 
 
 
@@ -147,7 +148,11 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
                 startActivityForResult(intent,CODE);
 
+
+
+
                 if (Inicio.temp==1){
+
                     goMain();
                 }
 

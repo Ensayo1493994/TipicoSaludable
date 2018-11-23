@@ -76,6 +76,8 @@ public class CaloriasActivity extends AppCompatActivity {
 
         validar = (Button) findViewById(R.id.validar);
         inicializarFirebase();
+
+        //--------------------------  VALIDACION FORMULARIO UNA VEZ  -----------------
         Query q = databaseReference.orderByChild("nombre").equalTo(user.getDisplayName());
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
