@@ -78,7 +78,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        nombreusuario=  user.getDisplayName();
+      nombreusuario=  user.getDisplayName();
 
 
 
@@ -189,7 +189,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                     signoigual.setText("=");
                     signosuma.setText("+");
                     Glide.with(imgcalculo.getContext()).load(itemDetallado.getIdDrawable()).into(imgcalculo);
-                    Double resultadocal = itemDetallado.getCalorias()*Double.parseDouble(edtxcantidad.getText().toString());
+                    Double resultadocal = Double.parseDouble(itemDetallado.getCalorias())*Double.parseDouble(edtxcantidad.getText().toString());
                     caster = Integer.valueOf(resultadocal.intValue());
 
                     resultado.setText(""+caster);
@@ -273,7 +273,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
 
 
-                        //FirebaseUser user = firebaseAuth.getCurrentUser();
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
                         p.setUsuario(nombreusuario);

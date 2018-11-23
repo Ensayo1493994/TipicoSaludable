@@ -15,19 +15,18 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class Comida {
-    private String Nombre, Carbohidratos, Proteinas, Receta,idDrawable;
-    private float Calorias;
+    private String Nombre, Carbohidratos, Proteinas, Receta,idDrawable, Calorias;
 
-    public Comida(String nombre, String carbohidratos, String proteinas, String receta, String idDrawable, float calorias) {
+    public Comida() {
+    }
+
+    public Comida(String nombre, String carbohidratos, String proteinas, String receta, String idDrawable, String calorias) {
         Nombre = nombre;
         Carbohidratos = carbohidratos;
         Proteinas = proteinas;
         Receta = receta;
         this.idDrawable = idDrawable;
         Calorias = calorias;
-    }
-
-    public Comida() {
     }
 
     public String getNombre() {
@@ -70,11 +69,11 @@ public class Comida {
         this.idDrawable = idDrawable;
     }
 
-    public float getCalorias() {
+    public String getCalorias() {
         return Calorias;
     }
 
-    public void setCalorias(float calorias) {
+    public void setCalorias(String calorias) {
         Calorias = calorias;
     }
 
