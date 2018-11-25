@@ -6,73 +6,65 @@ package com.sanchez.tipicosaludable;
 
 public class Deportes_firebase {
 
-    private String Nombre;
-    private  String Calorias;
-    private  String Descripcion;
-    private String Categoria;
-    private String Duracion;
-    private  String Imagen;
+    private String nombre;
+    private  String calorias;
+    private String categoria;
+    private String duracion;
+    private  String imagen;
 
+    public Deportes_firebase() {
+    }
 
-
-    public Deportes_firebase(String nombre, String calorias, String descripcion, String categoria, String duracion, String imagen) {
-        Nombre = nombre;
-        Calorias = calorias;
-        Descripcion = descripcion;
-        Categoria = categoria;
-        Duracion = duracion;
-        Imagen = imagen;
+    public Deportes_firebase(String nombre, String calorias, String categoria, String duracion, String imagen) {
+        this.nombre = nombre;
+        this.calorias = calorias;
+        this.categoria = categoria;
+        this.duracion = duracion;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getCalorias() {
-        return Calorias;
+        return calorias;
     }
 
     public void setCalorias(String calorias) {
-        Calorias = calorias;
-    }
-
-    public String getDescripcion() {
-        return Descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.calorias = calorias;
     }
 
     public String getCategoria() {
-        return Categoria;
+        return categoria;
     }
 
     public void setCategoria(String categoria) {
-        Categoria = categoria;
+        this.categoria = categoria;
     }
 
     public String getDuracion() {
-        return Duracion;
+        return duracion;
     }
 
     public void setDuracion(String duracion) {
-        Duracion = duracion;
+        this.duracion = duracion;
     }
 
     public String getImagen() {
-        return Imagen;
+        return imagen;
     }
 
     public void setImagen(String imagen) {
-        Imagen = imagen;
+        this.imagen = imagen;
     }
+
     public int getId() {
-        return Nombre.hashCode();
+        return nombre.hashCode();
     }
     public static Deportes_firebase getItem(int id){
         for (Deportes_firebase item : Deportesfirebase.listadeportes){

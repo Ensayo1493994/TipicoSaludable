@@ -82,7 +82,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         />
                     <TextView
-                        android:id="@+id/duracion_min"
+                        android:id="@+id/duracion_min2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="30"
@@ -107,7 +107,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         />
                     <TextView
-                        android:id="@+id/caloriasdepor"
+                        android:id="@+id/caloriasdepor2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="181"

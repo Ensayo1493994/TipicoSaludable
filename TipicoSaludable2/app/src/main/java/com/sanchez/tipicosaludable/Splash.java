@@ -53,29 +53,6 @@ public class Splash extends AppCompatActivity {
         timer.schedule(tarea,2000);
 
         inicializarfirebase();
-        Query q = databaseReference.orderByChild("nombre").equalTo("johan");
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                encontrousuario = encontrousuario+1;
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        if (encontrousuario ==1){
-            //Intent intent = new Intent(Splash.this,Menu_Lateral.class);
-            //startActivity(intent);
-            Toast.makeText(this, "el usuario existe", Toast.LENGTH_SHORT).show();
-        }else{
-            //Intent intent = new Intent(Splash.this,CaloriasActivity.class);
-            //startActivity(intent);
-            Toast.makeText(this, "no encontro", Toast.LENGTH_SHORT).show();
-
-        }
 
 
     }
