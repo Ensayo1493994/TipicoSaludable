@@ -329,10 +329,10 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
                         Historial p = new Historial();
                         p.setUid(UUID.randomUUID().toString());
-                        p.setCalorias_acumuladas(Lista_Ejercicios2.caloriasacumuladas);
+                        p.setCalorias_acumuladas(Deportesfirebase.caloriasacumuladas);
                         p.setCalorías_consumidas(Calorias_consumidas);
                         p.setCalorías_excedentes(canti);
-                        p.setCalorías_finales(Lista_Ejercicios2.resta);
+                        p.setCalorías_finales(Deportesfirebase.resta);
                         p.setCalorías_máximas(CaloriasActivity.actmb);
                         p.setFecha(""+dia+"-"+(mes+1)+"-"+año);
 

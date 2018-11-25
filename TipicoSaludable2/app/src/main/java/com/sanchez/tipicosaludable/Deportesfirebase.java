@@ -41,6 +41,8 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
     Deportes_firebase item;
 
     Button btnrealizar, btncancelar;
+    public static  int resta, calentero, caloriasacumuladas=0;
+    Double a = ScrollingDetalle.Calorias_consumidas;
 
 
     @Override
@@ -114,9 +116,6 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
                 gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
                 calorias = popupdeportes.findViewById(R.id.calorias_depor);
                 duracion = popupdeportes.findViewById(R.id.duracion_depor);
-
-
-
                 Glide.with(getContext())
                         .load(item.getImagen())
                         .crossFade()
@@ -128,6 +127,10 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
 
                 calorias.setText(item.getCalorias());
                 duracion.setText(item.getDuracion());
+
+                calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
+                resta= calentero - Integer.parseInt(calorias.getText().toString());
 
                 popupdeportes.show();
 
