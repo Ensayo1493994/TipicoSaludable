@@ -45,6 +45,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
+
+    //----------------------------------DESCOMENTAR LO DEL USER.GETDISPLAYNAME
     private  FirebaseAuth firebaseAuth;
     public static final String EXTRA_PARAM_ID = "com.herprogramacion.comidas20184K.extra.ID";
     public static final String VIEW_NAME_HEADER_IMAGE = "imagen_compartida";
@@ -343,14 +346,6 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
 
                         //p.setUsuario(nombreusuario);
-                        GregorianCalendar calendar = new GregorianCalendar();
-                        if (calendar.isLeapYear(año)){
-                            Toast.makeText(ScrollingDetalle.this, "El año es bisiesto", Toast.LENGTH_SHORT).show();
-
-                        }else{
-                            Toast.makeText(ScrollingDetalle.this, "No es bisiesto", Toast.LENGTH_SHORT).show();
-
-                        }
 
 
                         databaseReference.child("Historial").child(p.getUid()).setValue(p);
@@ -463,7 +458,8 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
             public void onClick(View v) {
                 epicDialog.dismiss();
 
-                Toast.makeText(ScrollingDetalle.this,"Aceptaste",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),Lista_Ejercicios2.class);
+                startActivity(intent);
 
             }
         });
