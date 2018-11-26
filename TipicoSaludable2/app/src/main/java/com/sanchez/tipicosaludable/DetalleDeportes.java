@@ -99,9 +99,29 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
             }
         });
         cronos.start();
-        if (seg==30){
-            starsonido();
-        }
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    if(isOn){
+                        try{
+                            Thread.sleep(1);
+
+                        }catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
+                        if (min==30){
+                            starsonido();
+                            isOn = false;
+                        }
+
+                    }
+                }
+
+            }
+        });
+        t.start();
+
     }
 
     private void starsonido(){

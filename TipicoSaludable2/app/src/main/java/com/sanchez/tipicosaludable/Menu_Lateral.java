@@ -74,7 +74,6 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         txtNombre1 = view.findViewById(R.id.txtNombre1);
         txtCorreo1 = view.findViewById(R.id.txtCorreo1);
 
-        /*
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
@@ -85,7 +84,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         }else {
             goLogin();
-        }*/
+        }
 
 
 
@@ -113,8 +112,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         //-----------------------DIAS---------------------------
 
-        /*
-        final Calendar c = Calendar.getInstance();
+
+        /*final Calendar c = Calendar.getInstance();
         dia = c.get(Calendar.DAY_OF_MONTH);
         mes = c.get(Calendar.MONTH);
         año = c.get(Calendar.YEAR);
@@ -133,7 +132,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
             }
         }*/
 
-        /*
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         navigationView.setNavigationItemSelectedListener(this);
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -160,7 +160,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();*/
+                .build();
 
 
     }

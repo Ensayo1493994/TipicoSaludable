@@ -14,12 +14,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <android.support.v4.widget.CircleImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/fotop"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
                 android:layout_margin="8dp"
-                android:background="@color/colorAccent"/>
+                android:src="@drawable/logoredondo"/>
 
             <TextView
                 android:id="@+id/txtNombre"

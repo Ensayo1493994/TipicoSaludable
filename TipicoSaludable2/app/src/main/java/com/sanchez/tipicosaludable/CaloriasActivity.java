@@ -83,10 +83,11 @@ public class CaloriasActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 encontrousuario = encontrousuario+1;
+
+                Toast.makeText(CaloriasActivity.this, ""+encontrousuario, Toast.LENGTH_SHORT).show();
                 if (encontrousuario==1){
                     Intent intent = new Intent(CaloriasActivity.this,Menu_Lateral.class);
                     startActivity(intent);
-
                 }
 
 
@@ -97,6 +98,8 @@ public class CaloriasActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
 

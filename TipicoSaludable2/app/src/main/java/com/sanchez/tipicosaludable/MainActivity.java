@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void setUserData(FirebaseUser user) {
         txtNombre.setText(user.getDisplayName());
         txtCorreo.setText(user.getEmail());
-        txtId.setText(user.getUid());
         Glide.with(this).load(user.getPhotoUrl()).into(fotop);
 
     }

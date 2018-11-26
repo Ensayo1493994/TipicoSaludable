@@ -127,30 +127,29 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
                     Historial p = new Historial();
                     //textView2.setText(""+p.getCalorías_máximas());
                     Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();*/
+                    try{
+                        for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
+                            Perfil p = objSnapshot.getValue(Perfil.class);
+                            perfil_lista.add(p);
+                            adaptadorperfil = new ArrayAdapter<Perfil>(getContext(),android.R.layout.simple_list_item_1,perfil_lista);
+                            //Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();
 
-
-                    for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
-                        Perfil p = objSnapshot.getValue(Perfil.class);
-                        perfil_lista.add(p);
-                        adaptadorperfil = new ArrayAdapter<Perfil>(getContext(),android.R.layout.simple_list_item_1,perfil_lista);
-                        //Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();
-
-                        caloriasmaximas = p.getCalorías_maximas();
-
-
+                            caloriasmaximas = p.getCalorías_maximas();
 
 
 
 
 
+
+
+
+                        }
+                        entero = Integer.valueOf(caloriasmaximas.intValue());
+                        textView2.setText(""+entero);
+
+                    }catch (Exception e){
 
                     }
-                    entero = Integer.valueOf(caloriasmaximas.intValue());
-                    textView2.setText(""+entero);
-
-
-
-
 
                 }
 
@@ -168,9 +167,6 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
 
         //-------------CONSULTAR INFO POR USUARIO--------------
-
-
-
 
 
         if (ScrollingDetalle.ultimoconsumo.size()>0){
