@@ -33,6 +33,8 @@ import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Calendar;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Menu_Lateral extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
@@ -42,6 +44,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private GoogleApiClient googleApiClient;
+    int dia, mes, año,diadespues;
 
 
     @Override
@@ -105,7 +108,36 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION FIN-----------------------------------
 
         //------------------------------DESCOMENTAR LO DEL INICIO DE SESION AL HACR PUSH
+
        /* firebaseAuth = FirebaseAuth.getInstance();
+=======
+
+
+        //-----------------------DIAS---------------------------
+
+
+        /*final Calendar c = Calendar.getInstance();
+        dia = c.get(Calendar.DAY_OF_MONTH);
+        mes = c.get(Calendar.MONTH);
+        año = c.get(Calendar.YEAR);
+
+        diadespues = dia+1;
+
+
+        while (dia<diadespues){
+            final Calendar c2 = Calendar.getInstance();
+            dia = c2.get(Calendar.DAY_OF_MONTH);
+
+            if (dia==diadespues){
+
+                Toast.makeText(getApplicationContext(), "ya paso un dia", Toast.LENGTH_SHORT).show();
+
+            }
+        }*/
+
+
+
+        firebaseAuth = FirebaseAuth.getInstance();
         navigationView.setNavigationItemSelectedListener(this);
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -131,7 +163,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();*/
+                .build();
 
 
     }
@@ -235,7 +267,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment4).commit();
 
         }else if(id == R.id.nav_deportes){
-            fragment4 = new Deportesfinal();
+            fragment4 = new Deportesfirebase();
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment4).commit();
 
         } else if (id == R.id.nav_cerrar_sesion) {

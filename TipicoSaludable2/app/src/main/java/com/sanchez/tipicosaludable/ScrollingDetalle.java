@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -33,15 +34,24 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.sanchez.tipicosaludable.model.Historial;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
 public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
+
+    //----------------------------------DESCOMENTAR LO DEL USER.GETDISPLAYNAME
     private  FirebaseAuth firebaseAuth;
     public static final String EXTRA_PARAM_ID = "com.herprogramacion.comidas20184K.extra.ID";
     public static final String VIEW_NAME_HEADER_IMAGE = "imagen_compartida";
@@ -56,7 +66,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
     int cantidaddelalimento=0;
-    int bound = ultimoconsumo.size(), imagenid, igual=0, caster;
+    int bound = ultimoconsumo.size(), imagenid, igual=0, caster, consultahistorial=0;
     String i;
     UltimoConsumo consumo1 = new UltimoConsumo();
     //-----------------------------
@@ -68,13 +78,17 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
     EditText edtxcantidad;
     //DESCARGA DE PDF
     DownloadManager downloadManager;
+    final Calendar c = Calendar.getInstance();
+
+    private List<Historial> listahistorial = new ArrayList<Historial>();
+    ArrayAdapter<Historial> adaptador;
 
     //FIREBASE
     FirebaseDatabase firebaseDatabase;
     FirebaseApp firebaseApp;
     DatabaseReference databaseReference;
     String nombreusuario;
-
+    Historial p;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +97,11 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
         //nombreusuario=  user.getDisplayName();
+
+
+      //nombreusuario=  user.getDisplayName();
 
 
 
@@ -215,7 +233,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                     signoigual.setText("=");
                     signosuma.setText("+");
                     Glide.with(imgcalculo.getContext()).load(itemDetallado.getIdDrawable()).into(imgcalculo);
-                    Double resultadocal = itemDetallado.getCalorias()*Double.parseDouble(edtxcantidad.getText().toString());
+                    Double resultadocal = Double.parseDouble(itemDetallado.getCalorias())*Double.parseDouble(edtxcantidad.getText().toString());
                     caster = Integer.valueOf(resultadocal.intValue());
 
                     resultado.setText(""+caster);
@@ -279,7 +297,6 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
                         //----Agregar DATOS HISTORIAL FIREBASE---------
                         Calorias_consumidas = cantidaddelalimento*(consumo+ Double.parseDouble(informacion.getText().toString()));
-                        final Calendar c = Calendar.getInstance();
                         dia = c.get(Calendar.DAY_OF_MONTH);
                         mes = c.get(Calendar.MONTH);
                         año = c.get(Calendar.YEAR);
@@ -287,32 +304,95 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                         //Toast.makeText(ScrollingDetalle.this, ""+dia+"/"+mes+"/"+año, Toast.LENGTH_SHORT).show();
 
 
+                        //------ CONSULTAR SI EL USUARIO YA AH CONSUMIDO ALGO ANTES
+
+                        Query consulta = databaseReference.child("Historial").child("usuario").equalTo("Felixangel1 Quelal");
+                        consulta.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+                                    consultahistorial = consultahistorial+1;
+                                    Toast.makeText(ScrollingDetalle.this, "encontro "+consultahistorial, Toast.LENGTH_SHORT).show();
+                                    /*
+
+                                    p  = objsnapshot.getValue(Historial.class);
+                                    listahistorial.add(p);
+
+                                    adaptador  = new ArrayAdapter<Historial>(ScrollingDetalle.this,android.R.layout.simple_list_item_1,listahistorial);
+
+
+
+                                    //-------------------------------ACTUALIZAR INFO POR USUARIO----------------------------------
+
+                                    Toast.makeText(ScrollingDetalle.this, ""+consultahistorial, Toast.LENGTH_SHORT).show();
+                                    if (consultahistorial==1){
+                                        //Historial p = new Historial();
+                                        Historial a = new Historial();
+                                        a.setUid(p.getUid());
+                                        a.setCalorias_acumuladas(Lista_Ejercicios2.caloriasacumuladas);
+                                        a.setCalorías_consumidas(Calorias_consumidas);
+                                        a.setCalorías_excedentes(canti);
+                                        a.setCalorías_finales(Lista_Ejercicios2.resta);
+                                        a.setCalorías_máximas(CaloriasActivity.actmb);
+                                        a.setFecha(""+dia+"-"+(mes+1)+"-"+año);
+
+
+
+
+                                        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+                                        a.setUsuario("Felixangel1 Quelal");
+                                        databaseReference.child("Historial").child(a.getUid()).setValue(a);
+
+                                    }*/
+                                }
+
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
                         Historial p = new Historial();
                         p.setUid(UUID.randomUUID().toString());
-                        p.setCalorias_acumuladas(Lista_Ejercicios2.caloriasacumuladas);
+                        p.setCalorias_acumuladas(Deportesfirebase.caloriasacumuladas);
                         p.setCalorías_consumidas(Calorias_consumidas);
                         p.setCalorías_excedentes(canti);
-                        p.setCalorías_finales(Lista_Ejercicios2.resta);
+                        p.setCalorías_finales(Deportesfirebase.resta);
                         p.setCalorías_máximas(CaloriasActivity.actmb);
                         p.setFecha(""+dia+"-"+(mes+1)+"-"+año);
 
 
 
 
-                        //FirebaseUser user = firebaseAuth.getCurrentUser();
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
-                        p.setUsuario(nombreusuario);
+                        //p.setUsuario(nombreusuario);
+
 
                         databaseReference.child("Historial").child(p.getUid()).setValue(p);
 
                         //------VALIDACION 1 DIA DESPUES --------------------
                         diadespues = dia+1;
                         //Toast.makeText(ScrollingDetalle.this, "dia despues"+diadespues, Toast.LENGTH_SHORT).show();
-                        if (dia==diadespues){
-                            Toast.makeText(ScrollingDetalle.this, "un dia despues", Toast.LENGTH_SHORT).show();
-                        }
+                        /*while (dia<diadespues){
+                            final Calendar c2 = Calendar.getInstance();
+                            dia = c2.get(Calendar.DAY_OF_MONTH);
 
+                            if (dia==diadespues){
+
+                                Toast.makeText(ScrollingDetalle.this, "ya paso un dia", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }*/
 
 
 
@@ -323,7 +403,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                         x=((CaloriasActivity.actmb*90)/100);
                        // Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
                         if (Calorias_consumidas>CaloriasActivity.actmb){
-                            Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
 
 
                             canti= (Calorias_consumidas-CaloriasActivity.actmb);
@@ -374,6 +454,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
 
 
+
     }
 
     private void cargarImagenExtendida() {
@@ -407,7 +488,8 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
             public void onClick(View v) {
                 epicDialog.dismiss();
 
-                Toast.makeText(ScrollingDetalle.this,"Aceptaste",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),Lista_Ejercicios2.class);
+                startActivity(intent);
 
             }
         });

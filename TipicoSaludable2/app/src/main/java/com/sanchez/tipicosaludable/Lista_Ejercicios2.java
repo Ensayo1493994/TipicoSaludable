@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,13 +28,20 @@ import com.bakerj.infinitecards.transformer.DefaultTransformerToFront;
 import com.bakerj.infinitecards.transformer.DefaultZIndexTransformerCommon;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class Lista_Ejercicios2 extends AppCompatActivity {
+public class Lista_Ejercicios2 extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     //recomendacion
     public static AdapterCard adapterCard;
@@ -48,1870 +59,85 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
 
     //------------------------------
 
-    Dialog epicDialog;
+    Dialog popupdeportes;
     public static  int resta, calentero, caloriasacumuladas=0;
-    Double a = ScrollingDetalle.Calorias_consumidas;
-
-
-    //botones (1=aceptar) y (2=cancelar) segun su layaut
-    Button btnBra1;
-    Button btnBra2;
-
-    Button btnSalt1;
-    Button btnSalt2;
-
-    Button btnSen1;
-    Button btnSen2;
-
-    Button btnTit1;
-    Button btnTit2;
-
-    Button btnAbd1;
-    Button btnAbd2;
-
-    Button btnBurp1;
-    Button btnBurp2;
-
-    Button btnCmb1;
-    Button btnCmb2;
-
-    Button btnImp1;
-    Button btnImp2;
-
-    Button btnAero1;
-    Button btnAero2;
-
-    Button btnCam1;
-    Button btnCam2;
-
-    Button btnPilat1;
-    Button btnPilat2;
-
-    Button btnMar1;
-    Button btnMar2;
-
-    Button btnSpn1;
-    Button btnSpn2;
-
-    Button btnSlp1;
-    Button btnSlp2;
-
-    Button btnTrote1;
-    Button btnTrote2;
-
-    Button btnYoga1;
-    Button btnYoga2;
-
-    Button btnZum1;
-    Button btnZum2;
-
-    Button btnFut1;
-    Button btnFut2;
-
-    Button btnNata1;
-    Button btnNata2;
-
-    Button btnCicli1;
-    Button btnCicli2;
-
-    Button btnPat1;
-    Button btnPat2;
-
-    Button btnBal1;
-    Button btnBal2;
-
-    //para mostrar el titulo y texto de cada alerta
-
-    TextView tituloBrazo, calbrazo;       TextView mensajeBrazo;
-
-    TextView tituloSalto, calsalto;       TextView mensajeSalto;
-
-    TextView tituloSenta, calsenta;       TextView mensajeSenta;
-
-    TextView tituloTit, caltit;         TextView mensajeTit;
-
-    TextView tituloAbd, calabd;         TextView mensajeAbd;
-
-    TextView tituloBurp, calburp;        TextView mensajeBurp;
-
-    TextView tituloCmb, calcmb;         TextView mensajeCmb;
-
-    TextView tituloImp, calimp;         TextView mensajeImp;
-
-    TextView tituloAero, calaero;        TextView mensajeAero;
-
-    TextView tituloCam, calcaminar;         TextView mensajeCam;
-
-    TextView tituloPilat, calpilates;       TextView mensajePilat;
-
-    TextView tituloMarcha, calmarcha;      TextView mensajeMarcha;
-
-    TextView tituloSpn, calspin;         TextView mensajeSpn;
-
-    TextView tituloSlp, calslp;         TextView mensajeSlp;
-
-    TextView tituloTrotar, caltrotar;      TextView mensajeTrotar;
-
-    TextView tituloYoga, calyoga;        TextView mensajeYoga;
-
-    TextView tituloZumba, calzumba;       TextView mensajeZumba;
-
-    TextView tituloFutbol, calfutbol;      TextView mensajeFutbol;
-
-    TextView tituloNatacion, calnatacion;    TextView mensajeNatacion;
-
-    TextView tituloCicli, calciclismo;
-    TextView mensajeCicli;
-
-    TextView tituloaPat, calpatinaje;
-    TextView mensajePat;
-
+    ImageView Xfutbol;
     TextView tituloreco;
 
-    TextView tituloBal,calbaloncesto;         TextView mensajeBal;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    public static ArrayList<Deportes_firebase> listadeportes = new ArrayList<Deportes_firebase>();
+    ArrayAdapter<Deportes_firebase> adaptador;
 
+    Deportes_firebase item;
 
-    //cierra la alerta segun su layaut
-    ImageView Xbrazo;
-    ImageView Xsaltar;
-    ImageView Xsentado;
-    ImageView Xtitere;
-    ImageView Xabd;
-    ImageView Xburpes;
-    ImageView Xclimber;
-    ImageView Ximpulso;
-    ImageView Xmarcha;
-    ImageView Xaerobicos;
-    ImageView Xcaminar;
-    ImageView Xpilates;
-    ImageView Xspinning;
-    ImageView Xslep;
-    ImageView Xtrotar;
-    ImageView Xyoga;
-    ImageView Xzumba;
-    ImageView Xfutbol;
-    ImageView Xnatacion;
-    ImageView Xciclismo;
-    ImageView Xpatinaje;
-    ImageView Xbaloncesto;
+    Button btnrealizar, btncancelar;
+    Double a = ScrollingDetalle.Calorias_consumidas;
+    ImageView gifdeporte, xbutton;
+    TextView duracion, calorias;
 
-    //Gif para ejercicios
-    ImageView Titulo1;
-    ImageView Titulo2;
-    ImageView Titulo3;
-    ImageView GifFlexion_Brazo;
-    ImageView GifSaltos;
-    ImageView GifSentadillas;
-    ImageView GifTitere;
-    ImageView GifAbd;
-    ImageView GifBurpes;
-    ImageView GifClimber;
-    ImageView GifSalto_impulso;
-    ImageView Titulo;
-    ImageView GifMarcha;
-    ImageView GifAerobicos;
-    ImageView GifCaminar;
-    ImageView GifPilates;
-    ImageView GifSpinning;
-    ImageView GifStep;
-    ImageView GifTrotar;
-    ImageView GifYoga;
-    ImageView GifZumba;
-    ImageView GifFutbol;
-    ImageView GifBaloncesto;
-    ImageView GifNatacion;
-    ImageView GifCiclismo;
-    ImageView GifPatinaje;
-
-    //abre una alerta segun su layaut
-    ImageButton Men_Brazo;
-    ImageButton Men_saltos;
-    ImageButton Men_sentadilla;
-    ImageButton Men_titere;
-    ImageButton Men_abd;
-    ImageButton Men_burpes;
-    ImageButton Men_climber;
-    ImageButton Men_impulso;
-    ImageButton Men_aerobicos;
-    ImageButton Men_caminar;
-    ImageButton Men_pilates;
-    ImageButton Men_marchar;
-    ImageButton Men_spinning;
-    ImageButton Men_step;
-    ImageButton Men_trotar;
-    ImageButton Men_yoga;
-    ImageButton Men_zumba;
-    ImageButton Men_futbol;
-    ImageButton Men_natacion;
-    ImageButton Men_ciclismo;
-    ImageButton Men_patinaje;
-    ImageButton Men_baloncesto;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista__ejercicios2);
-        epicDialog = new Dialog(this);
+        popupdeportes = new Dialog(this);
+        final GridView gridView = findViewById(R.id.griddeportes);
+        gridView.setOnItemClickListener(this);
+
         ShowRecomendacion();
 
-        // Iconos de de titulos--------------------------------------------------------------------------------------------------------------------------------------------
-        Titulo1 = (ImageView) findViewById(R.id.Titulo1);
-        String ImageTitulo1 = "https://firebasestorage.googleapis.com/v0/b/popuptez.appspot.com/o/Ejercicio.png?alt=media&token=9521d9e4-4cc4-47db-85df-310757c907b6";
-        Glide.with(this)
-                .load(ImageTitulo1)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Titulo1);
+        inicializarfirebase();
 
-        Titulo2 = (ImageView) findViewById(R.id.Titulo2);
-        String ImageTitulo2 = "https://firebasestorage.googleapis.com/v0/b/popuptez.appspot.com/o/Actividad.png?alt=media&token=fbe52a9e-affd-439d-baa4-fd389fd7b9ab";
-        Glide.with(this)
-                .load(ImageTitulo2)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Titulo2);
-
-        Titulo3 = (ImageView) findViewById(R.id.Titulo3);
-        String ImageTitulo3 = "https://firebasestorage.googleapis.com/v0/b/popuptez.appspot.com/o/Deporte.png?alt=media&token=03311932-4882-4287-a346-ef6ea06a8b4b";
-        Glide.with(this)
-                .load(ImageTitulo3)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Titulo3);
-
-
-        //Imagenes para deportes---------------------------------------------------------------------------------------------------------------------------------------------
-        Men_Brazo = (ImageButton) findViewById(R.id.Men_Brazo);
-        String ImageBrazo = "https://firebasestorage.googleapis.com/v0/b/popuptez.appspot.com/o/brazo.png?alt=media&token=2dff3d1a-a385-4f9e-9b1a-121dd2c7ff20";
-        Glide.with(this)
-                .load(ImageBrazo)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_Brazo);
-
-        Men_saltos = (ImageButton) findViewById(R.id.Men_Saltos);
-        String ImageSaltar = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44166184_116269556022478_1994582558859329536_n.jpg?_nc_cat=101&oh=38c21736a4976fbc53d8a95b575d3a90&oe=5C430068";
-        Glide.with(this)
-                .load(ImageSaltar)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_saltos);
-
-
-        Men_sentadilla = (ImageButton) findViewById(R.id.Men_Sentadilla);
-        String ImageSentado = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44329409_116269619355805_2198198450032476160_n.jpg?_nc_cat=110&oh=16fd5314c43a06deec2a48b323f0b46c&oe=5C533A91";
-        Glide.with(this)
-                .load(ImageSentado)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_sentadilla);
-
-        Men_titere = (ImageButton) findViewById(R.id.Men_Titere);
-        String ImageTitere = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44329409_116269619355805_2198198450032476160_n.jpg?_nc_cat=110&oh=16fd5314c43a06deec2a48b323f0b46c&oe=5C533A91";
-        Glide.with(this)
-                .load(ImageTitere)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_titere);
-
-        Men_abd = (ImageButton) findViewById(R.id.Men_Abd);
-        String ImageAbd = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44329409_116269619355805_2198198450032476160_n.jpg?_nc_cat=110&oh=16fd5314c43a06deec2a48b323f0b46c&oe=5C533A91";
-        Glide.with(this)
-                .load(ImageAbd)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_abd);
-
-
-        Men_burpes = (ImageButton) findViewById(R.id.Men_Burpes);
-        String ImageBurpes = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44091833_116135479369219_3933751711658672128_n.jpg?_nc_cat=106&oh=d32cd9cda89d26d4b906cc84557a7716&oe=5C58916D";
-        Glide.with(this)
-                .load(ImageBurpes)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_burpes);
-
-        Men_climber = (ImageButton) findViewById(R.id.Men_Climber);
-        String ImageClimber = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44216950_116269566022477_1465670466071953408_n.jpg?_nc_cat=103&oh=41ed4e14cbb4b9e3b0da14e1e450ec1d&oe=5C3F4B73";
-        Glide.with(this)
-                .load(ImageClimber)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_climber);
-
-        Men_impulso = (ImageButton) findViewById(R.id.Men_Salto_Impulso);
-        String ImageImpulso = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44329409_116269619355805_2198198450032476160_n.jpg?_nc_cat=110&oh=16fd5314c43a06deec2a48b323f0b46c&oe=5C533A91";
-        Glide.with(this)
-                .load(ImageImpulso)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_impulso);
-
-        Men_marchar = (ImageButton) findViewById(R.id.Men_Marcha);
-        String ImageMarchar = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44096666_116277762688324_3260684603563704320_n.jpg?_nc_cat=104&oh=5fd9a608d2d550f0da56929cc22eb0e1&oe=5C532D4D";
-        Glide.with(this)
-                .load(ImageMarchar)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_marchar);
-
-        Men_zumba = (ImageButton) findViewById(R.id.Men_Zumba);
-        String ImageZumba = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44096666_116277762688324_3260684603563704320_n.jpg?_nc_cat=104&oh=5fd9a608d2d550f0da56929cc22eb0e1&oe=5C532D4D";
-        Glide.with(this)
-                .load(ImageZumba)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_zumba);
-
-        Men_pilates = (ImageButton) findViewById(R.id.Men_Pilates);
-        String ImagePilates = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44096666_116277762688324_3260684603563704320_n.jpg?_nc_cat=104&oh=5fd9a608d2d550f0da56929cc22eb0e1&oe=5C532D4D";
-        Glide.with(this)
-                .load(ImagePilates)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_pilates);
-
-        Men_yoga = (ImageButton) findViewById(R.id.Men_Yoga);
-        String ImageYoga = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44126068_116135669369200_171724775452835840_n.jpg?_nc_cat=110&oh=dca02e36a1f53095ff153b3d5ee75d2f&oe=5C57073F";
-        Glide.with(this)
-                .load(ImageYoga)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_yoga);
-
-        Men_step = (ImageButton) findViewById(R.id.Men_Step);
-        String ImageStep = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44126068_116135669369200_171724775452835840_n.jpg?_nc_cat=110&oh=dca02e36a1f53095ff153b3d5ee75d2f&oe=5C57073F";
-        Glide.with(this)
-                .load(ImageStep)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_step);
-
-        Men_caminar = (ImageButton) findViewById(R.id.Men_Caminar);
-        String ImageCaminar = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44252444_116269622689138_1666714947440082944_n.jpg?_nc_cat=102&oh=04e0343d6ad6e9b9333b1021c9dec7f7&oe=5C44E5E7";
-        Glide.with(this)
-                .load(ImageCaminar)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_caminar);
-
-        Men_trotar = (ImageButton) findViewById(R.id.Men_Trotar);
-        String ImageTrotar = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44224980_116135596035874_7012991625051766784_n.jpg?_nc_cat=103&oh=2a09416022b020f9e3951204e81d7504&oe=5C477F5F";
-        Glide.with(this)
-                .load(ImageTrotar)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_trotar);
-
-        Men_aerobicos = (ImageButton) findViewById(R.id.Men_Aerobicos);
-        String ImageAerobicos = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44224980_116135596035874_7012991625051766784_n.jpg?_nc_cat=103&oh=2a09416022b020f9e3951204e81d7504&oe=5C477F5F";
-        Glide.with(this)
-                .load(ImageAerobicos)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_aerobicos);
-
-        Men_spinning = (ImageButton) findViewById(R.id.Men_Spinninng);
-        String ImageSpinning = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44074945_116135459369221_1830872136546254848_n.jpg?_nc_cat=111&oh=5cc5a966a67c6abe3f10e1ba9745a670&oe=5C4BCE22";
-        Glide.with(this)
-                .load(ImageSpinning)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_spinning);
-
-        Men_futbol = (ImageButton) findViewById(R.id.Men_Futbol);
-
-        String ImageFutbol = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44164443_116135682702532_4389934116745773056_n.jpg?_nc_cat=102&oh=cc2f5e27fb9abc5983932b993d1e8901&oe=5C4FF4EB";
-        Glide.with(this)
-                .load(ImageFutbol)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_futbol);
-
-        Men_natacion = (ImageButton) findViewById(R.id.Men_Natacion);
-        String ImageNatacion = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44119841_116135566035877_8809757039753428992_n.jpg?_nc_cat=107&oh=a3fccfebd43312f71b72106628a38f9a&oe=5C59241B";
-        Glide.with(this)
-                .load(ImageNatacion)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_natacion);
-
-        Men_ciclismo = (ImageButton) findViewById(R.id.Men_Ciclismo);
-        String ImageCiclismo = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44274916_116135519369215_5593136094817288192_n.jpg?_nc_cat=110&oh=b3402b0ab920f0a86adc04f13d89cc2b&oe=5C42219C";
-        Glide.with(this)
-                .load(ImageCiclismo)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_ciclismo);
-
-
-        Men_patinaje = (ImageButton) findViewById(R.id.Men_Patinaje);
-        String ImagePatinaje = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44228356_116239482692152_3177025529765167104_n.jpg?_nc_cat=101&oh=9a2e851c488b9e6f151bd436e98e0d36&oe=5C56E964";
-        Glide.with(this)
-                .load(ImagePatinaje)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_patinaje);
-
-        Men_baloncesto = (ImageButton) findViewById(R.id.Men_Baloncesto);
-        String ImageBaloncesto = "https://scontent.feoh2-1.fna.fbcdn.net/v/t1.0-9/44206405_116135739369193_2680578794120544256_n.jpg?_nc_cat=111&oh=0d51706267b29644151bb1efba2c1ac8&oe=5C4EF4FE";
-        Glide.with(this)
-                .load(ImageBaloncesto)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(Men_baloncesto);
-
-
-        //ImagButtons--------------------------------------------------------------------------------------------------------------------------------------------
-        Men_Brazo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowBrazo();
-
-            }
-        });
-        Men_saltos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowSaltos();
-            }
-        });
-        Men_sentadilla.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowSentadilla();
-            }
-        });
-        Men_titere.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowTitetre();
-            }
-        });
-        Men_abd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowABD();
-            }
-        });
-        Men_burpes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowBurpes();
-            }
-        });
-        Men_climber.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowClimber();
-            }
-        });
-        Men_impulso.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowSaltoImpulso();
-            }
-        });
-        Men_marchar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowMarchar();
-            }
-        });
-        Men_zumba.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowZumba();
-            }
-        });
-        Men_pilates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowPilates();
-            }
-        });
-        Men_yoga.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowYoga();
-            }
-        });
-        Men_step.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowStep();
-            }
-        });
-        Men_caminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowCaminar();
-            }
-        });
-        Men_trotar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowTrotar();
-            }
-        });
-        Men_aerobicos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowAerobicos();
-            }
-        });
-        Men_spinning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowSpinning();
-            }
-        });
-        Men_futbol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowFutbol();
-            }
-        });
-        Men_natacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowNatacion();
-            }
-        });
-        Men_ciclismo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowCiclismo();
-            }
-        });
-        Men_patinaje.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowPatinaje();
-            }
-        });
-        Men_baloncesto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowBaloncesto();
-            }
-        });
-        //End-----------------------------------------------------------------
-    }
-
-    //Shows--------------------------------------------------------------------------------------------------------------------------------------------------
-    public void ShowBrazo() {
-        epicDialog.setContentView(R.layout.flexion_brazo_alert);
-        Xbrazo = (ImageView) epicDialog.findViewById(R.id.Xbrazo);
-        btnBra1 = (Button) epicDialog.findViewById(R.id.btnBra1);
-        btnBra2 = (Button) epicDialog.findViewById(R.id.btnBra2);
-        tituloBrazo = (TextView) epicDialog.findViewById(R.id.tituloBrazo);
-        mensajeBrazo = (TextView) epicDialog.findViewById(R.id.mensajeBrazo);
-        calbrazo = epicDialog.findViewById(R.id.Flexion_Brazo_Cal);
-
-
-        GifFlexion_Brazo = (ImageView) epicDialog.findViewById(R.id.GifFlexion_Brazo);
-        String url = "https://firebasestorage.googleapis.com/v0/b/popuptez.appspot.com/o/gif_brazo.gif?alt=media&token=20d7c498-87b9-4fe8-87f4-832af0626eb0";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifFlexion_Brazo);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnBra1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calbrazo.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-                Intent intent = new Intent(Lista_Ejercicios2.this,DetalleDeportes.class);
-                startActivity(intent);
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnBra2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xbrazo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowSaltos() {
-        epicDialog.setContentView(R.layout.saltar_alert);
-        Xsaltar = (ImageView) epicDialog.findViewById(R.id.Xsalto);
-        btnSalt1 = (Button) epicDialog.findViewById(R.id.btnSalt1);
-        btnSalt2 = (Button) epicDialog.findViewById(R.id.btnSalt2);
-        tituloSalto = (TextView) epicDialog.findViewById(R.id.tituloSalto);
-        mensajeSalto = (TextView) epicDialog.findViewById(R.id.mensajeSalto);
-        calsalto = epicDialog.findViewById(R.id.Salto_Impulso_Cal);
-
-        GifSaltos = (ImageView) epicDialog.findViewById(R.id.GifSaltos);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifSaltos);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnSalt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calsalto.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-                Intent intent = new Intent(Lista_Ejercicios2.this,DetalleDeportes.class);
-                startActivity(intent);
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnSalt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xsaltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowSentadilla() {
-        epicDialog.setContentView(R.layout.sentadilla_alert);
-        Xsentado = (ImageView) epicDialog.findViewById(R.id.Xsentado);
-        btnSen1 = (Button) epicDialog.findViewById(R.id.btnSen1);
-        btnSen2 = (Button) epicDialog.findViewById(R.id.btnSen2);
-        tituloSenta = (TextView) epicDialog.findViewById(R.id.tituloSenta);
-        mensajeSenta = (TextView) epicDialog.findViewById(R.id.mensajeSenta);
-        calsenta = epicDialog.findViewById(R.id.Sentadilla_Cal);
-
-        GifSentadillas = (ImageView) epicDialog.findViewById(R.id.GifSentadillas);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifSentadillas);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnSen1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calsenta.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-                Intent intent = new Intent(Lista_Ejercicios2.this,DetalleDeportes.class);
-                startActivity(intent);
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnSen2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xsentado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowTitetre() {
-        epicDialog.setContentView(R.layout.titere_alert);
-        Xtitere = (ImageView) epicDialog.findViewById(R.id.Xtitere);
-        btnTit1 = (Button) epicDialog.findViewById(R.id.btnTit1);
-        btnTit2 = (Button) epicDialog.findViewById(R.id.btnTit2);
-        tituloTit = (TextView) epicDialog.findViewById(R.id.tituloTit);
-        mensajeTit = (TextView) epicDialog.findViewById(R.id.mensajeTit);
-        caltit = epicDialog.findViewById(R.id.Titere_Cal);
-
-        GifTitere = (ImageView) epicDialog.findViewById(R.id.GifTitere);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifTitere);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnTit1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(caltit.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-                Intent intent = new Intent(Lista_Ejercicios2.this,DetalleDeportes.class);
-                startActivity(intent);
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnTit2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xtitere.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowABD() {
-        epicDialog.setContentView(R.layout.abd_alert);
-        Xabd = (ImageView) epicDialog.findViewById(R.id.Xabd);
-        btnAbd1 = (Button) epicDialog.findViewById(R.id.btnAbd1);
-        btnAbd2 = (Button) epicDialog.findViewById(R.id.btnAbd2);
-        tituloAbd = (TextView) epicDialog.findViewById(R.id.tituloAbd);
-        mensajeAbd = (TextView) epicDialog.findViewById(R.id.mensajeAbd);
-        calabd = epicDialog.findViewById(R.id.Abd_Cal);
-
-        GifAbd = (ImageView) epicDialog.findViewById(R.id.GifAbd);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifAbd);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnAbd1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                resta= calentero - Integer.parseInt(calabd.getText().toString());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnAbd2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xabd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowBurpes() {
-        epicDialog.setContentView(R.layout.burbes_alert);
-        Xburpes = (ImageView) epicDialog.findViewById(R.id.Xburpes);
-        btnBurp1 = (Button) epicDialog.findViewById(R.id.btnBurp1);
-        btnBurp2 = (Button) epicDialog.findViewById(R.id.btnBurp2);
-        tituloBurp = (TextView) epicDialog.findViewById(R.id.tituloBurp);
-        mensajeBurp = (TextView) epicDialog.findViewById(R.id.mensajeBurp);
-        calburp = epicDialog.findViewById(R.id.Burpes_Cal);
-
-        GifBurpes = (ImageView) epicDialog.findViewById(R.id.GifBurpes);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifBurpes);
-
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnBurp1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calburp.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnBurp2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xburpes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowClimber() {
-        epicDialog.setContentView(R.layout.climber_alert);
-        Xclimber = (ImageView) epicDialog.findViewById(R.id.Xclimber);
-        btnCmb1 = (Button) epicDialog.findViewById(R.id.btnCmb1);
-        btnCmb2 = (Button) epicDialog.findViewById(R.id.btnCmb2);
-        tituloCmb = (TextView) epicDialog.findViewById(R.id.tituloCmb);
-        mensajeCmb = (TextView) epicDialog.findViewById(R.id.mensajeCmb);
-        calcmb = epicDialog.findViewById(R.id.Climber_Cal);
-
-        GifClimber = (ImageView) epicDialog.findViewById(R.id.GifClimber);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifClimber);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnCmb1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calcmb.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnCmb2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xclimber.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowSaltoImpulso() {
-        epicDialog.setContentView(R.layout.impulso_alert);
-        Ximpulso = (ImageView) epicDialog.findViewById(R.id.Ximpulso);
-        btnImp1 = (Button) epicDialog.findViewById(R.id.btnImp1);
-        btnImp2 = (Button) epicDialog.findViewById(R.id.btnImp2);
-        tituloImp = (TextView) epicDialog.findViewById(R.id.tituloImp);
-        mensajeImp = (TextView) epicDialog.findViewById(R.id.mensajeImp);
-        calimp = findViewById(R.id.Salto_Impulso_Cal);
-
-        GifSalto_impulso = (ImageView) epicDialog.findViewById(R.id.GifSalto_Impulso);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifSalto_impulso);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnImp1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calimp.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnImp2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Ximpulso.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowMarchar() {
-        epicDialog.setContentView(R.layout.marchar_alert);
-        Xmarcha = (ImageView) epicDialog.findViewById(R.id.Xmarchar);
-        btnMar1 = (Button) epicDialog.findViewById(R.id.btnMar1);
-        btnMar2 = (Button) epicDialog.findViewById(R.id.btnMar2);
-        tituloMarcha = (TextView) epicDialog.findViewById(R.id.tituloMarchar);
-        mensajeMarcha = (TextView) epicDialog.findViewById(R.id.mensajeMarchar);
-        calmarcha = epicDialog.findViewById(R.id.Marcha_Cal);
-
-        GifMarcha = (ImageView) epicDialog.findViewById(R.id.GifMarcha);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifMarcha);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnMar1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calmarcha.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnMar2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xmarcha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowZumba() {
-        epicDialog.setContentView(R.layout.zumba_alert);
-        Xzumba = (ImageView) epicDialog.findViewById(R.id.Xzumba);
-        btnZum1 = (Button) epicDialog.findViewById(R.id.btnZum1);
-        btnZum2 = (Button) epicDialog.findViewById(R.id.btnZum2);
-        tituloZumba = (TextView) epicDialog.findViewById(R.id.tituloZumba);
-        mensajeZumba = (TextView) epicDialog.findViewById(R.id.mensajeZumba);
-        calzumba = epicDialog.findViewById(R.id.Zumba_Cal);
-
-        GifZumba = (ImageView) epicDialog.findViewById(R.id.GifZumba);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifZumba);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnZum1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calzumba.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnZum2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xzumba.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowPilates() {
-        epicDialog.setContentView(R.layout.pilates_alert);
-        Xpilates = (ImageView) epicDialog.findViewById(R.id.Xpilates);
-        btnPilat1 = (Button) epicDialog.findViewById(R.id.btnPilat1);
-        btnPilat2 = (Button) epicDialog.findViewById(R.id.btnPilat2);
-        tituloPilat = (TextView) epicDialog.findViewById(R.id.tituloPilat);
-        mensajePilat = (TextView) epicDialog.findViewById(R.id.mensajePilat);
-        calpilates = epicDialog.findViewById(R.id.Patinaje_Cal);
-
-        GifPilates = (ImageView) epicDialog.findViewById(R.id.GifPilates);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifPilates);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnPilat1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calpilates.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnPilat2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xpilates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowYoga() {
-        epicDialog.setContentView(R.layout.yoga_alert);
-        Xyoga = (ImageView) epicDialog.findViewById(R.id.Xyoga);
-        btnYoga1 = (Button) epicDialog.findViewById(R.id.btnYoga1);
-        btnYoga2 = (Button) epicDialog.findViewById(R.id.btnYoga2);
-        tituloYoga = (TextView) epicDialog.findViewById(R.id.tituloYoga);
-        mensajeYoga = (TextView) epicDialog.findViewById(R.id.mensajeYoga);
-        calyoga = epicDialog.findViewById(R.id.Yoga_Cal);
-
-        GifYoga = (ImageView) epicDialog.findViewById(R.id.GifYoga);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifYoga);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnYoga1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calyoga.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnYoga2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xyoga.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowStep() {
-        epicDialog.setContentView(R.layout.step_alert);
-        Xslep = (ImageView) epicDialog.findViewById(R.id.Xslep);
-        btnSlp1 = (Button) epicDialog.findViewById(R.id.btnSlp1);
-        btnSlp2 = (Button) epicDialog.findViewById(R.id.btnSlp2);
-        tituloSlp = (TextView) epicDialog.findViewById(R.id.tituloSlp);
-        mensajeSlp = (TextView) epicDialog.findViewById(R.id.mensajeSlp);
-        calslp = epicDialog.findViewById(R.id.Step_Cal);
-
-        GifStep = (ImageView) epicDialog.findViewById(R.id.GifStep);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifStep);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnSlp1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calslp.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnSlp2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xslep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowCaminar() {
-        epicDialog.setContentView(R.layout.caminar_alert);
-        Xcaminar = (ImageView) epicDialog.findViewById(R.id.Xcaminar);
-        btnCam1 = (Button) epicDialog.findViewById(R.id.btnCam1);
-        btnCam2 = (Button) epicDialog.findViewById(R.id.btnCam2);
-        tituloCam = (TextView) epicDialog.findViewById(R.id.tituloCam);
-        mensajeCam = (TextView) epicDialog.findViewById(R.id.mensajeCam);
-        calcaminar = epicDialog.findViewById(R.id.Cminar_Cal);
-
-        GifCaminar = (ImageView) epicDialog.findViewById(R.id.GifCaminar);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifCaminar);
-
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnCam1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calcaminar.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnCam2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xcaminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowTrotar() {
-        epicDialog.setContentView(R.layout.trotar_alert);
-        Xtrotar = (ImageView) epicDialog.findViewById(R.id.Xtrotar);
-        btnTrote1 = (Button) epicDialog.findViewById(R.id.btnTrote1);
-        btnTrote2 = (Button) epicDialog.findViewById(R.id.btnTrote2);
-        tituloTrotar = (TextView) epicDialog.findViewById(R.id.tituloTrotar);
-        mensajeTrotar = (TextView) epicDialog.findViewById(R.id.mensajeTrotar);
-        caltrotar = epicDialog.findViewById(R.id.Trotar_Cal);
-
-        GifTrotar = (ImageView) epicDialog.findViewById(R.id.GifTrotar);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifTrotar);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnTrote1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(caltrotar.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnTrote2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xtrotar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowAerobicos() {
-        epicDialog.setContentView(R.layout.aerobicos_alert);
-        Xaerobicos = (ImageView) epicDialog.findViewById(R.id.Xaerobicos);
-        btnAero1 = (Button) epicDialog.findViewById(R.id.btnAero1);
-        btnAero2 = (Button) epicDialog.findViewById(R.id.btnAero2);
-        tituloAero = (TextView) epicDialog.findViewById(R.id.tituloAero);
-        mensajeAero = (TextView) epicDialog.findViewById(R.id.mensajeAero);
-        calaero = epicDialog.findViewById(R.id.Aerobicos_Cal);
-
-        GifAerobicos = (ImageView) epicDialog.findViewById(R.id.GifAerobicos);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifAerobicos);
-
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnAero1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calaero.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnAero2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xaerobicos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowSpinning() {
-        epicDialog.setContentView(R.layout.spinning_alert);
-        Xspinning = (ImageView) epicDialog.findViewById(R.id.Xspinning);
-        btnSpn1 = (Button) epicDialog.findViewById(R.id.btnSpn1);
-        btnSpn2 = (Button) epicDialog.findViewById(R.id.btnSpn2);
-        tituloSpn = (TextView) epicDialog.findViewById(R.id.tituloSpn);
-        mensajeSpn = (TextView) epicDialog.findViewById(R.id.mensajeSpn);
-        calspin = epicDialog.findViewById(R.id.Spininng_Cal);
-
-        GifSpinning = (ImageView) epicDialog.findViewById(R.id.GifSpinning);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifSpinning);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnSpn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calspin.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnSpn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xspinning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-    }
-
-    public void ShowFutbol() {
-        epicDialog.setContentView(R.layout.futbol_alert);
-        Xfutbol = (ImageView) epicDialog.findViewById(R.id.Xfutbol);
-        btnFut1 = (Button) epicDialog.findViewById(R.id.btnFut1);
-        btnFut2 = (Button) epicDialog.findViewById(R.id.btnFut2);
-        tituloFutbol = (TextView) epicDialog.findViewById(R.id.tituloFutbol);
-        mensajeFutbol = (TextView) epicDialog.findViewById(R.id.mensajeFutbol);
-        calfutbol = epicDialog.findViewById(R.id.Futbol_Cal);
-
-        GifFutbol = (ImageView) epicDialog.findViewById(R.id.GifFutbol);
-        String url = "https://firebasestorage.googleapis.com/v0/b/popuptez.appspot.com/o/futbol.gif?alt=media&token=49374665-0c56-4c63-b816-ecb8689bdb6f";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifFutbol);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnFut1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calbrazo.getText().toString());
-                resta= calentero - Integer.parseInt(calfutbol.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnFut2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xfutbol.setOnClickListener(new View.OnClickListener() {
+        databaseReference.child("Deporte").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<ArrayList<Deportes_firebase>> t = new GenericTypeIndicator<ArrayList<Deportes_firebase>>(){};
+                listadeportes = dataSnapshot.getValue(t);
+                adaptador = new ArrayAdapter<Deportes_firebase>(getApplicationContext(),android.R.layout.simple_list_item_1,listadeportes);
 
+                //AdaptadorComida adaptadorComida = new AdaptadorComida(getContext(),listacomida);
+                AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getApplicationContext(),listadeportes);
+                gridView.setAdapter(adaptadorDeportes);
             }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-
-    }
 
-    public void ShowNatacion() {
-        epicDialog.setContentView(R.layout.natacion_alert);
-        Xnatacion = (ImageView) epicDialog.findViewById(R.id.Xnatacion);
-        btnNata1 = (Button) epicDialog.findViewById(R.id.btnNata1);
-        btnNata2 = (Button) epicDialog.findViewById(R.id.btnNata2);
-        tituloNatacion = (TextView) epicDialog.findViewById(R.id.tituloNatacion);
-        mensajeNatacion = (TextView) epicDialog.findViewById(R.id.mensajeNatacion);
-        if (CaloriasActivity.check == 1){
-            calnatacion = epicDialog.findViewById(R.id.Natacion_Cal_Hombre);
-
-        }else {
-            calnatacion = epicDialog.findViewById(R.id.Natacion_Cal_Mujer);
-
-        }
-
-
-        GifNatacion = (ImageView) epicDialog.findViewById(R.id.GifNatacion);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifNatacion);
-
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnNata1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calnatacion.getText().toString());
-                resta= calentero - Integer.parseInt(calnatacion.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        // Cancelar ----------------------------------------------------------------------------
-        btnNata2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
             }
         });
-        //Cerrar-------------------------------------------------------------------------------
-        Xnatacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
 
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
 
 
     }
 
-    public void ShowCiclismo() {
-        epicDialog.setContentView(R.layout.ciclismo_alert);
-        Xciclismo = (ImageView) epicDialog.findViewById(R.id.Xciclismo);
-        btnCicli1 = (Button) epicDialog.findViewById(R.id.btnCicli1);
-        btnCicli2 = (Button) epicDialog.findViewById(R.id.btnCicli2);
-        tituloCicli = (TextView) epicDialog.findViewById(R.id.tituloCicli);
-        mensajeCicli = (TextView) epicDialog.findViewById(R.id.mensajeCicli);
-        calciclismo = epicDialog.findViewById(R.id.Ciclismo_Cal);
-
-
-        GifCiclismo = (ImageView) epicDialog.findViewById(R.id.GifCiclismo);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifCiclismo);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnCicli1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calciclismo.getText().toString());
-                resta= calentero - Integer.parseInt(calciclismo.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnCicli2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xciclismo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-
-
-    }
-
-    public void ShowPatinaje() {
-        epicDialog.setContentView(R.layout.patinaje_alert);
-        Xpatinaje = (ImageView) epicDialog.findViewById(R.id.Xpatinaje);
-        btnPat1 = (Button) epicDialog.findViewById(R.id.btnPat1);
-        btnPat2 = (Button) epicDialog.findViewById(R.id.btnPat2);
-        tituloaPat = (TextView) epicDialog.findViewById(R.id.tituloPat);
-        mensajePat = (TextView) epicDialog.findViewById(R.id.mensajePat);
-        calpatinaje = epicDialog.findViewById(R.id.Patinaje_Cal);
-
-
-        GifPatinaje = (ImageView) epicDialog.findViewById(R.id.GifPatinaje);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifPatinaje);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnPat1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calpatinaje.getText().toString());
-                resta= calentero - Integer.parseInt(calpatinaje.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnPat2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xpatinaje.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
-
-
-    }
-
-    public void ShowBaloncesto() {
-        epicDialog.setContentView(R.layout.baloncesto_alert);
-        Xbaloncesto = (ImageView) epicDialog.findViewById(R.id.Xbaloncesto);
-        btnBal1 = (Button) epicDialog.findViewById(R.id.btnBal1);
-        btnBal2 = (Button) epicDialog.findViewById(R.id.btnBal2);
-        tituloBal = (TextView) epicDialog.findViewById(R.id.tituloBal);
-        mensajeBal = (TextView) epicDialog.findViewById(R.id.mensajeBal);
-        calbaloncesto = epicDialog.findViewById(R.id.Baloncesto_Cal);
-
-
-        GifBaloncesto = (ImageView) epicDialog.findViewById(R.id.GifBaloncesto);
-        String url = "https://upload-assets.vice.com/files/2016/08/17/1471460267Day84_Small.gif?resize=540:*";
-        Glide.with(this)
-                .load(url)
-                .crossFade()
-                .centerCrop()
-                .placeholder(R.drawable.imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.5f)
-                .into(GifBaloncesto);
-
-        // Aceptar ----------------------------------------------------------------------------
-        btnBal1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muy Bien ¡¡", Toast.LENGTH_SHORT).show();
-                calentero = Integer.valueOf(a.intValue());
-                resta= calentero - Integer.parseInt(calbaloncesto.getText().toString());
-                //Toast.makeText(Lista_Ejercicios2.this, ""+resta, Toast.LENGTH_SHORT).show();
-                ScrollingDetalle.Calorias_consumidas = resta;
-                epicDialog.dismiss();
-            }
-        });
-
-        // Cancelar ----------------------------------------------------------------------------
-        btnBal2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Lista_Ejercicios2.this, "!! Muyy Maalll ¡¡", Toast.LENGTH_SHORT).show();
-                epicDialog.dismiss();
-            }
-        });
-        //Cerrar-------------------------------------------------------------------------------
-        Xbaloncesto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                epicDialog.dismiss();
-
-            }
-        });
-        epicDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        epicDialog.show();
+    private void inicializarfirebase() {
+        FirebaseApp.initializeApp(this);
+        firebaseDatabase= FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
     //<ALERTA RECOMENDADOS------------------------->
     public void ShowRecomendacion() {
-        epicDialog.setContentView(R.layout.recomendacion_alert);
-        Xfutbol= (ImageView) epicDialog.findViewById(R.id.Xfutbol);
-        tituloreco = (TextView) epicDialog.findViewById(R.id.tituloreco);
-        btn1 = (Button) epicDialog.findViewById(R.id.btnFut1);
-        btn2 = (Button) epicDialog.findViewById(R.id.btnFut2);
+        popupdeportes.setContentView(R.layout.recomendacion_alert);
+        Xfutbol= (ImageView) popupdeportes.findViewById(R.id.Xfutbol);
+        tituloreco = (TextView) popupdeportes.findViewById(R.id.tituloreco);
+        btn1 = (Button) popupdeportes.findViewById(R.id.btnFut1);
+        btn2 = (Button) popupdeportes.findViewById(R.id.btnFut2);
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = epicDialog.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = popupdeportes.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(layoutManager);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
         recyclerView.setAdapter(adapter);
+
+        /*
         adapter.setMlistener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void itemClick(int position) {
+
 
                 switch (position){
                     case 0:
@@ -1939,24 +165,24 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
                         break;
                 }
             }
-        });
+        });*/
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                epicDialog.dismiss();
+                popupdeportes.dismiss();
             }
         });
         Xfutbol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                epicDialog.dismiss();
+                popupdeportes.dismiss();
 
             }
         });
         getImages();
 
-        epicDialog.show();
+        popupdeportes.show();
         }
 
     private void getImages(){
@@ -2004,5 +230,103 @@ public class Lista_Ejercicios2 extends AppCompatActivity {
 
         //mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         //mNames.add("ABD");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        item = (Deportes_firebase) adapterView.getItemAtPosition(position);
+        popupdeportes.setContentView(R.layout.contendedor_alert);
+        gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
+        calorias = popupdeportes.findViewById(R.id.caloriasdepor2);
+        duracion = popupdeportes.findViewById(R.id.duracion_min2);
+        btnrealizar = popupdeportes.findViewById(R.id.btnrealizar);
+        btncancelar = popupdeportes.findViewById(R.id.btncancelar2);
+        xbutton = popupdeportes.findViewById(R.id.xContenedor);
+        xbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupdeportes.dismiss();
+            }
+        });
+        btnrealizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                popupdeportes.dismiss();
+                popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                duracion = popupdeportes.findViewById(R.id.duracion_depor);
+                Glide.with(getApplicationContext())
+                        .load(item.getImagen())
+                        .crossFade()
+                        .centerCrop()
+                        .placeholder(R.drawable.imagen)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .thumbnail(0.5f)
+                        .into(gifdeporte);
+
+                calorias.setText(item.getCalorias());
+                duracion.setText(item.getDuracion());
+
+                calentero = Integer.valueOf(a.intValue());
+                caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
+                resta= calentero - Integer.parseInt(calorias.getText().toString());
+
+                popupdeportes.show();
+
+            }
+        });
+
+        Glide.with(this)
+                .load(item.getImagen())
+                .crossFade()
+                .centerCrop()
+                .placeholder(R.drawable.imagen)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .thumbnail(0.5f)
+                .into(gifdeporte);
+
+        calorias.setText(item.getCalorias());
+        duracion.setText(item.getDuracion());
+
+        popupdeportes.show();
+
+
+
+        /*
+        btnrealizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupdeportes.dismiss();
+                popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                duracion = popupdeportes.findViewById(R.id.duracion_depor);
+
+
+
+                Glide.with(getContext())
+                        .load(item.getImagen())
+                        .crossFade()
+                        .centerCrop()
+                        .placeholder(R.drawable.imagen)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .thumbnail(0.5f)
+                        .into(gifdeporte);
+
+                calorias.setText(item.getCalorias());
+                duracion.setText(item.getDuracion());
+
+                popupdeportes.show();
+
+            }
+        });*/
+
+
+
+
+
+
     }
 }

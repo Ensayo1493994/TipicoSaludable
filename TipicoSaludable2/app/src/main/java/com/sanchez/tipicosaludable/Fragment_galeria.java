@@ -35,6 +35,7 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
     DatabaseReference databaseReference;
     public static ArrayList<Comida> listacomida = new ArrayList<Comida>();
     ArrayAdapter<Comida> adaptador;
+    Double parseo;
 
 
 
@@ -76,6 +77,7 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
                 }*/
                 GenericTypeIndicator<ArrayList<Comida>> t = new GenericTypeIndicator<ArrayList<Comida>>(){};
                  listacomida = dataSnapshot.getValue(t);
+
                 adaptador = new ArrayAdapter<Comida>(getContext(),android.R.layout.simple_list_item_1,listacomida);
                 AdaptadorComida adaptadorComida = new AdaptadorComida(getContext(),listacomida);
                 gridView.setAdapter(adaptadorComida);

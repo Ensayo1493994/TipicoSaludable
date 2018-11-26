@@ -76,6 +76,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     DatabaseReference databaseReference;
     ArrayList<Perfil> perfil_lista = new ArrayList<Perfil>();
     ArrayAdapter<Perfil> adaptadorperfil;
+    int encontrousuario=0;
+
 
 
 
@@ -100,6 +102,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         //----------------------MOSTRAR FORMULARIO UNA SOLA VEZ--------------------
         firebaseAuth = FirebaseAuth.getInstance();
+
+
 
         if (Inicio.temp==1){
             goMain();
@@ -143,7 +147,12 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             public void onClick(View view) {
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
                 startActivityForResult(intent,CODE);
+
+
+
+
                 if (Inicio.temp==1){
+
                     goMain();
                 }
 
@@ -160,6 +169,23 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 if (user != null){
                     goMainScreen();
                 }
+                /*FirebaseUser user = firebaseAuth.getCurrentUser();
+                Query q = databaseReference.orderByChild("nombre").equalTo(user.getDisplayName());
+                q.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        encontrousuario = encontrousuario+1;
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                if (encontrousuario ==1){
+                    goMain();
+                }*/
 
             }
         };
