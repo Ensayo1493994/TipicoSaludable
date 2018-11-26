@@ -110,7 +110,7 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
                         }catch (InterruptedException e){
                             e.printStackTrace();
                         }
-                        if (min==30){
+                        if (seg==30){
                             starsonido();
                             isOn = false;
                         }
