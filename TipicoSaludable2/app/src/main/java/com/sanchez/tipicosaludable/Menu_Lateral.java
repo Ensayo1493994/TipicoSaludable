@@ -113,7 +113,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         //-----------------------DIAS---------------------------
 
 
-        final Calendar c = Calendar.getInstance();
+        /*final Calendar c = Calendar.getInstance();
         dia = c.get(Calendar.DAY_OF_MONTH);
         mes = c.get(Calendar.MONTH);
         año = c.get(Calendar.YEAR);
@@ -130,7 +130,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(getApplicationContext(), "ya paso un dia", Toast.LENGTH_SHORT).show();
 
             }
-        }
+        }*/
 
 
 

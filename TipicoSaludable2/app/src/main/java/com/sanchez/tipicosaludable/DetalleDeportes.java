@@ -82,9 +82,6 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
                                 }
                                 if (seg<10){
                                     s ="0"+ seg;
-                                    if (seg==30){
-                                        starsonido();
-                                    }
                                 }else {
                                     s ="" +seg;
                                 }if (min<10){
@@ -102,6 +99,28 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
             }
         });
         cronos.start();
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    if(isOn){
+                        try{
+                            Thread.sleep(1);
+
+                        }catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
+                        if (min==30){
+                            starsonido();
+                            isOn = false;
+                        }
+
+                    }
+                }
+
+            }
+        });
+        t.start();
 
     }
 

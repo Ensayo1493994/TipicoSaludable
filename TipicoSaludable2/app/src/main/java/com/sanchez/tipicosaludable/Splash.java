@@ -38,6 +38,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         inicializarfirebase();
+        //Autenticacion si el usuario esta logeado
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -51,40 +52,14 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
 
             }
         };
-
-
-        Query q = databaseReference.orderByChild("nombre").equalTo("johan");
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                encontrousuario = encontrousuario+1;
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        if (encontrousuario ==1){
-            //Intent intent = new Intent(Splash.this,Menu_Lateral.class);
-            //startActivity(intent);
-            Toast.makeText(this, "el usuario existe", Toast.LENGTH_SHORT).show();
-        }else{
-            //Intent intent = new Intent(Splash.this,CaloriasActivity.class);
-            //startActivity(intent);
-            Toast.makeText(this, "no encontro", Toast.LENGTH_SHORT).show();
-
-        }
-
     }
-
+    //-----------metodo oara ir a LoginActivity------------------------------------
     private void goLogin() {
         Intent intent = new Intent(Splash.this,Login.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
+    //------------metodo para el splash------------------------------------------------
     private void runner() {
         TimerTask tarea = new TimerTask() {
             @Override
