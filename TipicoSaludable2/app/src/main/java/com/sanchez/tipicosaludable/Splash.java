@@ -52,6 +52,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
             }
         };
 
+
         Query q = databaseReference.orderByChild("nombre").equalTo("johan");
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -75,7 +76,6 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
             Toast.makeText(this, "no encontro", Toast.LENGTH_SHORT).show();
 
         }
-
 
     }
 
