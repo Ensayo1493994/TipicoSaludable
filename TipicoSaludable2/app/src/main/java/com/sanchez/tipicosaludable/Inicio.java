@@ -1,7 +1,6 @@
 package com.sanchez.tipicosaludable;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -64,23 +63,6 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         GridView gridView = (GridView) vista.findViewById(R.id.ultimoconsumo);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user == null){
-
-                    goLogin();
-                }
-
-            }
-
-            private void goLogin() {
-                Intent intent = new Intent(getContext(),Login.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        };
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         //nombreusuario=  user.getDisplayName();
@@ -184,7 +166,6 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
 
 
-
         //-------------CONSULTAR INFO POR USUARIO--------------
 
 
@@ -211,6 +192,8 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         firebaseDatabase= FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Historial");
         tablaperfil = firebaseDatabase.getReference("Perfil");
+
+
 
     }
 

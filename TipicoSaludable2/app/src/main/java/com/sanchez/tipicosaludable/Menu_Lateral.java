@@ -71,7 +71,6 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         txtNombre1 = view.findViewById(R.id.txtNombre1);
         txtCorreo1 = view.findViewById(R.id.txtCorreo1);
 
-        /*
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
@@ -82,7 +81,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         }else {
             goLogin();
-        }*/
+        }
 
 
 
@@ -106,7 +105,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION FIN-----------------------------------
 
         //------------------------------DESCOMENTAR LO DEL INICIO DE SESION AL HACR PUSH
-        /*
+
         firebaseAuth = FirebaseAuth.getInstance();
         navigationView.setNavigationItemSelectedListener(this);
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -133,7 +132,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();*/
+                .build();
 
 
     }

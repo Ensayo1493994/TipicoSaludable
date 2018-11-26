@@ -82,6 +82,9 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
                                 }
                                 if (seg<10){
                                     s ="0"+ seg;
+                                    if (seg==30){
+                                        starsonido();
+                                    }
                                 }else {
                                     s ="" +seg;
                                 }if (min<10){
@@ -99,9 +102,7 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
             }
         });
         cronos.start();
-        if (seg==30){
-            starsonido();
-        }
+
     }
 
     private void starsonido(){
