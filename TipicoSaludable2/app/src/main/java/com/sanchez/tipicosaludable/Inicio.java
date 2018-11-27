@@ -18,10 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.FirebaseApp;
@@ -49,7 +46,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
     DatabaseReference databaseReference, tablaperfil;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseAuth firebaseAuth;
-    private InterstitialAd mInterstitialAd;
+
     ArrayList<Historial> historial_lista = new ArrayList<Historial>();
 
     Historial usuariofound;
@@ -69,20 +66,8 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         View vista = inflater.inflate(R.layout.fragment_inicio, container, false);
         GridView gridView = (GridView) vista.findViewById(R.id.ultimoconsumo);
 
-        Button mMyButton = vista.findViewById(R.id.mybuttom);
-        MobileAds.initialize(getContext(), "ca-app-pub-3940256099942544~3347511713");
 
-        mInterstitialAd = new InterstitialAd(getContext());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
 
-        });
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -107,16 +92,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
             }
         };
 
-        mMyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    Log.d("TAG", "The interstitial wasn't loaded yet.");
-                }
-            }
-        });
+
 
 
 
