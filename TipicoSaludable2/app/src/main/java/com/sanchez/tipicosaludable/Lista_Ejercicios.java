@@ -4,9 +4,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -53,6 +55,14 @@ public class Lista_Ejercicios extends Fragment implements AdapterView.OnItemClic
     public static  int resta, calentero, caloriasacumuladas=0;
     Double a = ScrollingDetalle.Calorias_consumidas;
     int i=0;
+
+    TextView crono,caloriras_depor,duracion_depor;
+    ImageView playbuttom,stopbuttom,rewindbuttom,imgdeporte;
+    boolean isOn = false;
+    int min=0,seg=0,mili=0;
+    Handler h = new Handler();
+    Thread cronos;
+    MediaPlayer alarma;
 
 
     @Override
@@ -102,6 +112,8 @@ public class Lista_Ejercicios extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+
         item = (Deportes_firebase) adapterView.getItemAtPosition(position);
         popupdeportes.setContentView(R.layout.contendedor_alert);
         gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
@@ -125,6 +137,12 @@ public class Lista_Ejercicios extends Fragment implements AdapterView.OnItemClic
                 gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
                 calorias = popupdeportes.findViewById(R.id.calorias_depor);
                 duracion = popupdeportes.findViewById(R.id.duracion_depor);
+                crono = popupdeportes.findViewById(R.id.crono);
+                playbuttom = popupdeportes.findViewById(R.id.playbuttom);
+                stopbuttom = popupdeportes.findViewById(R.id.stopbuttom);
+                rewindbuttom = popupdeportes.findViewById(R.id.rewindbuttom);
+                alarma  = MediaPlayer.create(getContext(),R.raw.alarma);
+
                 Glide.with(getContext())
                         .load(item.getImagen())
                         .crossFade()
@@ -140,10 +158,115 @@ public class Lista_Ejercicios extends Fragment implements AdapterView.OnItemClic
                 calentero = Integer.valueOf(a.intValue());
                 caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
                 resta= calentero - Integer.parseInt(calorias.getText().toString());
+                playbuttom.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        isOn=true;
+                    }
 
+                });
+                stopbuttom.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        isOn=false;
+                    }
+                });
+                rewindbuttom.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        isOn=false;
+                        mili=0;
+                        seg=0;
+                        min=0;
+                        crono.setText("00:00:000");
+
+                    }
+                });
+                cronos = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (true){
+                            if (isOn){
+                                try{
+                                    Thread.sleep(1);
+
+                                }catch (InterruptedException e){
+                                    e.printStackTrace();
+                                }
+                                mili++;
+                                if (mili==999){
+                                    seg++;
+                                    mili=0;
+                                }
+                                if (seg==59){
+                                    min++;
+                                    seg=0;
+                                }
+                                h.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        String m = "", s = "", mi = "";
+                                        if (mili<10) {
+                                            m = "00" + mili;
+                                        }else if (mili<100){
+                                            m="0"+mili;
+                                        }else {
+                                            m=""+mili;
+                                        }
+                                        if (seg<10){
+                                            s ="0"+ seg;
+                                        }else {
+                                            s ="" +seg;
+                                        }if (min<10){
+                                            mi="0"+min;
+                                        }else {
+                                            mi=""+min;
+                                        }
+                                        crono.setText(mi+":"+s+":"+m);
+                                    }
+                                });
+
+                            }
+                        }
+
+                    }
+                });
+                cronos.start();
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (true){
+                            if(isOn){
+                                try{
+                                    Thread.sleep(1);
+
+                                }catch (InterruptedException e){
+                                    e.printStackTrace();
+                                }
+                                if (min==30){
+                                    starsonido();
+                                    isOn = false;
+                                    popupdeportes.dismiss();
+                                    Toast.makeText(getContext(), "Realizado", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                    }
+                });
+                t.start();
                 popupdeportes.show();
-
             }
+
+
+            private void starsonido(){
+                alarma.start();
+            }
+
+
+
+
+
         });
 
         Glide.with(this)
@@ -159,6 +282,37 @@ public class Lista_Ejercicios extends Fragment implements AdapterView.OnItemClic
         duracion.setText(item.getDuracion());
 
         popupdeportes.show();
+
+
+
+        /*
+        btnrealizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupdeportes.dismiss();
+                popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                duracion = popupdeportes.findViewById(R.id.duracion_depor);
+
+
+
+                Glide.with(getContext())
+                        .load(item.getImagen())
+                        .crossFade()
+                        .centerCrop()
+                        .placeholder(R.drawable.imagen)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .thumbnail(0.5f)
+                        .into(gifdeporte);
+
+                calorias.setText(item.getCalorias());
+                duracion.setText(item.getDuracion());
+
+                popupdeportes.show();
+
+            }
+        });*/
 
 
     }
