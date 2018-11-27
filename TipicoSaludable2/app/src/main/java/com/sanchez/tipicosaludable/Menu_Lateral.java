@@ -74,8 +74,12 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         txtNombre1 = view.findViewById(R.id.txtNombre1);
         txtCorreo1 = view.findViewById(R.id.txtCorreo1);
 
+
         /*
         firebaseAuth = FirebaseAuth.getInstance();
+=======
+       /* firebaseAuth = FirebaseAuth.getInstance();
+>>>>>>> cd3a9a667d12c27b68d609fb15b485e71167b7dd
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
             View view1 = navigationView.getHeaderView(0);
@@ -85,7 +89,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         }else {
             goLogin();
-        }
+        }*/
 
 
 
@@ -97,7 +101,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
                 finish();
 
             }
-        });*/
+        });
 
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION-----------------------------------
         if (CaloriasActivity.imc>=40){
@@ -109,6 +113,9 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION FIN-----------------------------------
 
         //------------------------------DESCOMENTAR LO DEL INICIO DE SESION AL HACR PUSH
+
+       /* firebaseAuth = FirebaseAuth.getInstance();
+=======
 
 
         //-----------------------DIAS---------------------------

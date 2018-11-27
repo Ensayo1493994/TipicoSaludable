@@ -139,5 +139,25 @@
     <string name="Cronometro">Cronometro</string>
     <string name="Crono">00:00:000</string>
 
+    //Acerca de
+
+    <string name="tipico_de">Tipico Saludable</string>
+    <string name="calificala">Califica nuestra aplicación</string>
+    <string name="equipo">Nuestro  Equipo de Desarrollo</string>
+    <string name="ficha1">(Sena) ADSI - 1493994</string>
+    <string name="webs">WEBGRAFÍAS</string>
+    <string name="comidas_titulo">Comidas</string>
+    <string name="links_comidas">https://www.fatsecret.com</string>
+    <string name="links_comidas2">http://productossanluis.com</string>
+    <string name="link_comidas3">http://www.eluniversal.com</string>
+
+    <string name="recetas_titulo">RECETAS</string>
+    <string name="fuentes">Fuentes</string>
+    <string name="link_recetas">http://www.eltoquecolombiano.com</string>
+    <string name="link_recetas2">https://www.recetasgratis.net</string>
+    <string name="link_recetas3">https://www.mycolombianrecipes.com</string>
+
+    <string name="copy_tipico">Típico Saludable - Todos los derechos reservados ©  - v 1.0</string>
+    <string name="version">v 1.0</string>
 
 </resources>
