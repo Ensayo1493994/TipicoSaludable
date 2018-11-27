@@ -28,11 +28,11 @@ public class DetalleDeportes extends AppCompatActivity implements View.OnClickLi
         playbuttom = findViewById(R.id.playbuttom);
         stopbuttom = findViewById(R.id.stopbuttom);
         rewindbuttom = findViewById(R.id.rewindbuttom);
+        alarma  = MediaPlayer.create(this,R.raw.alarma);
         //en lo de abajo es que tenes que agrgar lo de la base de datos la imagen, duracion y calorias de los deportes
         imgdeporte = findViewById(R.id.imgdeporte);
         caloriras_depor = findViewById(R.id.calorias_depor);
         duracion_depor = findViewById(R.id.duracion_depor);
-        alarma  = MediaPlayer.create(this,R.raw.alarma);
 
         playbuttom.setOnClickListener(this);
         stopbuttom.setOnClickListener(this);
