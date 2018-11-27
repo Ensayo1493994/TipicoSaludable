@@ -241,7 +241,6 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
                                     popupdeportes.dismiss();
                                     Toast.makeText(getContext(), "Realizado", Toast.LENGTH_SHORT).show();
                                 }
-
                             }
                         }
 
