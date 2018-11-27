@@ -68,6 +68,9 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         //nombreusuario=  user.getDisplayName();
         //Toast.makeText(getContext(), ""+user.getDisplayName(), Toast.LENGTH_SHORT).show();
 
+
+
+
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {

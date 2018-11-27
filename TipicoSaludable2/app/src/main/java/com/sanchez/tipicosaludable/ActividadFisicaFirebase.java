@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -25,14 +24,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 
-public class Deportesfirebase extends Fragment implements AdapterView.OnItemClickListener {
+public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnItemClickListener {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     public static ArrayList<Deportes_firebase> listadeportes = new ArrayList<Deportes_firebase>();
@@ -52,38 +50,25 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_deportesfirebase, container, false);
-        final GridView gridView = view.findViewById(R.id.griddeportes);
+        View vista = inflater.inflate(R.layout.fragment_actividad_fisica_firebase, container, false);
+        final GridView gridView = vista.findViewById(R.id.griddeportes);
         gridView.setOnItemClickListener(this);
         popupdeportes = new Dialog(getContext());
 
         inicializarfirebase();
 
-        //---------------------------- DATOS DEPORTE FIREBASE --------------------
-
-        Query q = databaseReference.orderByChild("categoria").equalTo("deporte");
+        Query q = databaseReference.orderByChild("categoria").equalTo("actividad fisica");
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
-
                     Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
                     listadeportes.add(p);
                     adaptador = new ArrayAdapter<Deportes_firebase>(getContext(),android.R.layout.simple_list_item_1,listadeportes);
                     AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getContext(),listadeportes);
                     gridView.setAdapter(adaptadorDeportes);
-
                 }
-
-
-                /*
-                GenericTypeIndicator<ArrayList<Deportes_firebase>> t = new GenericTypeIndicator<ArrayList<Deportes_firebase>>(){};
-                listadeportes = dataSnapshot.getValue(t);
-                adaptador = new ArrayAdapter<Deportes_firebase>(getContext(),android.R.layout.simple_list_item_1,listadeportes);
-                //AdaptadorComida adaptadorComida = new AdaptadorComida(getContext(),listacomida);
-                AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getContext(),listadeportes);
-                gridView.setAdapter(adaptadorDeportes);*/
 
             }
 
@@ -93,23 +78,18 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
             }
         });
 
-
-
-        return view;
-
+        return vista;
     }
 
     private void inicializarfirebase() {
         FirebaseApp.initializeApp(getContext());
-        firebaseDatabase= FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Deporte");
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-
         item = (Deportes_firebase) adapterView.getItemAtPosition(position);
         popupdeportes.setContentView(R.layout.contendedor_alert);
         gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
@@ -169,43 +149,5 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
         popupdeportes.show();
 
 
-
-        /*
-        btnrealizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupdeportes.dismiss();
-                popupdeportes.setContentView(R.layout.activity_detalle_deportes);
-                gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
-                calorias = popupdeportes.findViewById(R.id.calorias_depor);
-                duracion = popupdeportes.findViewById(R.id.duracion_depor);
-
-
-
-                Glide.with(getContext())
-                        .load(item.getImagen())
-                        .crossFade()
-                        .centerCrop()
-                        .placeholder(R.drawable.imagen)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .thumbnail(0.5f)
-                        .into(gifdeporte);
-
-                calorias.setText(item.getCalorias());
-                duracion.setText(item.getDuracion());
-
-                popupdeportes.show();
-
-            }
-        });*/
-
-
-
-
-
-
-
     }
-
-
 }
