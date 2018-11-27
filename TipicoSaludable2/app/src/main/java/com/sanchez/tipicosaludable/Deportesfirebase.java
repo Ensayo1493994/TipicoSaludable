@@ -49,7 +49,7 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
     public static  int resta, calentero, caloriasacumuladas=0;
     Double a = ScrollingDetalle.Calorias_consumidas;
     int i=0;
-
+    //cronometro
     TextView crono,caloriras_depor,duracion_depor;
     ImageView playbuttom,stopbuttom,rewindbuttom,imgdeporte;
     boolean isOn = false;
