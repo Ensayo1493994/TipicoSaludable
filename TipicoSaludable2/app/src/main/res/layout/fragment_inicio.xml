@@ -60,11 +60,7 @@
             </ScrollView>
 
         </LinearLayout>
-        <Button
-            android:id="@+id/mybuttom"
-            android:layout_width="wrap_content"
-            android:text="Anuncio equisde"
-            android:layout_height="wrap_content" />
+
 
 
 

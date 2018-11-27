@@ -25,10 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.FirebaseApp;
@@ -59,7 +56,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
     private ImageView imagenExtendida, imgcalculo;
     private TextView informacion, informacionprote, informacioncarbo, txtcantidad, resultado, signosuma, signoigual;
     private Button btnconsumodealimeto, btncalcular;
-    private InterstitialAd mInterstitialAd;
+
     private double consumo=0, x;
     public static double canti;
     int dia, mes, año, diadespues;
@@ -140,19 +137,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
         informacioncarbo = findViewById(R.id.informacioncarbo);
         informacionprote = findViewById(R.id.informacionprote);
 
-        MobileAds.initialize(ScrollingDetalle.this, "ca-app-pub-3940256099942544~3347511713");
 
-        mInterstitialAd = new InterstitialAd(getApplicationContext());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-
-        });
 
         btnconsumodealimeto = findViewById(R.id.btnconsumodealimento);
         btnconsumodealimeto.setOnClickListener(new View.OnClickListener() {
@@ -161,11 +146,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
 
                 try{
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
-                    } else {
-                        Log.d("TAG", "The interstitial wasn't loaded yet.");
-                    }
+
 
                     Calorias_consumidas=Calorias_consumidas+(consumo + Double.parseDouble(informacion.getText().toString()));
                 }catch (Exception e){
