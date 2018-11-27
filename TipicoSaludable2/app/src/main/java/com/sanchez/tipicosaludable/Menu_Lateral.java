@@ -74,7 +74,12 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         txtNombre1 = view.findViewById(R.id.txtNombre1);
         txtCorreo1 = view.findViewById(R.id.txtCorreo1);
 
+
+        /*
+        firebaseAuth = FirebaseAuth.getInstance();
+=======
        /* firebaseAuth = FirebaseAuth.getInstance();
+>>>>>>> cd3a9a667d12c27b68d609fb15b485e71167b7dd
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
             View view1 = navigationView.getHeaderView(0);
@@ -136,6 +141,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         }*/
 
 
+        /*
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         navigationView.setNavigationItemSelectedListener(this);
@@ -163,7 +170,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
+                .build();*/
 
 
     }
@@ -239,7 +246,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
 
         if (id == R.id.nav_ejercicios) {
-            fragment2 = new Deportes2();
+            fragment2 = new EjerciciosFirebase();
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment2).commit();
 
 
@@ -263,7 +270,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         }
         else if(id == R.id.nav_actividad){
-            fragment4 = new Actividad_Fisica();
+            fragment4 = new ActividadFisicaFirebase();
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment4).commit();
 
         }else if(id == R.id.nav_deportes){

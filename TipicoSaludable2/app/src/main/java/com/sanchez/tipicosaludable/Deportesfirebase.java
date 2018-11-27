@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
     Button btnrealizar, btncancelar;
     public static  int resta, calentero, caloriasacumuladas=0;
     Double a = ScrollingDetalle.Calorias_consumidas;
+    int i=0;
 
     TextView crono,caloriras_depor,duracion_depor;
     ImageView playbuttom,stopbuttom,rewindbuttom,imgdeporte;
@@ -71,15 +73,29 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
 
         //---------------------------- DATOS DEPORTE FIREBASE --------------------
 
-        databaseReference.child("Deporte").addValueEventListener(new ValueEventListener() {
+        Query q = databaseReference.orderByChild("categoria").equalTo("deporte");
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+
+                    Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
+                    listadeportes.add(p);
+                    adaptador = new ArrayAdapter<Deportes_firebase>(getContext(),android.R.layout.simple_list_item_1,listadeportes);
+                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getContext(),listadeportes);
+                    gridView.setAdapter(adaptadorDeportes);
+
+                }
+
+
+                /*
                 GenericTypeIndicator<ArrayList<Deportes_firebase>> t = new GenericTypeIndicator<ArrayList<Deportes_firebase>>(){};
                 listadeportes = dataSnapshot.getValue(t);
                 adaptador = new ArrayAdapter<Deportes_firebase>(getContext(),android.R.layout.simple_list_item_1,listadeportes);
                 //AdaptadorComida adaptadorComida = new AdaptadorComida(getContext(),listacomida);
                 AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getContext(),listadeportes);
-                gridView.setAdapter(adaptadorDeportes);
+                gridView.setAdapter(adaptadorDeportes);*/
 
             }
 
@@ -98,7 +114,7 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
     private void inicializarfirebase() {
         FirebaseApp.initializeApp(getContext());
         firebaseDatabase= FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
+        databaseReference = firebaseDatabase.getReference("Deporte");
     }
 
 
