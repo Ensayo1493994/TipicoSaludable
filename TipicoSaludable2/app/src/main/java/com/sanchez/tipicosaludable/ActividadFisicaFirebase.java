@@ -38,16 +38,16 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
     DatabaseReference databaseReference;
     public static ArrayList<Deportes_firebase> listadeportes = new ArrayList<Deportes_firebase>();
     ArrayAdapter<Deportes_firebase> adaptador;
-    Dialog popupdeportes;
+    Dialog popupdeportes, popupdeportes2;
     ImageView gifdeporte, xbutton;
-    TextView duracion, calorias;
+    TextView duracion, calorias, textorealizado;
     Deportes_firebase item;
 
-    Button btnrealizar, btncancelar;
+    Button btnrealizar, btncancelar, btnaceptar;
     public static  int resta, calentero, caloriasacumuladas=0;
     Double a = ScrollingDetalle.Calorias_consumidas;
     int i=0;
-
+    //cronometro
     TextView crono,caloriras_depor,duracion_depor;
     ImageView playbuttom,stopbuttom,rewindbuttom,imgdeporte;
     boolean isOn = false;
@@ -55,6 +55,7 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
     Handler h = new Handler();
     Thread cronos;
     MediaPlayer alarma;
+
 
 
     @Override
@@ -65,6 +66,7 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
         final GridView gridView = vista.findViewById(R.id.griddeportes);
         gridView.setOnItemClickListener(this);
         popupdeportes = new Dialog(getContext());
+        popupdeportes2 = new Dialog(getContext());
 
         inicializarfirebase();
 
@@ -100,7 +102,9 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
 
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
+
+
         item = (Deportes_firebase) adapterView.getItemAtPosition(position);
         popupdeportes.setContentView(R.layout.contendedor_alert);
         gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
@@ -115,6 +119,20 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
                 popupdeportes.dismiss();
             }
         });
+
+
+        popupdeportes2.setContentView(R.layout.ejerciciorealizado);
+        textorealizado = popupdeportes2.findViewById(R.id.texttorelaizado);
+        btnaceptar = popupdeportes2.findViewById(R.id.btnaceptar);
+
+        textorealizado.setText("Felicidades has quemado un total de "+ calorias.getText());
+        btnaceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupdeportes2.dismiss();
+            }
+        });
+
         btnrealizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,6 +147,7 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
                 stopbuttom = popupdeportes.findViewById(R.id.stopbuttom);
                 rewindbuttom = popupdeportes.findViewById(R.id.rewindbuttom);
                 alarma  = MediaPlayer.create(getContext(),R.raw.alarma);
+
                 Glide.with(getContext())
                         .load(item.getImagen())
                         .crossFade()
@@ -218,6 +237,8 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
                     }
                 });
                 cronos.start();
+
+
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -229,23 +250,48 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
                                 }catch (InterruptedException e){
                                     e.printStackTrace();
                                 }
-                                if (min==30){
+                                if (seg==30){
                                     starsonido();
                                     isOn = false;
                                     popupdeportes.dismiss();
-                                    Toast.makeText(getContext(), "Realizado", Toast.LENGTH_SHORT).show();
                                 }
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (seg==30){
+                                            starsonido();
+                                            popupdeportes.dismiss();
+                                            popupdeportes2.show();
+
+
+
+                                            isOn = false;
+
+                                            //Toast.makeText(getContext(), "Realizado", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
                         }
 
                     }
                 });
                 t.start();
-
-
                 popupdeportes.show();
-
+                seg =0;
+                mili=0;
+                min =0;
             }
+
+
+            private void starsonido(){
+                alarma.start();
+            }
+
+
+
+
+
         });
 
         Glide.with(this)
@@ -263,8 +309,37 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
         popupdeportes.show();
 
 
+
+        /*
+        btnrealizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupdeportes.dismiss();
+                popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                duracion = popupdeportes.findViewById(R.id.duracion_depor);
+
+
+
+                Glide.with(getContext())
+                        .load(item.getImagen())
+                        .crossFade()
+                        .centerCrop()
+                        .placeholder(R.drawable.imagen)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .thumbnail(0.5f)
+                        .into(gifdeporte);
+
+                calorias.setText(item.getCalorias());
+                duracion.setText(item.getDuracion());
+
+                popupdeportes.show();
+
+            }
+        });*/
+
+
     }
-    private void starsonido(){
-        alarma.start();
-    }
+
 }

@@ -268,6 +268,11 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
                                 }catch (InterruptedException e){
                                     e.printStackTrace();
                                 }
+                                if (seg==30){
+                                    starsonido();
+                                    isOn = false;
+                                    popupdeportes.dismiss();
+                                }
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -284,7 +289,6 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
                                         }
                                     }
                                 });
-
                             }
                         }
 
