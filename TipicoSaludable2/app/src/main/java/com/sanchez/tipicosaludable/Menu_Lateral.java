@@ -47,6 +47,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     int dia, mes, año,diadespues;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
