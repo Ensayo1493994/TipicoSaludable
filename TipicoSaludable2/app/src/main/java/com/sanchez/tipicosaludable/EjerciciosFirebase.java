@@ -38,16 +38,16 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
     DatabaseReference databaseReference;
     public static ArrayList<Deportes_firebase> listadeportes = new ArrayList<Deportes_firebase>();
     ArrayAdapter<Deportes_firebase> adaptador;
-    Dialog popupdeportes;
+    Dialog popupdeportes, popupdeportes2;
     ImageView gifdeporte, xbutton;
-    TextView duracion, calorias;
+    TextView duracion, calorias, textorealizado;
     Deportes_firebase item;
 
-    Button btnrealizar, btncancelar;
+    Button btnrealizar, btncancelar, btnaceptar;
     public static  int resta, calentero, caloriasacumuladas=0;
     Double a = ScrollingDetalle.Calorias_consumidas;
     int i=0;
-
+    //cronometro
     TextView crono,caloriras_depor,duracion_depor;
     ImageView playbuttom,stopbuttom,rewindbuttom,imgdeporte;
     boolean isOn = false;
@@ -55,6 +55,7 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
     Handler h = new Handler();
     Thread cronos;
     MediaPlayer alarma;
+
 
 
     @Override
@@ -65,6 +66,7 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
         final GridView gridView = vista.findViewById(R.id.griddeportes);
         gridView.setOnItemClickListener(this);
         popupdeportes = new Dialog(getContext());
+        popupdeportes2 = new Dialog(getContext());
 
         inicializarfirebase();
 
@@ -104,7 +106,7 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
 
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
 
 
         item = (Deportes_firebase) adapterView.getItemAtPosition(position);
@@ -121,6 +123,20 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
                 popupdeportes.dismiss();
             }
         });
+
+
+        popupdeportes2.setContentView(R.layout.ejerciciorealizado);
+        textorealizado = popupdeportes2.findViewById(R.id.texttorelaizado);
+        btnaceptar = popupdeportes2.findViewById(R.id.btnaceptar);
+
+        textorealizado.setText("Felicidades has quemado un total de "+ calorias.getText());
+        btnaceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupdeportes2.dismiss();
+            }
+        });
+
         btnrealizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -225,6 +241,8 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
                     }
                 });
                 cronos.start();
+
+
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -241,6 +259,22 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
                                     isOn = false;
                                     popupdeportes.dismiss();
                                 }
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (seg==30){
+                                            starsonido();
+                                            popupdeportes.dismiss();
+                                            popupdeportes2.show();
+
+
+
+                                            isOn = false;
+
+                                            //Toast.makeText(getContext(), "Realizado", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
                         }
 
@@ -248,6 +282,9 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
                 });
                 t.start();
                 popupdeportes.show();
+                seg =0;
+                mili=0;
+                min =0;
             }
 
 
@@ -308,4 +345,5 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
 
 
     }
+
 }

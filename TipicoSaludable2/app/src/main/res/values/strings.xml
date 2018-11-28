@@ -130,8 +130,8 @@
     <string name="Mujer">Mujer -></string>
     <string name="tituloreco">Deportes Recomendados</string>
     <string name="app_Omitir">Omitir</string>
-    <string name="Limite_cal">Calorias maximas por dia:</string>
-    <string name="cal_per">0000.00</string>
+    <string name="Limite_cal">Calorias max. por dia:</string>
+    <string name="cal_per">0000</string>
     <string name="btncalcular">Calcular</string>
 
     //Cronometro
@@ -159,5 +159,8 @@
 
     <string name="copy_tipico">Típico Saludable - Todos los derechos reservados ©  - v 1.0</string>
     <string name="version">v 1.0</string>
+    <string name="caloras_consu">Cal. Consumidas</string>
+    <string name="titulo_inicio">Informacion</string>
+    <string name="Cantidad">Felicidades has quemadi un total de 101</string>
 
 </resources>

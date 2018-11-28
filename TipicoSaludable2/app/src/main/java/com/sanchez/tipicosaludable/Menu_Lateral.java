@@ -243,6 +243,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         Fragment fragment2 = null;
         Fragment fragment3 = null;
         Fragment fragment4 = null;
+        Fragment fragment5 = null;
 
 
         if (id == R.id.nav_ejercicios) {
@@ -263,6 +264,9 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         }
         else if (id == R.id.nav_acercade) {
+            /*fragment5 = new AcercaDeFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment5).commit();*/
+
 
         }else if (id == R.id.nav_deportesgordos) {
             fragment3 = new Lista_Ejercicios();
