@@ -12,8 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context="com.alejandro.menu_comida.MainActivity"
-        android:background="@drawable/madera"
-        >
+        android:background="@drawable/fondodos">
 
 
 

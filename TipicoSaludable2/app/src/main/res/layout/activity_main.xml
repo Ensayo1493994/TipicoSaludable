@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.sanchez.tipicosaludable.MainActivity">
+    tools:context="com.sanchez.tipicosaludable.MainActivity"
+    android:background="@drawable/fondodos">
 
         <LinearLayout
             android:layout_width="match_parent"

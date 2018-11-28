@@ -2,6 +2,8 @@ package com.sanchez.tipicosaludable;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
+import android.support.v7.widget.AppCompatImageHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +51,6 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
         View vista = inflater.inflate(R.layout.fragment_galeria, container, false);
         // Inflate the layout for this fragment
         final GridView gridView = (GridView) vista.findViewById(R.id.grid);
-
-
 /*
         AdaptadorComida adaptador = new AdaptadorComida(getContext());
 

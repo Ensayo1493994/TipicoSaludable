@@ -11,6 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+<<<<<<< HEAD
         app:cardCornerRadius="15dp">
 
         <LinearLayout
@@ -30,6 +31,32 @@
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
+=======
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:layout_width="340dp"
+            android:layout_height="340dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            >
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/correctoo"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/texttorelaizado"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/Cantidad"
+                android:layout_margin="10dp"
+                android:textAlignment="center"
+>>>>>>> catalejo
                 />
             <Button
                 android:id="@+id/btnaceptar"
@@ -37,6 +64,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btnaceptar"
+<<<<<<< HEAD
+=======
+                android:layout_margin="5dp"
+>>>>>>> catalejo
                 />
 
 

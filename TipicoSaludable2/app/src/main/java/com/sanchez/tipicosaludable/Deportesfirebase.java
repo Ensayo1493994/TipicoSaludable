@@ -289,7 +289,6 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
                                         }
                                     }
                                 });
-
                             }
                         }
 

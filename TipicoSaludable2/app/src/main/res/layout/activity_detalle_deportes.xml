@@ -15,7 +15,8 @@
             android:id="@+id/imgdeporte"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -123,17 +124,6 @@
                 android:src="@drawable/rewindbutton" />
         </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnrealizado"
-        style="@android:style/Widget.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:text="@string/app_realizar"
-        android:textSize="18dp" />
 
 
 </RelativeLayout>

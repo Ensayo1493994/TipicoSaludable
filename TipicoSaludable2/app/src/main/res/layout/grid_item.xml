@@ -9,17 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:transitionName="@string/nombre_transicion_imagen" />
+        android:transitionName="@string/nombre_transicion_imagen"
+        />
 
     <TextView
         android:id="@+id/nombre_comida"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/background_footer"
+        android:background="@drawable/black_gardien"
         android:maxLines="1"
         android:padding="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/blanco"
+        android:textSize="16dp"
+        android:text="MyFit"/>
 
 </FrameLayout>
