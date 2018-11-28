@@ -263,6 +263,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         }
         else if (id == R.id.nav_acercade) {
+            fragment3 = new AcercaDeFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment3).commit();
 
         }else if (id == R.id.nav_deportesgordos) {
             fragment3 = new Lista_Ejercicios();
