@@ -251,11 +251,10 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
                                 }catch (InterruptedException e){
                                     e.printStackTrace();
                                 }
-                                if (min==30){
+                                if (seg==30){
                                     starsonido();
                                     isOn = false;
                                     popupdeportes.dismiss();
-                                    Toast.makeText(getContext(), "Realizado", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
