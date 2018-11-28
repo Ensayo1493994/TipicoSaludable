@@ -108,9 +108,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
                 android:layout_margin="5dp"
                 android:padding="5dp"
-                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:textAlignment="center"
                 />
@@ -121,15 +122,29 @@
                 >
                 <GridView
                     android:id="@+id/ultimoconsumo"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+=======
                     android:layout_gravity="center_horizontal">
+>>>>>>> adef53447db6de79add9e28022c303c0a2372ab7
 
                 </GridView>
 
             </ScrollView>
 
         </LinearLayout>
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/barchart">
+
+
+
+        </com.github.mikephil.charting.charts.BarChart>
+
 
 
 
