@@ -47,11 +47,11 @@ public class AdaptadorComida extends BaseAdapter {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.grid_item, viewGroup, false);
+            view = inflater.inflate(R.layout.card_item, viewGroup, false);
         }
 
-        ImageView imagenComida = (ImageView) view.findViewById(R.id.imagen_comida);
-        TextView nombreComida = (TextView) view.findViewById(R.id.nombre_comida);
+        ImageView imagenComida = (ImageView) view.findViewById(R.id.imag_comida);
+        TextView nombreComida = (TextView) view.findViewById(R.id.txt_comida);
 
         final Comida item = getItem(position);
         //imagenComida.setImageResource(item.getIdDrawable());
