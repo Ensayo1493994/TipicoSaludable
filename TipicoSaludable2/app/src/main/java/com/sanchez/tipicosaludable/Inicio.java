@@ -161,7 +161,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         final TextView textView2 = vista.findViewById(R.id.cal_per);
         inicializarfirebase();
 
-        Query q = tablaperfil.orderByChild("nombre").equalTo(nombreusuario);
+        /*Query q = tablaperfil.orderByChild("nombre").equalTo(nombreusuario);
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -180,7 +180,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
 
