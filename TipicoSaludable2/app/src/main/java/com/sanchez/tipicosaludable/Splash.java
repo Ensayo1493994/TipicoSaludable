@@ -41,7 +41,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
         runner();
         //Autenticacion si el usuario esta logeado
 
-        /*
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -54,7 +54,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
                 }
 
             }
-        };*/
+        };
     }
     //-----------metodo oara ir a LoginActivity------------------------------------
     private void goLogin() {

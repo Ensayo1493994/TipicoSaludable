@@ -330,7 +330,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
 
-        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     @Override
