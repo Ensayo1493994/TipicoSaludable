@@ -130,7 +130,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        //nombreusuario=  user.getDisplayName();
+        nombreusuario=  user.getDisplayName();
         //Toast.makeText(getContext(), ""+user.getDisplayName(), Toast.LENGTH_SHORT).show();
 
 
@@ -161,7 +161,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         final TextView textView2 = vista.findViewById(R.id.cal_per);
         inicializarfirebase();
 
-        /*Query q = tablaperfil.orderByChild("nombre").equalTo(nombreusuario);
+        Query q = tablaperfil.orderByChild("nombre").equalTo(nombreusuario);
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -180,14 +180,14 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
 
 
         //-------------CONSULTAR INFO POR USUARIO--------------
 
 
-        //if(user != null){
+        if(user != null){
             Query q2 = tablaperfil.orderByChild("nombre").equalTo(user.getDisplayName());
             //Query q2 =tablaperfil.orderByChild("nombre").equalTo("Leonardo Sanchez");
             q2.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -199,7 +199,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
                     Historial p = new Historial();
                     //textView2.setText(""+p.getCalorías_máximas());
                     Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();*/
-                    //try{
+                    try{
                         for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
                             Perfil p = objSnapshot.getValue(Perfil.class);
                             perfil_lista.add(p);
@@ -216,9 +216,9 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
                     createCharts();
 
-                    //}catch (Exception e){
+                    }catch (Exception e){
 
-                    //}
+                    }
 
                 }
 
@@ -232,7 +232,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
 
 
-        //}
+        }
 
 
 
