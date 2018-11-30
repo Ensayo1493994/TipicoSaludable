@@ -60,7 +60,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity implements AdapterView.
     //------------------------------
 
     Dialog popupdeportes;
-    public static  int resta, calentero, caloriasacumuladas=0;
+    public static  int resta, calentero, caloriasacumuladas=0, calquemadas;
     ImageView Xfutbol;
     TextView tituloreco;
 
@@ -290,6 +290,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity implements AdapterView.
                 calentero = Integer.valueOf(a.intValue());
                 caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
                 resta= calentero - Integer.parseInt(calorias.getText().toString());
+                calquemadas = Integer.parseInt(calorias.getText().toString());
 
                 popupdeportes.show();
 

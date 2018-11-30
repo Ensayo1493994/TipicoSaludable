@@ -95,7 +95,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        //nombreusuario=  user.getDisplayName();
+        nombreusuario=  user.getDisplayName();
 
 
       //nombreusuario=  user.getDisplayName();

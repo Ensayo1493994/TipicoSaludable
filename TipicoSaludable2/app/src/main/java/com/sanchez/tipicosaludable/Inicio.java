@@ -91,10 +91,11 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
 
     //datos de los ejes de la grafica de barras, datos de la torta pastel
-    private String[] dias = new String[]{"Maxima", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"};
+    private String[] dias = new String[]{"Maxima", "Cal Consumidas", "Cal Quemadas"};
     //private int[] calorias = new int[]{2345, 1234, 3467, 2456, 1654, 2987, 1879, 1963}; // variables con las calorias de todos los dias la primera es la caloria maxima
     private int[] calorias;
-    private int[] color = new int[]{Color.GREEN, Color.YELLOW, Color.RED, Color.BLUE, Color.GRAY, Color.CYAN, Color.MAGENTA, Color.LTGRAY};
+    //private int[] color = new int[]{Color.GREEN, Color.YELLOW, Color.RED, Color.BLUE, Color.GRAY, Color.CYAN, Color.MAGENTA, Color.LTGRAY};
+    private int[] color = new int[]{Color.GREEN, Color.YELLOW, Color.RED};
 
 
 
@@ -212,7 +213,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
                         textView2.setText(""+entero);
                         Double ash = ScrollingDetalle.Calorias_consumidas;
                         parseo = Integer.valueOf(ash.intValue());
-                    calorias = new int[]{Integer.parseInt(textView2.getText().toString()),parseo,0,0,0,0,0,0};
+                    calorias = new int[]{Integer.parseInt(textView2.getText().toString()),parseo,Lista_Ejercicios2.calquemadas};
 
                     createCharts();
 
