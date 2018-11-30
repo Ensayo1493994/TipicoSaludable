@@ -282,7 +282,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     @Override
@@ -291,7 +291,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         if(firebaseAuthListener != null){
 
-            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+            //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
 
         }
 

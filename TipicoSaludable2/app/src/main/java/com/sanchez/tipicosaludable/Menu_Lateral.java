@@ -80,9 +80,9 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-       firebaseAuth = FirebaseAuth.getInstance();
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+       /*
+       FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
             View view1 = navigationView.getHeaderView(0);
             txtNombre1.setText(user.getDisplayName());
@@ -92,7 +92,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         }else {
             goLogin();
         }
-
+*/
 
 
         imageViewlogo1.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +116,6 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         //------------------------------DESCOMENTAR LO DEL INICIO DE SESION AL HACR PUSH
 
-       firebaseAuth = FirebaseAuth.getInstance();
 
 
         //-----------------------DIAS---------------------------
@@ -330,14 +329,14 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
 
-        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         if (firebaseAuthListener != null){
-            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+            //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
 
         }
     }

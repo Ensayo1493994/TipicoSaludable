@@ -130,7 +130,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        nombreusuario=  user.getDisplayName();
+        //nombreusuario=  user.getDisplayName();
         //Toast.makeText(getContext(), ""+user.getDisplayName(), Toast.LENGTH_SHORT).show();
 
 
@@ -187,9 +187,9 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         //-------------CONSULTAR INFO POR USUARIO--------------
 
 
-        if(user != null){
-            Query q2 = tablaperfil.orderByChild("nombre").equalTo(user.getDisplayName());
-            //Query q2 =tablaperfil.orderByChild("nombre").equalTo("Leonardo Sanchez");
+        //if(user != null){
+            //Query q2 = tablaperfil.orderByChild("nombre").equalTo(user.getDisplayName());
+            Query q2 =tablaperfil.orderByChild("nombre").equalTo("Leonardo Sanchez");
             q2.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -232,7 +232,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
 
 
-        }
+        //}
 
 
 

@@ -529,7 +529,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
             @Override
             public void onClick(View v) {
                 epicDialog.dismiss();
-                Toast.makeText(ScrollingDetalle.this,"Cuida tu alimentaci�n!!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrollingDetalle.this,"Cuida tu alimentación!!",Toast.LENGTH_SHORT).show();
 
             }
         });

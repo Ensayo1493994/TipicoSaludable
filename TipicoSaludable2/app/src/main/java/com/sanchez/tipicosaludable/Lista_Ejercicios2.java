@@ -75,6 +75,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity implements AdapterView.
     Double a = ScrollingDetalle.Calorias_consumidas;
     ImageView gifdeporte, xbutton;
     TextView duracion, calorias;
+    int i=0;
 
 
 
@@ -86,13 +87,29 @@ public class Lista_Ejercicios2 extends AppCompatActivity implements AdapterView.
         final GridView gridView = findViewById(R.id.griddeportes);
         gridView.setOnItemClickListener(this);
 
-        ShowRecomendacion();
+        //ShowRecomendacion();
 
         inicializarfirebase();
 
         databaseReference.child("Deporte").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+
+
+
+                    Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
+                    listadeportes.add(p);
+                    adaptador = new ArrayAdapter<Deportes_firebase>(getApplicationContext(),android.R.layout.simple_list_item_1,listadeportes);
+                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getApplicationContext(),listadeportes);
+                    gridView.setAdapter(adaptadorDeportes);
+
+                }
+
+
+
+                /*
+
                 GenericTypeIndicator<ArrayList<Deportes_firebase>> t = new GenericTypeIndicator<ArrayList<Deportes_firebase>>(){};
                 listadeportes = dataSnapshot.getValue(t);
                 adaptador = new ArrayAdapter<Deportes_firebase>(getApplicationContext(),android.R.layout.simple_list_item_1,listadeportes);
@@ -100,6 +117,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity implements AdapterView.
                 //AdaptadorComida adaptadorComida = new AdaptadorComida(getContext(),listacomida);
                 AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getApplicationContext(),listadeportes);
                 gridView.setAdapter(adaptadorDeportes);
+*/
             }
 
             @Override
