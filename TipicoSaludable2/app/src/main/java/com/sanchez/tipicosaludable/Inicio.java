@@ -1,36 +1,21 @@
 package com.sanchez.tipicosaludable;
 
-import android.content.Context;
-<<<<<<< HEAD
-import android.graphics.Color;
-=======
-import android.graphics.drawable.AnimationDrawable;
->>>>>>> adef53447db6de79add9e28022c303c0a2372ab7
-import android.net.Uri;
-import android.os.Bundle;
 
+import android.graphics.Color;
+
+import android.graphics.drawable.AnimationDrawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-<<<<<<< HEAD
-import android.support.annotation.Nullable;
-=======
-import android.support.constraint.ConstraintLayout;
->>>>>>> adef53447db6de79add9e28022c303c0a2372ab7
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
@@ -105,34 +90,12 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
         View vista = inflater.inflate(R.layout.fragment_inicio, container, false);
         GridView gridView = (GridView) vista.findViewById(R.id.ultimoconsumo);
-<<<<<<< HEAD
         barChart = vista.findViewById(R.id.barchart);
         createCharts();
-=======
-
-       /* View decorView =getActivity().getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-
-        LinearLayout linearLayout = (LinearLayout) vista.findViewById(R.id.bglayout);
-
-
-        animationDrawable = (AnimationDrawable) bglayout.getBackground();
-        animationDrawable.setEnterFadeDuration(4500);
-        animationDrawable.setExitFadeDuration(4500);
-        animationDrawable.start();
-        */
-
-
->>>>>>> adef53447db6de79add9e28022c303c0a2372ab7
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        //nombreusuario=  user.getDisplayName();
-        //Toast.makeText(getContext(), ""+user.getDisplayName(), Toast.LENGTH_SHORT).show();
-
 
 
 
@@ -159,27 +122,6 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         final TextView textView2 = vista.findViewById(R.id.cal_per);
         inicializarfirebase();
 
-        /*Query q = tablaperfil.orderByChild("nombre").equalTo(nombreusuario);
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
-                    Perfil p = objSnapshot.getValue(Perfil.class);
-                    perfil_lista.add(p);
-                    //adaptadorperfil = new ArrayAdapter<Perfil>(Login.this,android.R.layout.simple_list_item_1,perfil_lista);
-                    adaptadorperfil = new ArrayAdapter<Perfil>(getContext(),android.R.layout.simple_list_item_1,perfil_lista);
-                    //Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();
-                    temp=1;
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
 
 
         //-------------CONSULTAR INFO POR USUARIO--------------
@@ -191,26 +133,13 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
             q2.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    /*GenericTypeIndicator<ArrayList<Historial>> t = new GenericTypeIndicator<ArrayList<Historial>>(){};
-                    historial_lista = dataSnapshot.getValue(t);
-                    adaptador = new ArrayAdapter<Historial>(getContext(),android.R.layout.simple_list_item_1,historial_lista);
-                    Historial p = new Historial();
-                    //textView2.setText(""+p.getCalorías_máximas());
-                    Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();*/
                     try{
                         for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
                             Perfil p = objSnapshot.getValue(Perfil.class);
                             perfil_lista.add(p);
                             adaptadorperfil = new ArrayAdapter<Perfil>(getContext(),android.R.layout.simple_list_item_1,perfil_lista);
-                            //Toast.makeText(getContext(), ""+p.getCalorías_máximas(), Toast.LENGTH_SHORT).show();
 
                             caloriasmaximas = p.getCalorías_maximas();
-
-
-
-
-
-
 
 
                         }

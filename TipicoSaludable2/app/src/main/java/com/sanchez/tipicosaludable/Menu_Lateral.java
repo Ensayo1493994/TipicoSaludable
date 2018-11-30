@@ -265,15 +265,15 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,  fragment3).commit();
 
         }
+        else if (id == R.id.nav_perfil) {
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, new Fragment_Perfil()).commit();
+
+        }
         else if (id == R.id.nav_acercade) {
-<<<<<<< HEAD
             fragment3 = new AcercaDeFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment3).commit();
-=======
-            /*fragment5 = new AcercaDeFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment5).commit();*/
 
->>>>>>> ab8db4aaabcabc5581c2d3999d52ed2663c36c19
 
         }else if (id == R.id.nav_deportesgordos) {
             fragment3 = new Lista_Ejercicios();
