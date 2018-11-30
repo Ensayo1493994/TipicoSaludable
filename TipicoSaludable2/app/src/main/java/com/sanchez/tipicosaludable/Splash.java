@@ -38,10 +38,11 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         inicializarfirebase();
-        runner();
+        //runner();
         //Autenticacion si el usuario esta logeado
 
-        /*
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -54,7 +55,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
                 }
 
             }
-        };*/
+        };
     }
     //-----------metodo oara ir a LoginActivity------------------------------------
     private void goLogin() {
@@ -88,7 +89,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
     @Override
     protected void onStart() {
         super.onStart();
-        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
 
     }
 
@@ -96,7 +97,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
     protected void onStop() {
         super.onStop();
         if (firebaseAuthListener != null){
-            //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
     }
 

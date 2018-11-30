@@ -9,146 +9,171 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/fondodos">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/titulo_inicio"
-            android:textSize="25dp" />
-        <LinearLayout
-        android:layout_width="310dp"
-        android:layout_height="180dp"
-        android:layout_gravity="center_horizontal"
-        android:padding="5dp"
-            android:background="@drawable/fondogris">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_vertical"
-                android:padding="5dp"
-                android:layout_margin="5dp">
-
-                <TextView
-
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Limite_cal"
-                    android:textSize="18sp"
-                    android:layout_marginTop="15dp"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:layout_margin="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cal_per"
-                    android:textSize="40sp"
-                    android:id="@+id/cal_per"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="5dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_vertical"
-                android:padding="5dp"
-                android:layout_margin="5dp">
-
-                <TextView
-                    android:id="@+id/limte_cal"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/caloras_consu"
-                    android:textSize="18sp"
-                    android:layout_marginTop="15dp"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:layout_margin="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cal_per"
-                    android:textSize="40sp"
-                    android:id="@+id/cal_cons"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="5dp"
-                    />
-            </LinearLayout>
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ultimoconsumo"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="14dp"
-            android:textAlignment="center"
-            android:padding="5dp"
-            android:layout_margin="10dp"
-            />
-        <LinearLayout
+        android:background="@drawable/fondodos"
+        >
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:id="@+id/txtnoconsumo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:layout_margin="5dp"
-                android:padding="5dp"
-                android:gravity="center"
-                android:textAlignment="center"
-                />
-            <ScrollView
+            android:layout_height="match_parent">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+
                 >
-                <GridView
-                    android:id="@+id/ultimoconsumo"
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/titulo_inicio"
+                    android:textSize="25dp" />
+                <LinearLayout
+                    android:layout_width="310dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="5dp"
+                    android:background="@drawable/fondogris">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical"
+                        android:padding="5dp"
+                        android:layout_margin="5dp">
+
+                        <TextView
+
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Limite_cal"
+                            android:textSize="18sp"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center"
+                            android:textAlignment="center"
+                            android:layout_margin="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cal_per"
+                            android:textSize="40sp"
+                            android:id="@+id/cal_per"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="5dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical"
+                        android:padding="5dp"
+                        android:layout_margin="5dp">
+
+                        <TextView
+                            android:id="@+id/limte_cal"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/caloras_consu"
+                            android:textSize="18sp"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center"
+                            android:textAlignment="center"
+                            android:layout_margin="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cal_per"
+                            android:textSize="40sp"
+                            android:id="@+id/cal_cons"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="5dp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ultimoconsumo"
+                    android:textSize="20sp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="14dp"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    android:layout_margin="10dp"
+                    />
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp">
-=======
-                    android:layout_gravity="center_horizontal">
->>>>>>> adef53447db6de79add9e28022c303c0a2372ab7
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/txtnoconsumo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        />
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        >
+                        <GridView
+                            android:id="@+id/ultimoconsumo"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_gravity="center_horizontal">
 
-                </GridView>
 
-            </ScrollView>
+                        </GridView>
 
-        </LinearLayout>
-        <com.github.mikephil.charting.charts.BarChart
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/barchart">
+                    </ScrollView>
 
+                </LinearLayout>
 
-
-        </com.github.mikephil.charting.charts.BarChart>
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barchart"
+                    android:layout_width="match_parent"
 
 
+                    android:layout_height="190dp">
 
+
+                </com.github.mikephil.charting.charts.BarChart>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
 
 
     </LinearLayout>
+
+
+
+
+
+
+
+
+
 
 </FrameLayout>

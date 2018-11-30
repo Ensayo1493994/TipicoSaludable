@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -15,8 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.components.Legend;
@@ -48,7 +47,7 @@ import java.util.ArrayList;
 
 
 public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
-    int size, entero;
+    int parseo, entero;
     Double caloriasmaximas;
     FirebaseApp firebaseApp;
     FirebaseDatabase firebaseDatabase;
@@ -76,9 +75,11 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
 
     //datos de los ejes de la grafica de barras, datos de la torta pastel
-    private String[] dias = new String[]{"Maxima", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"};
-    private int[] calorias = new int[]{2345, 1234, 3467, 2456, 1654, 2987, 1879, 1963}; // variables con las calorias de todos los dias la primera es la caloria maxima
-    private int[] color = new int[]{Color.GREEN, Color.YELLOW, Color.RED, Color.BLUE, Color.GRAY, Color.CYAN, Color.MAGENTA, Color.LTGRAY};
+    private String[] dias = new String[]{"Maxima", "Cal Consumidas", "Cal Quemadas"};
+    //private int[] calorias = new int[]{2345, 1234, 3467, 2456, 1654, 2987, 1879, 1963}; // variables con las calorias de todos los dias la primera es la caloria maxima
+    private int[] calorias;
+    //private int[] color = new int[]{Color.GREEN, Color.YELLOW, Color.RED, Color.BLUE, Color.GRAY, Color.CYAN, Color.MAGENTA, Color.LTGRAY};
+    private int[] color = new int[]{Color.GREEN, Color.YELLOW, Color.RED};
 
 
 
@@ -93,6 +94,9 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         barChart = vista.findViewById(R.id.barchart);
         createCharts();
 
+
+        barChart = vista.findViewById(R.id.barchart);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -104,8 +108,8 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
-                    //nombreusuario=  user.getDisplayName();
-                    Toast.makeText(getContext(), ""+user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                    nombreusuario=  user.getDisplayName();
+                    //Toast.makeText(getContext(), ""+user.getDisplayName(), Toast.LENGTH_SHORT).show();
                 }else {
 
                 }
@@ -119,6 +123,8 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
         TextView textView = vista.findViewById(R.id.txtnoconsumo);
 
+
+
         final TextView textView2 = vista.findViewById(R.id.cal_per);
         inicializarfirebase();
 
@@ -127,9 +133,9 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         //-------------CONSULTAR INFO POR USUARIO--------------
 
 
-        if(user != null){
-            Query q2 = tablaperfil.orderByChild("nombre").equalTo(user.getDisplayName());
-            //Query q =databaseReference.orderByChild("usuario").equalTo("INGRID KATERINE VELASCO LOPEZ");
+        //if(user != null){
+            //Query q2 = tablaperfil.orderByChild("nombre").equalTo(user.getDisplayName());
+            Query q2 =tablaperfil.orderByChild("nombre").equalTo("Leonardo Sanchez");
             q2.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -139,12 +145,14 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
                             perfil_lista.add(p);
                             adaptadorperfil = new ArrayAdapter<Perfil>(getContext(),android.R.layout.simple_list_item_1,perfil_lista);
 
-                            caloriasmaximas = p.getCalorías_maximas();
-
-
-                        }
+                            caloriasmaximas = p.getCalorías_maximas(); }
                         entero = Integer.valueOf(caloriasmaximas.intValue());
                         textView2.setText(""+entero);
+                        Double ash = ScrollingDetalle.Calorias_consumidas;
+                        parseo = Integer.valueOf(ash.intValue());
+                    calorias = new int[]{Integer.parseInt(textView2.getText().toString()),parseo,Lista_Ejercicios2.calquemadas};
+
+                    createCharts();
 
                     }catch (Exception e){
 
@@ -160,7 +168,9 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
 
 
-        }
+
+
+        //}
 
 
 

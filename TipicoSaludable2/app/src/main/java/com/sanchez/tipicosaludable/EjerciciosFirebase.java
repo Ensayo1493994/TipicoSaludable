@@ -27,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -70,6 +71,8 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
 
         inicializarfirebase();
 
+
+
         Query q  = databaseReference.orderByChild("categoria").equalTo("ejercicio");
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -101,6 +104,7 @@ public class EjerciciosFirebase extends Fragment implements AdapterView.OnItemCl
     private void inicializarfirebase() {
         FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
+        //databaseReference = firebaseDatabase.getReference("Deporte");
         databaseReference = firebaseDatabase.getReference("Deporte");
     }
 
