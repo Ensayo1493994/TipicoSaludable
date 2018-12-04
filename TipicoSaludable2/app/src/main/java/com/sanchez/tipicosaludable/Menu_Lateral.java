@@ -82,7 +82,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
 
 
-       FirebaseUser user = firebaseAuth.getCurrentUser();
+       /*
+        FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
             View view1 = navigationView.getHeaderView(0);
             txtNombre1.setText(user.getDisplayName());
@@ -91,7 +92,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         }else {
             goLogin();
-        }
+        }*/
 
 
 
@@ -140,6 +141,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
             }
         }*/
 
+
+        /*
         firebaseAuth = FirebaseAuth.getInstance();
         navigationView.setNavigationItemSelectedListener(this);
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -166,7 +169,7 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
+                .build();*/
 
 
     }
@@ -329,14 +332,14 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
 
-        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         if (firebaseAuthListener != null){
-            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+            //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
 
         }
     }

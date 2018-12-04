@@ -95,7 +95,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        nombreusuario=  user.getDisplayName();
+        //nombreusuario=  user.getDisplayName();
 
 
       //nombreusuario=  user.getDisplayName();
@@ -145,13 +145,15 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
             public void onClick(View view) {
 
 
-                try{
+                //try{
 
 
-                    Calorias_consumidas=Calorias_consumidas+(consumo + Double.parseDouble(informacion.getText().toString()));
-                }catch (Exception e){
-                    Log.e("Error Calorias",e.getMessage());
-                }
+                    //Calorias_consumidas=Calorias_consumidas+(consumo + Double.parseDouble(informacion.getText().toString()));
+                //Toast.makeText(ScrollingDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+
+                //}catch (Exception e){
+                    //Log.e("Error Calorias",e.getMessage());
+                //}
 
                 showCalcularcantidad();
 
@@ -249,6 +251,8 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                         //---------------------- AGREGAR LA IMAGEN AL INICIO -----------------
                         consumo1.setIdDrawable(Fragment_galeria.n);
                         consumo1.setNombre(Fragment_galeria.nombrealimento);
+
+
                         if (bound>0){
                             for ( imagenid = 0; imagenid < bound; imagenid= imagenid+1){
 
@@ -277,7 +281,11 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
 
                         //----Agregar DATOS HISTORIAL FIREBASE---------
-                        Calorias_consumidas = cantidaddelalimento*(consumo+ Double.parseDouble(informacion.getText().toString()));
+
+
+                        Calorias_consumidas = Calorias_consumidas+cantidaddelalimento*(consumo+ Double.parseDouble(informacion.getText().toString()));
+                        Toast.makeText(ScrollingDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+
                         dia = c.get(Calendar.DAY_OF_MONTH);
                         mes = c.get(Calendar.MONTH);
                         año = c.get(Calendar.YEAR);
@@ -381,13 +389,13 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
 
                         //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
-                        x=((CaloriasActivity.actmb*90)/100);
+                        x=((Inicio.maximas*90)/100);
                        // Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
-                        if (Calorias_consumidas>CaloriasActivity.actmb){
+                        if (Calorias_consumidas>Inicio.maximas){
                             //Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
 
 
-                            canti= (Calorias_consumidas-CaloriasActivity.actmb);
+                            canti= (Calorias_consumidas-Inicio.maximas);
 
 
 
@@ -397,14 +405,14 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                             cantidadaconsumir.dismiss();
 
                         }
-                        else  if(Calorias_consumidas==CaloriasActivity.actmb){
+                        else  if(Calorias_consumidas==Inicio.maximas){
                             Toast.makeText(ScrollingDetalle.this, "No debes comsumir mas alimentos",
                                     Toast.LENGTH_LONG).show();
                             ShowTope();
                             cantidadaconsumir.dismiss();
 
                         }
-                        else if(Calorias_consumidas>=x && x<CaloriasActivity.actmb){
+                        else if(Calorias_consumidas>=x && x<Inicio.maximas){
                             canti= (CaloriasActivity.actmb-Calorias_consumidas);
                             Toast.makeText(ScrollingDetalle.this, "Te faltan "+canti+" calorias",
                                     Toast.LENGTH_LONG).show();

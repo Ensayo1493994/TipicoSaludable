@@ -64,7 +64,7 @@ import java.util.ArrayList;
 
 public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
     int parseo, entero;
-    Double caloriasmaximas;
+    Double caloriasmaximas, caloriasconsumidas;
     FirebaseApp firebaseApp;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference, tablaperfil;
@@ -77,7 +77,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
     Historial usuariofound;
     ArrayList<Perfil> perfil_lista = new ArrayList<Perfil>();
     ArrayAdapter<Perfil> adaptadorperfil;
-    public  static int temp=0;
+    public  static int temp=0, maximas;
     String nombreusuario;
 
     //animacion fondo
@@ -109,6 +109,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         GridView gridView = (GridView) vista.findViewById(R.id.ultimoconsumo);
 
         barChart = vista.findViewById(R.id.barchart);
+        TextView cal_cosumidas = vista.findViewById(R.id.cal_cons);
 
 
 
@@ -211,6 +212,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
                         }
                         entero = Integer.valueOf(caloriasmaximas.intValue());
                         textView2.setText(""+entero);
+                        maximas = Integer.parseInt(textView2.getText().toString());
                         Double ash = ScrollingDetalle.Calorias_consumidas;
                         parseo = Integer.valueOf(ash.intValue());
                     calorias = new int[]{Integer.parseInt(textView2.getText().toString()),parseo,Lista_Ejercicios2.calquemadas};
@@ -250,6 +252,10 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
             textView.setText("No has consumido nada hoy");
 
         }
+        caloriasconsumidas = ScrollingDetalle.Calorias_consumidas;
+        entero = Integer.valueOf(caloriasconsumidas.intValue());
+
+        cal_cosumidas.setText(""+entero);
 
 
 

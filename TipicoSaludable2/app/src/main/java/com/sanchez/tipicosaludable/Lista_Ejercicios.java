@@ -172,6 +172,7 @@ public class Lista_Ejercicios extends Fragment implements AdapterView.OnItemClic
                 duracion.setText(item.getDuracion());
 
                 calentero = Integer.valueOf(a.intValue());
+                ScrollingDetalle.Calorias_consumidas = ScrollingDetalle.Calorias_consumidas-Integer.parseInt(calorias.getText().toString());
                 caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
                 resta= calentero - Integer.parseInt(calorias.getText().toString());
                 playbuttom.setOnClickListener(new View.OnClickListener() {

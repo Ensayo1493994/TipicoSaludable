@@ -34,7 +34,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.sanchez.tipicosaludable.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,12 +72,14 @@ public class Lista_Ejercicios2 extends AppCompatActivity implements AdapterView.
     ArrayAdapter<Deportes_firebase> adaptador;
 
     Deportes_firebase item;
+    Deportes_firebase item2;
 
     Button btnrealizar, btncancelar;
     Double a = ScrollingDetalle.Calorias_consumidas;
     ImageView gifdeporte, xbutton;
     TextView duracion, calorias;
     int i=0;
+
 
 
 
@@ -87,7 +91,7 @@ public class Lista_Ejercicios2 extends AppCompatActivity implements AdapterView.
         final GridView gridView = findViewById(R.id.griddeportes);
         gridView.setOnItemClickListener(this);
 
-        //ShowRecomendacion();
+        ShowRecomendacion();
 
         inicializarfirebase();
 
@@ -151,39 +155,611 @@ public class Lista_Ejercicios2 extends AppCompatActivity implements AdapterView.
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
         recyclerView.setAdapter(adapter);
 
-        /*
+
         adapter.setMlistener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void itemClick(int position) {
 
-
                 switch (position){
                     case 0:
-                        ShowCaminar();
+
+
+                        Query q = databaseReference.child("Deporte").orderByChild("nombre").equalTo("Caminar");
+                        q.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+
+                                    Toast.makeText(Lista_Ejercicios2.this, "consulto", Toast.LENGTH_SHORT).show();
+
+
+
+                                    final  Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
+                                    listadeportes.add(p);
+                                    adaptador = new ArrayAdapter<Deportes_firebase>(getApplicationContext(),android.R.layout.simple_list_item_1,listadeportes);
+                                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getApplicationContext(),listadeportes);
+
+
+
+
+                                    //Toast.makeText(Lista_Ejercicios2.this, ""+item2.getCalorias(), Toast.LENGTH_SHORT).show();
+
+                                    popupdeportes.setContentView(R.layout.contendedor_alert);
+                                    gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
+                                    calorias = popupdeportes.findViewById(R.id.caloriasdepor2);
+                                    duracion = popupdeportes.findViewById(R.id.duracion_min2);
+                                    btnrealizar = popupdeportes.findViewById(R.id.btnrealizar);
+                                    btncancelar = popupdeportes.findViewById(R.id.btncancelar2);
+                                    xbutton = popupdeportes.findViewById(R.id.xContenedor);
+
+
+
+                                    xbutton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            popupdeportes.dismiss();
+                                        }
+                                    });
+
+                                    btnrealizar.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            popupdeportes.dismiss();
+                                            popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                                            gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                                            calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                                            duracion = popupdeportes.findViewById(R.id.duracion_depor);
+                                            Glide.with(getApplicationContext())
+                                                    .load(p.getImagen())
+                                                    .crossFade()
+                                                    .centerCrop()
+                                                    .placeholder(R.drawable.imagen)
+                                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                    .thumbnail(0.5f)
+                                                    .into(gifdeporte);
+
+                                            calorias.setText(p.getCalorias());
+                                            duracion.setText(p.getDuracion());
+
+                                            calentero = Integer.valueOf(a.intValue());
+                                            caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
+                                            resta= calentero - Integer.parseInt(calorias.getText().toString());
+                                            calquemadas = Integer.parseInt(calorias.getText().toString());
+
+                                            popupdeportes.show();
+
+                                        }
+                                    });
+
+                                    Glide.with(getApplicationContext())
+                                            .load(p.getImagen())
+                                            .crossFade()
+                                            .centerCrop()
+                                            .placeholder(R.drawable.imagen)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .thumbnail(0.5f)
+                                            .into(gifdeporte);
+
+                                    calorias.setText(p.getCalorias());
+                                    duracion.setText(p.getDuracion());
+
+                                    popupdeportes.show();
+
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                         break;
 
                     case 1:
-                        ShowBrazo();
+                        //
+                        Query q2 = databaseReference.child("Deporte").orderByChild("nombre").equalTo("Brazo");
+                        q2.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+
+
+
+                                    final Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
+                                    listadeportes.add(p);
+                                    adaptador = new ArrayAdapter<Deportes_firebase>(getApplicationContext(),android.R.layout.simple_list_item_1,listadeportes);
+                                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getApplicationContext(),listadeportes);
+
+
+
+                                    popupdeportes.setContentView(R.layout.contendedor_alert);
+                                    gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
+                                    calorias = popupdeportes.findViewById(R.id.caloriasdepor2);
+                                    duracion = popupdeportes.findViewById(R.id.duracion_min2);
+                                    btnrealizar = popupdeportes.findViewById(R.id.btnrealizar);
+                                    btncancelar = popupdeportes.findViewById(R.id.btncancelar2);
+                                    xbutton = popupdeportes.findViewById(R.id.xContenedor);
+
+
+
+                                    xbutton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            popupdeportes.dismiss();
+                                        }
+                                    });
+
+                                    btnrealizar.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+
+                                            popupdeportes.dismiss();
+                                            popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                                            gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                                            calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                                            duracion = popupdeportes.findViewById(R.id.duracion_depor);
+                                            Glide.with(getApplicationContext())
+                                                    .load(p.getImagen())
+                                                    .crossFade()
+                                                    .centerCrop()
+                                                    .placeholder(R.drawable.imagen)
+                                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                    .thumbnail(0.5f)
+                                                    .into(gifdeporte);
+
+                                            calorias.setText(p.getCalorias());
+                                            duracion.setText(p.getDuracion());
+
+                                            calentero = Integer.valueOf(a.intValue());
+                                            caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
+                                            resta= calentero - Integer.parseInt(calorias.getText().toString());
+                                            calquemadas = Integer.parseInt(calorias.getText().toString());
+
+                                            popupdeportes.show();
+
+                                        }
+                                    });
+
+                                    Glide.with(getApplicationContext())
+                                            .load(p.getImagen())
+                                            .crossFade()
+                                            .centerCrop()
+                                            .placeholder(R.drawable.imagen)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .thumbnail(0.5f)
+                                            .into(gifdeporte);
+
+                                    calorias.setText(p.getCalorias());
+                                    duracion.setText(p.getDuracion());
+
+                                    popupdeportes.show();
+
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                         break;
 
                     case 2:
-                        ShowSentadilla();
+
+                        //
+                        Query q3 = databaseReference.child("Deporte").orderByChild("nombre").equalTo("Sentadilla");
+                        q3.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+
+
+
+                                    final Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
+                                    listadeportes.add(p);
+                                    adaptador = new ArrayAdapter<Deportes_firebase>(getApplicationContext(),android.R.layout.simple_list_item_1,listadeportes);
+                                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getApplicationContext(),listadeportes);
+
+
+
+                                    popupdeportes.setContentView(R.layout.contendedor_alert);
+                                    gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
+                                    calorias = popupdeportes.findViewById(R.id.caloriasdepor2);
+                                    duracion = popupdeportes.findViewById(R.id.duracion_min2);
+                                    btnrealizar = popupdeportes.findViewById(R.id.btnrealizar);
+                                    btncancelar = popupdeportes.findViewById(R.id.btncancelar2);
+                                    xbutton = popupdeportes.findViewById(R.id.xContenedor);
+
+
+
+                                    xbutton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            popupdeportes.dismiss();
+                                        }
+                                    });
+
+                                    btnrealizar.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+
+                                            popupdeportes.dismiss();
+                                            popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                                            gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                                            calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                                            duracion = popupdeportes.findViewById(R.id.duracion_depor);
+                                            Glide.with(getApplicationContext())
+                                                    .load(p.getImagen())
+                                                    .crossFade()
+                                                    .centerCrop()
+                                                    .placeholder(R.drawable.imagen)
+                                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                    .thumbnail(0.5f)
+                                                    .into(gifdeporte);
+
+                                            calorias.setText(p.getCalorias());
+                                            duracion.setText(p.getDuracion());
+
+                                            calentero = Integer.valueOf(a.intValue());
+                                            caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
+                                            resta= calentero - Integer.parseInt(calorias.getText().toString());
+                                            calquemadas = Integer.parseInt(calorias.getText().toString());
+
+                                            popupdeportes.show();
+
+                                        }
+                                    });
+
+                                    Glide.with(getApplicationContext())
+                                            .load(p.getImagen())
+                                            .crossFade()
+                                            .centerCrop()
+                                            .placeholder(R.drawable.imagen)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .thumbnail(0.5f)
+                                            .into(gifdeporte);
+
+                                    calorias.setText(p.getCalorias());
+                                    duracion.setText(p.getDuracion());
+
+                                    popupdeportes.show();
+
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                         break;
 
                     case 3:
-                        ShowSaltos();
+
+                        //
+                        Query q4 = databaseReference.child("Deporte").orderByChild("nombre").equalTo("Saltos");
+                        q4.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+
+
+
+                                    final Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
+                                    listadeportes.add(p);
+                                    adaptador = new ArrayAdapter<Deportes_firebase>(getApplicationContext(),android.R.layout.simple_list_item_1,listadeportes);
+                                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getApplicationContext(),listadeportes);
+
+
+
+                                    popupdeportes.setContentView(R.layout.contendedor_alert);
+                                    gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
+                                    calorias = popupdeportes.findViewById(R.id.caloriasdepor2);
+                                    duracion = popupdeportes.findViewById(R.id.duracion_min2);
+                                    btnrealizar = popupdeportes.findViewById(R.id.btnrealizar);
+                                    btncancelar = popupdeportes.findViewById(R.id.btncancelar2);
+                                    xbutton = popupdeportes.findViewById(R.id.xContenedor);
+
+
+
+                                    xbutton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            popupdeportes.dismiss();
+                                        }
+                                    });
+
+                                    btnrealizar.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+
+                                            popupdeportes.dismiss();
+                                            popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                                            gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                                            calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                                            duracion = popupdeportes.findViewById(R.id.duracion_depor);
+                                            Glide.with(getApplicationContext())
+                                                    .load(p.getImagen())
+                                                    .crossFade()
+                                                    .centerCrop()
+                                                    .placeholder(R.drawable.imagen)
+                                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                    .thumbnail(0.5f)
+                                                    .into(gifdeporte);
+
+                                            calorias.setText(p.getCalorias());
+                                            duracion.setText(p.getDuracion());
+
+                                            calentero = Integer.valueOf(a.intValue());
+                                            caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
+                                            resta= calentero - Integer.parseInt(calorias.getText().toString());
+                                            calquemadas = Integer.parseInt(calorias.getText().toString());
+
+                                            popupdeportes.show();
+
+                                        }
+                                    });
+
+                                    Glide.with(getApplicationContext())
+                                            .load(p.getImagen())
+                                            .crossFade()
+                                            .centerCrop()
+                                            .placeholder(R.drawable.imagen)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .thumbnail(0.5f)
+                                            .into(gifdeporte);
+
+                                    calorias.setText(p.getCalorias());
+                                    duracion.setText(p.getDuracion());
+
+                                    popupdeportes.show();
+
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
                         break;
 
                     case 4:
-                        ShowMarchar();
+
+                        Query q5 = databaseReference.child("Deporte").orderByChild("nombre").equalTo("Marcha");
+                        q5.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+
+
+
+                                    final Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
+                                    listadeportes.add(p);
+                                    adaptador = new ArrayAdapter<Deportes_firebase>(getApplicationContext(),android.R.layout.simple_list_item_1,listadeportes);
+                                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getApplicationContext(),listadeportes);
+
+
+
+                                    popupdeportes.setContentView(R.layout.contendedor_alert);
+                                    gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
+                                    calorias = popupdeportes.findViewById(R.id.caloriasdepor2);
+                                    duracion = popupdeportes.findViewById(R.id.duracion_min2);
+                                    btnrealizar = popupdeportes.findViewById(R.id.btnrealizar);
+                                    btncancelar = popupdeportes.findViewById(R.id.btncancelar2);
+                                    xbutton = popupdeportes.findViewById(R.id.xContenedor);
+
+
+
+                                    xbutton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            popupdeportes.dismiss();
+                                        }
+                                    });
+
+                                    btnrealizar.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+
+                                            popupdeportes.dismiss();
+                                            popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                                            gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                                            calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                                            duracion = popupdeportes.findViewById(R.id.duracion_depor);
+                                            Glide.with(getApplicationContext())
+                                                    .load(p.getImagen())
+                                                    .crossFade()
+                                                    .centerCrop()
+                                                    .placeholder(R.drawable.imagen)
+                                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                    .thumbnail(0.5f)
+                                                    .into(gifdeporte);
+
+                                            calorias.setText(p.getCalorias());
+                                            duracion.setText(p.getDuracion());
+
+                                            calentero = Integer.valueOf(a.intValue());
+                                            caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
+                                            resta= calentero - Integer.parseInt(calorias.getText().toString());
+                                            calquemadas = Integer.parseInt(calorias.getText().toString());
+
+                                            popupdeportes.show();
+
+                                        }
+                                    });
+
+                                    Glide.with(getApplicationContext())
+                                            .load(p.getImagen())
+                                            .crossFade()
+                                            .centerCrop()
+                                            .placeholder(R.drawable.imagen)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .thumbnail(0.5f)
+                                            .into(gifdeporte);
+
+                                    calorias.setText(p.getCalorias());
+                                    duracion.setText(p.getDuracion());
+
+                                    popupdeportes.show();
+
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                         break;
 
                     case 5:
-                        ShowClimber();
+
+                        //
+                        Query q6 = databaseReference.child("Deporte").orderByChild("nombre").equalTo("Climber");
+                        q6.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+
+
+
+                                    final Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
+                                    listadeportes.add(p);
+                                    adaptador = new ArrayAdapter<Deportes_firebase>(getApplicationContext(),android.R.layout.simple_list_item_1,listadeportes);
+                                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getApplicationContext(),listadeportes);
+
+
+                                    popupdeportes.setContentView(R.layout.contendedor_alert);
+                                    gifdeporte = popupdeportes.findViewById(R.id.GifDeporte);
+                                    calorias = popupdeportes.findViewById(R.id.caloriasdepor2);
+                                    duracion = popupdeportes.findViewById(R.id.duracion_min2);
+                                    btnrealizar = popupdeportes.findViewById(R.id.btnrealizar);
+                                    btncancelar = popupdeportes.findViewById(R.id.btncancelar2);
+                                    xbutton = popupdeportes.findViewById(R.id.xContenedor);
+
+
+
+                                    xbutton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            popupdeportes.dismiss();
+                                        }
+                                    });
+
+                                    btnrealizar.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+
+                                            popupdeportes.dismiss();
+                                            popupdeportes.setContentView(R.layout.activity_detalle_deportes);
+                                            gifdeporte = popupdeportes.findViewById(R.id.imgdeporte);
+                                            calorias = popupdeportes.findViewById(R.id.calorias_depor);
+                                            duracion = popupdeportes.findViewById(R.id.duracion_depor);
+                                            Glide.with(getApplicationContext())
+                                                    .load(p.getImagen())
+                                                    .crossFade()
+                                                    .centerCrop()
+                                                    .placeholder(R.drawable.imagen)
+                                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                    .thumbnail(0.5f)
+                                                    .into(gifdeporte);
+
+                                            calorias.setText(p.getCalorias());
+                                            duracion.setText(p.getDuracion());
+
+                                            calentero = Integer.valueOf(a.intValue());
+                                            caloriasacumuladas = caloriasacumuladas + Integer.parseInt(calorias.getText().toString());
+                                            resta= calentero - Integer.parseInt(calorias.getText().toString());
+                                            calquemadas = Integer.parseInt(calorias.getText().toString());
+
+                                            popupdeportes.show();
+
+                                        }
+                                    });
+
+                                    Glide.with(getApplicationContext())
+                                            .load(p.getImagen())
+                                            .crossFade()
+                                            .centerCrop()
+                                            .placeholder(R.drawable.imagen)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .thumbnail(0.5f)
+                                            .into(gifdeporte);
+
+                                    calorias.setText(p.getCalorias());
+                                    duracion.setText(p.getDuracion());
+
+                                    popupdeportes.show();
+
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                         break;
                 }
             }
-        });*/
+
+            private void ShowClimber() {
+
+
+            }
+
+            private void ShowMarchar() {
+
+
+            }
+
+            private void ShowSaltos() {
+
+
+            }
+
+            private void ShowSentadilla() {
+
+
+            }
+
+            private void ShowBrazo() {
+                ;
+
+
+
+            }
+
+            private void ShowCaminar() {
+
+            }
+        });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
