@@ -163,4 +163,16 @@
     <string name="titulo_inicio">Informacion</string>
     <string name="Cantidad">Felicidades has quemadi un total de 101</string>
 
+    // perfil
+
+    <string name="actividad">Actividad Fisica</string>
+    <string name="calmax">Calorias Maximas</string>
+    <string name="contextura">Contextura</string>
+    <string name="edad">Edad</string>
+    <string name="gener">Genero</string>
+    <string name="imc">Imc</string>
+    <string name="talla">Talla</string>
+    <string name="peso">Peso</string>
+
+
 </resources>
