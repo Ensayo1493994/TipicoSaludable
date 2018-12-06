@@ -136,7 +136,7 @@ public class Lista_Ejercicios extends Fragment implements AdapterView.OnItemClic
         textorealizado = popupdeportes2.findViewById(R.id.texttorelaizado);
         btnaceptar = popupdeportes2.findViewById(R.id.btnaceptar);
 
-        textorealizado.setText("Felicidades has quemado un total de "+ calorias.getText());
+        textorealizado.setText("Felicidades has quemado un total de "+ item.getCalorias());
         btnaceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

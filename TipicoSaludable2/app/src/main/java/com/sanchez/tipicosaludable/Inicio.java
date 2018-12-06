@@ -1,21 +1,30 @@
 package com.sanchez.tipicosaludable;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.components.Legend;
@@ -60,7 +69,9 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
     Historial usuariofound;
     ArrayList<Perfil> perfil_lista = new ArrayList<Perfil>();
+
     ArrayAdapter<Perfil> adaptadorperfil;
+    ArrayAdapter<Historial> adaptadorhistorial;
     public  static int temp=0, maximas;
     String nombreusuario;
 
@@ -73,6 +84,18 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
     BarChart barChart;
 
+    //SHARED PREFERENCE
+    /*
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor ;
+    String consumo;*/
+    SharedPreferences preferencias, imageninicio;
+    public static ArrayList<UltimoConsumo> ultimoconsumo2 = new ArrayList<>();
+
+
+
+
+
 
     //datos de los ejes de la grafica de barras, datos de la torta pastel
     private String[] dias = new String[]{"Maxima", "Cal Consumidas", "Cal Quemadas"};
@@ -80,7 +103,6 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
     private int[] calorias;
     //private int[] color = new int[]{Color.GREEN, Color.YELLOW, Color.RED, Color.BLUE, Color.GRAY, Color.CYAN, Color.MAGENTA, Color.LTGRAY};
     private int[] color = new int[]{Color.GREEN, Color.YELLOW, Color.RED};
-
 
 
 
@@ -93,9 +115,36 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
         GridView gridView = (GridView) vista.findViewById(R.id.ultimoconsumo);
         barChart = vista.findViewById(R.id.barchart);
 
-        TextView cal_cosumidas = vista.findViewById(R.id.cal_cons);
+        final TextView cal_cosumidas = vista.findViewById(R.id.cal_cons);
 
-        //createCharts();
+
+
+        /*
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        //preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        editor = preferences.edit();*/
+
+
+        //LEE LOS DATOS EN ESA COSA DE SHAREDPREFERENCES
+
+        preferencias = getActivity().getSharedPreferences("ejemplo",Context.MODE_PRIVATE);
+        String cal = preferencias.getString("calorias","0");
+        Double a = Double.parseDouble(cal);
+        entero = a.intValue();
+        cal_cosumidas.setText(""+a);
+
+
+
+        //AGREGA LAS COSAS
+
+        /*
+        preferencias = getActivity().getSharedPreferences("ejemplo",Context.MODE_PRIVATE);
+        String consumo = cal_cosumidas.getText().toString();
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("calorias",consumo);
+        prueba2.setText(consumo);
+        editor.commit();*/
+
 
 
 
@@ -147,13 +196,14 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
                             perfil_lista.add(p);
                             adaptadorperfil = new ArrayAdapter<Perfil>(getContext(),android.R.layout.simple_list_item_1,perfil_lista);
 
-                            caloriasmaximas = p.getCalorías_maximas(); }
+                            caloriasmaximas = p.getCalorías_maximas();
+                        }
                         entero = Integer.valueOf(caloriasmaximas.intValue());
                         textView2.setText(""+entero);
                         maximas = Integer.parseInt(textView2.getText().toString());
-                        Double ash = ScrollingDetalle.Calorias_consumidas;
+                        Double ash = ScrollingDetalle.ufff;
                         parseo = Integer.valueOf(ash.intValue());
-                    calorias = new int[]{Integer.parseInt(textView2.getText().toString()),parseo,Lista_Ejercicios2.calquemadas};
+                    calorias = new int[]{Integer.parseInt(textView2.getText().toString()),Integer.parseInt(cal_cosumidas.getText().toString()),Lista_Ejercicios2.calquemadas};
 
                     createCharts();
 
@@ -165,6 +215,7 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
+
 
                 }
             });
@@ -178,10 +229,30 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //-------------CONSULTAR INFO POR USUARIO--------------
 
 
         if (ScrollingDetalle.ultimoconsumo.size()>0){
+            /*
+            imageninicio = getActivity().getSharedPreferences("listaimagenes", Context.MODE_PRIVATE);
+            String lista = imageninicio.getString("src","");*/
+
             AdaptadorUltimoConsumo adaptador = new AdaptadorUltimoConsumo(getContext(),ScrollingDetalle.ultimoconsumo);
             gridView.setAdapter(adaptador);
 
@@ -190,10 +261,12 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
             textView.setText("No has consumido nada hoy");
 
         }
-        caloriasconsumidas = ScrollingDetalle.Calorias_consumidas;
+        /*caloriasconsumidas = ScrollingDetalle.Calorias_consumidas;
         entero = Integer.valueOf(caloriasconsumidas.intValue());
 
-        cal_cosumidas.setText(""+entero);
+        cal_cosumidas.setText(""+entero);*/
+
+
 
 
 
@@ -202,6 +275,8 @@ public class Inicio extends Fragment implements GoogleApiClient.OnConnectionFail
 
         return vista;
     }
+
+
 
     private void inicializarfirebase() {
         firebaseApp.initializeApp(getContext());
