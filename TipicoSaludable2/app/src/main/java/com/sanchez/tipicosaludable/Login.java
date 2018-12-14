@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private ProgressBar progressBar;
     private CallbackManager callbackManager;
-    private LoginButton btnloginfb;
+    //private LoginButton btnloginfb;
     Animation smalltobig, nothingtocome;
     ImageView logocir;
     FirebaseDatabase firebaseDatabase;
@@ -97,38 +97,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         inicializarfirebase();
 
         //btnlogin.startAnimation(nothingtocome);
-
-        // btnloginfb.startAnimation(nothingtocome);
-
         //----------------------MOSTRAR FORMULARIO UNA SOLA VEZ--------------------
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-
-        if (Inicio.temp==1){
-            goMain();
-        }
-
-        //Login Facebook
-        callbackManager = CallbackManager.Factory.create();
-        btnloginfb =findViewById(R.id.btnloginfb);
-        btnloginfb.setReadPermissions(Arrays.asList("email","public_profile"));
-        btnloginfb.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
-            }
-        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -149,14 +119,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 startActivityForResult(intent,CODE);
 
 
-
-
-                if (Inicio.temp==1){
-
-                    goMain();
-                }
-
-
             }
         });
 
@@ -169,24 +131,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 if (user != null){
                     goMainScreen();
                 }
-                /*FirebaseUser user = firebaseAuth.getCurrentUser();
-                Query q = databaseReference.orderByChild("nombre").equalTo(user.getDisplayName());
-                q.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        encontrousuario = encontrousuario+1;
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                if (encontrousuario ==1){
-                    goMain();
-                }*/
-
             }
         };
 
@@ -200,7 +144,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
     private void handleFacebookAccessToken(AccessToken accessToken) {
         progressBar.setVisibility(View.VISIBLE);
-        btnloginfb.setVisibility(View.GONE);
+        //btnloginfb.setVisibility(View.GONE);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -210,17 +154,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     Toast.makeText(getApplicationContext(), R.string.firebase_error_login, Toast.LENGTH_LONG).show();
                 }
                 progressBar.setVisibility(View.GONE);
-                btnloginfb.setVisibility(View.VISIBLE);
+                //btnloginfb.setVisibility(View.VISIBLE);
             }
         });
-    }
-
-
-    private void goMain() {
-        Intent intent3 = new Intent(Login.this ,Menu_Lateral.class);
-        intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent3);
-        finish();
     }
 
     @Override
@@ -231,7 +167,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+//        callbackManager.onActivityResult(requestCode,resultCode,data);
         if (requestCode == CODE){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult (result);
@@ -282,7 +218,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     @Override
     protected void onStart() {
         super.onStart();
-        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     @Override
@@ -291,7 +227,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         if(firebaseAuthListener != null){
 
-            //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
 
         }
 

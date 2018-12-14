@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -35,6 +36,8 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         inicializarfirebase();
@@ -43,7 +46,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
 
 
 
-        /*
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -56,7 +59,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
                 }
 
             }
-        };*/
+        };
     }
     //-----------metodo oara ir a LoginActivity------------------------------------
     private void goLogin() {
@@ -69,7 +72,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
         TimerTask tarea = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(Splash.this,Menu_Lateral.class);
+                Intent intent = new Intent(Splash.this,MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -90,7 +93,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
     @Override
     protected void onStart() {
         super.onStart();
-        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
 
     }
 
@@ -98,7 +101,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
     protected void onStop() {
         super.onStop();
         if (firebaseAuthListener != null){
-            //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
     }
 

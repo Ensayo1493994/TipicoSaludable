@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.sanchez.tipicosaludable.Lista_Ejercicios2">
-
-
+    tools:context=".EjerciciosFirebase"
+    android:background="@drawable/fondofinal">
         <GridView
             android:id="@+id/griddeportes"
             android:layout_width="match_parent"
@@ -17,10 +16,4 @@
             android:numColumns="auto_fit"
             android:padding="7dp"
             android:verticalSpacing="10dp" />
-
-
-
-
-
-
 </LinearLayout>

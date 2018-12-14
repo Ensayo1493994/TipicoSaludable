@@ -1,15 +1,14 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.sanchez.tipicosaludable.Inicio"
+    android:background="@drawable/fondofinal"
     >
-
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondodos"
+        android:orientation="vertical"
         >
         <ScrollView
             android:layout_width="match_parent"
@@ -29,11 +28,11 @@
                     android:text="@string/titulo_inicio"
                     android:textSize="25dp" />
                 <LinearLayout
-                    android:layout_width="310dp"
+                    android:layout_width="340dp"
                     android:layout_height="180dp"
                     android:layout_gravity="center_horizontal"
                     android:padding="5dp"
-                    android:background="@drawable/fondogris">
+                    android:background="@drawable/fonoazul">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -107,59 +106,72 @@
                     android:padding="5dp"
                     android:layout_margin="10dp"
                     />
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="360dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/fonoazul"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
                     >
+
                     <TextView
                         android:id="@+id/txtnoconsumo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
                         android:layout_margin="5dp"
-                        android:padding="5dp"
+                        android:layout_marginBottom="10dp"
                         android:gravity="center"
+                        android:padding="5dp"
                         android:textAlignment="center"
-                        />
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        >
-                        <GridView
-                            android:id="@+id/ultimoconsumo"
-                            android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
+                        android:textSize="20sp" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
-                            android:layout_gravity="center_horizontal">
+                            android:gravity="center"
+                            android:orientation="horizontal">
 
-
-                        </GridView>
-
-                    </ScrollView>
+                            <GridView
+                                android:id="@+id/ultimoconsumo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="10dp"
+                                android:nestedScrollingEnabled="true"
+                                android:padding="10dp"
+                                android:scrollIndicators="top"
+                                android:scrollingCache="true"
+                                android:layout_marginRight="10dp"/>
+                        </LinearLayout>
 
                 </LinearLayout>
 
+               <LinearLayout
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/fonoazul"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barchart"
+                        android:layout_width="300dp"
+                        android:layout_height="130dp"
+                        android:layout_margin="20dp"
+                        android:padding="10dp"
+                        >
 
 
-
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/barchart"
-                    android:layout_width="match_parent"
-
-
-                    android:layout_height="190dp">
-
-
-                </com.github.mikephil.charting.charts.BarChart>
-
-
-
-
+                    </com.github.mikephil.charting.charts.BarChart>
+               </LinearLayout>
 
 
             </LinearLayout>
@@ -171,12 +183,4 @@
     </LinearLayout>
 
 
-
-
-
-
-
-
-
-
-</FrameLayout>
+</LinearLayout>

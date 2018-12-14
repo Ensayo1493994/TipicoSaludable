@@ -2,6 +2,7 @@ package com.sanchez.tipicosaludable;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,7 +10,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -33,7 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnItemClickListener {
+public class ActividadFisicaFirebase extends AppCompatActivity implements AdapterView.OnItemClickListener {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     public static ArrayList<Deportes_firebase> listadeportes = new ArrayList<Deportes_firebase>();
@@ -59,15 +63,15 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View vista = inflater.inflate(R.layout.fragment_actividad_fisica_firebase, container, false);
-        final GridView gridView = vista.findViewById(R.id.griddeportes);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_actividadfisica);
+        final GridView gridView = findViewById(R.id.griddeportes);
         gridView.setOnItemClickListener(this);
-        popupdeportes = new Dialog(getContext());
-        popupdeportes2 = new Dialog(getContext());
-
+        popupdeportes = new Dialog(ActividadFisicaFirebase.this);
+        popupdeportes2 = new Dialog(ActividadFisicaFirebase.this);
+        getSupportActionBar().setTitle("Actividad Fisica");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         inicializarfirebase();
 
         Query q = databaseReference.orderByChild("categoria").equalTo("actividad fisica");
@@ -78,8 +82,8 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
                 for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
                     Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
                     listadeportes.add(p);
-                    adaptador = new ArrayAdapter<Deportes_firebase>(getContext(),android.R.layout.simple_list_item_1,listadeportes);
-                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getContext(),listadeportes);
+                    adaptador = new ArrayAdapter<Deportes_firebase>(ActividadFisicaFirebase.this,android.R.layout.simple_list_item_1,listadeportes);
+                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(ActividadFisicaFirebase.this,listadeportes);
                     gridView.setAdapter(adaptadorDeportes);
                 }
 
@@ -91,11 +95,33 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
             }
         });
 
-        return vista;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_actividad,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                Intent intent = new Intent(ActividadFisicaFirebase.this, MainActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void inicializarfirebase() {
-        FirebaseApp.initializeApp(getContext());
+        FirebaseApp.initializeApp(ActividadFisicaFirebase.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Deporte");
     }
@@ -146,9 +172,9 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
                 playbuttom = popupdeportes.findViewById(R.id.playbuttom);
                 stopbuttom = popupdeportes.findViewById(R.id.stopbuttom);
                 rewindbuttom = popupdeportes.findViewById(R.id.rewindbuttom);
-                alarma  = MediaPlayer.create(getContext(),R.raw.alarma);
+                alarma  = MediaPlayer.create(ActividadFisicaFirebase.this,R.raw.alarma);
 
-                Glide.with(getContext())
+                Glide.with(ActividadFisicaFirebase.this)
                         .load(item.getImagen())
                         .crossFade()
                         .centerCrop()
@@ -255,7 +281,7 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
                                     isOn = false;
                                     popupdeportes.dismiss();
                                 }
-                                getActivity().runOnUiThread(new Runnable() {
+                               runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         if (seg==30){
@@ -281,6 +307,7 @@ public class ActividadFisicaFirebase extends Fragment implements AdapterView.OnI
                 seg =0;
                 mili=0;
                 min =0;
+                isOn=false;
             }
 
 

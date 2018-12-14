@@ -57,146 +57,11 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.contenedor, new Inicio()).commit();
 
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        View view = navigationView.getHeaderView(0);
-        imageViewlogo1 = view.findViewById(R.id.imageViewlogo1);
-        txtNombre1 = view.findViewById(R.id.txtNombre1);
-        txtCorreo1 = view.findViewById(R.id.txtCorreo1);
-
-
-
-        firebaseAuth = FirebaseAuth.getInstance();
-
-
-
-       /*
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user != null){
-            View view1 = navigationView.getHeaderView(0);
-            txtNombre1.setText(user.getDisplayName());
-            txtCorreo1.setText(user.getEmail());
-            Glide.with(this).load(user.getPhotoUrl()).into(imageViewlogo1);
-
-        }else {
-            goLogin();
-        }*/
-
-
-
-        imageViewlogo1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  =  new Intent(Menu_Lateral.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
+        }
 
         //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION-----------------------------------
-        if (CaloriasActivity.imc>=40){
-            navigationView.getMenu().setGroupVisible(R.id.menunormal,false);
 
-        }else{
-            navigationView.getMenu().setGroupVisible(R.id.menugordos,false);
-        }
-        //---------------------------------------------- MENU PARA GENTE OBESA VALIDACION FIN-----------------------------------
-
-        //------------------------------DESCOMENTAR LO DEL INICIO DE SESION AL HACR PUSH
-
-
-
-        //-----------------------DIAS---------------------------
-
-
-        /*final Calendar c = Calendar.getInstance();
-        dia = c.get(Calendar.DAY_OF_MONTH);
-        mes = c.get(Calendar.MONTH);
-        año = c.get(Calendar.YEAR);
-
-        diadespues = dia+1;
-
-
-        while (dia<diadespues){
-            final Calendar c2 = Calendar.getInstance();
-            dia = c2.get(Calendar.DAY_OF_MONTH);
-
-            if (dia==diadespues){
-
-                Toast.makeText(getApplicationContext(), "ya paso un dia", Toast.LENGTH_SHORT).show();
-
-            }
-        }*/
-
-
-        /*
-        firebaseAuth = FirebaseAuth.getInstance();
-        navigationView.setNavigationItemSelectedListener(this);
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    View view = navigationView.getHeaderView(0);
-                    imageViewlogo1 = view.findViewById(R.id.imageViewlogo1);
-                    txtNombre1 = view.findViewById(R.id.txtNombre1);
-                    setUserData(user);
-
-                }else {
-                    goLogin();
-                }
-
-            }
-        };
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();*/
-
-
-    }
-    
-
-    private void setUserData(FirebaseUser user) {
-        txtNombre1.setText(user.getDisplayName());
-        Glide.with(this).load(user.getPhotoUrl()).into(imageViewlogo1);
-
-    }
-
-
-
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        /*Dialog dialog = new Dialog(getApplicationContext());
-        dialog.setContentView(R.layout.popup);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        final TextView txtinfocalorias = dialog.findViewById(R.id.infopopup);
-        txtinfocalorias.setText("Hoy has consumido "+ActividadDetalle.Calorias_consumidas+"calorias");
-        dialog.show();*/
-        Toast.makeText(this, "Hoy has consumido un total de "+ScrollingDetalle.Calorias_consumidas+" calorias hoy", Toast.LENGTH_LONG).show();
-
-    }
 
 
     @Override
@@ -224,9 +89,11 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+
+        /*
         if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -246,38 +113,22 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
 
         if (id == R.id.nav_ejercicios) {
-            fragment2 = new EjerciciosFirebase();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment2).commit();
 
 
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            fragment = new Fragment_galeria();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
 
         }
         else if (id ==R.id.nav_inicio){
-            fragment3 = new Inicio();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,  fragment3).commit();
 
         }
         else if (id == R.id.nav_perfil) {
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, new Fragment_Perfil()).commit();
+
 
         }
         else if (id == R.id.nav_acercade) {
-            fragment3 = new AcercaDeFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment3).commit();
-
-
-
-            fragment3 = new AcercaDeFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment3).commit();
-
-            /*fragment5 = new AcercaDeFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment5).commit();*/
 
 
         }else if (id == R.id.nav_deportesgordos) {
@@ -286,12 +137,8 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
 
         }
         else if(id == R.id.nav_actividad){
-            fragment4 = new ActividadFisicaFirebase();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment4).commit();
 
         }else if(id == R.id.nav_deportes){
-            fragment4 = new Deportesfirebase();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment4).commit();
 
         } else if (id == R.id.nav_cerrar_sesion) {
 
@@ -340,14 +187,14 @@ public class Menu_Lateral extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
 
-        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         if (firebaseAuthListener != null){
-            //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
 
         }
     }

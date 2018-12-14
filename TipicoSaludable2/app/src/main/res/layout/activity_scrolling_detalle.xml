@@ -32,9 +32,10 @@
 
             <ImageView
                 android:id="@+id/imagen_extendida"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:transitionName="@string/nombre_transicion_imagen">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transitionName="@string/nombre_transicion_imagen"
+                android:scaleType="centerCrop">
 
             </ImageView>
 
@@ -50,6 +51,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        android:src="@drawable/btnp"/>
+        android:src="@drawable/download"
+        app:fabSize="normal"/>
 
 </android.support.design.widget.CoordinatorLayout>

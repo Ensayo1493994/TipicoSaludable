@@ -1,11 +1,13 @@
 package com.sanchez.tipicosaludable;
 
+import android.animation.Animator;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -16,7 +18,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -63,7 +69,6 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
     int dia, mes, año, diadespues;
     public static double Calorias_consumidas;
     public static ArrayList<UltimoConsumo> ultimoconsumo = new ArrayList<>();
-
     int cantidaddelalimento=0;
     int bound = ultimoconsumo.size(), imagenid, igual=0, caster, consultahistorial=0;
     String i;
@@ -81,7 +86,6 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
     private List<Historial> listahistorial = new ArrayList<Historial>();
     ArrayAdapter<Historial> adaptador;
-    SharedPreferences preferencias, imageninicio;
 
     //FIREBASE
     FirebaseDatabase firebaseDatabase;
@@ -89,6 +93,8 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
     DatabaseReference databaseReference;
     String nombreusuario;
     Historial p;
+
+    SharedPreferences preferencias;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +116,49 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setScaleX(0);
+        fab.setScaleY(0);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            final Interpolator interpolador = AnimationUtils.loadInterpolator(getBaseContext(),
+                    android.R.interpolator.fast_out_linear_in);
+
+            fab.animate()
+                    .scaleX(1)
+                    .scaleY(1)
+                    .setInterpolator(interpolador)
+                    .setDuration(200)
+                    .setStartDelay(200)
+                    .setListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            fab.animate()
+                                    .scaleY(0)
+                                    .scaleX(0)
+                                    .setInterpolator(interpolador)
+                                    .setDuration(200)
+                                    .start();
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+
+                        }
+                    });
+        }
+        fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryDark)));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -266,15 +314,9 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                                 }
                             }
                             if(igual==0){
-                                imageninicio = getSharedPreferences("listaimagenes", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = imageninicio.edit();
-                                editor.putString("src",""+consumo1);
                                 ultimoconsumo.add(consumo1);
-                                editor.commit();
                             }
                         }else {
-
-
                             ultimoconsumo.add(consumo1);
 
                         }
@@ -304,7 +346,58 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
                         //------ CONSULTAR SI EL USUARIO YA AH CONSUMIDO ALGO ANTES
 
+                        Query consulta = databaseReference.child("Historial").child("usuario").equalTo("Felixangel1 Quelal");
+                        consulta.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                                for (DataSnapshot objsnapshot : dataSnapshot.getChildren()){
+                                    consultahistorial = consultahistorial+1;
+                                    //Toast.makeText(ScrollingDetalle.this, "encontro "+consultahistorial, Toast.LENGTH_SHORT).show();
+                                    /*
+
+                                    p  = objsnapshot.getValue(Historial.class);
+                                    listahistorial.add(p);
+
+                                    adaptador  = new ArrayAdapter<Historial>(ScrollingDetalle.this,android.R.layout.simple_list_item_1,listahistorial);
+
+
+
+                                    //-------------------------------ACTUALIZAR INFO POR USUARIO----------------------------------
+
+                                    Toast.makeText(ScrollingDetalle.this, ""+consultahistorial, Toast.LENGTH_SHORT).show();
+                                    if (consultahistorial==1){
+                                        //Historial p = new Historial();
+                                        Historial a = new Historial();
+                                        a.setUid(p.getUid());
+                                        a.setCalorias_acumuladas(Lista_Ejercicios2.caloriasacumuladas);
+                                        a.setCalorías_consumidas(Calorias_consumidas);
+                                        a.setCalorías_excedentes(canti);
+                                        a.setCalorías_finales(Lista_Ejercicios2.resta);
+                                        a.setCalorías_máximas(CaloriasActivity.actmb);
+                                        a.setFecha(""+dia+"-"+(mes+1)+"-"+año);
+
+
+
+
+                                        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+                                        a.setUsuario("Felixangel1 Quelal");
+                                        databaseReference.child("Historial").child(a.getUid()).setValue(a);
+
+                                    }*/
+                                }
+
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
 
 
                         Historial p = new Historial();
@@ -316,7 +409,6 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                         p.setCalorías_máximas(CaloriasActivity.actmb);
                         p.setFecha(""+dia+"-"+(mes+1)+"-"+año);
 
-
                         preferencias = getSharedPreferences("ejemplo",Context.MODE_PRIVATE);
                         Double consumo = Calorias_consumidas;
                         SharedPreferences.Editor editor = preferencias.edit();
@@ -327,7 +419,7 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                         FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
-                        //p.setUsuario(nombreusuario);
+                        p.setUsuario(nombreusuario);
 
 
                         databaseReference.child("Historial").child(p.getUid()).setValue(p);
@@ -352,14 +444,14 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
 
 
                         //Toast.makeText(ActividadDetalle.this, ""+Calorias_consumidas, Toast.LENGTH_SHORT).show();
+                        x=((MainActivity.entero*90)/100);
 
-                        x=((Inicio.maximas*90)/100);
                        // Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
-                        if (Calorias_consumidas>Inicio.maximas){
+                        if (Calorias_consumidas>MainActivity.entero){
                             //Toast.makeText(ScrollingDetalle.this, ""+CaloriasActivity.actmb, Toast.LENGTH_SHORT).show();
 
 
-                            canti= (Calorias_consumidas-Inicio.maximas);
+                            canti= (Calorias_consumidas-MainActivity.entero);
 
 
 
@@ -369,22 +461,22 @@ public class ScrollingDetalle extends AppCompatActivity implements GoogleApiClie
                             cantidadaconsumir.dismiss();
 
                         }
-                        else  if(Calorias_consumidas==Inicio.maximas){
+                        else  if(Calorias_consumidas==MainActivity.entero){
                             Toast.makeText(ScrollingDetalle.this, "No debes comsumir mas alimentos",
                                     Toast.LENGTH_LONG).show();
                             ShowTope();
                             cantidadaconsumir.dismiss();
 
                         }
-                        else if(Calorias_consumidas>=x && x<Inicio.maximas){
-                            canti= (CaloriasActivity.actmb-Calorias_consumidas);
+                        else if(Calorias_consumidas>=x && x<MainActivity.entero){
+                            canti= (Calorias_consumidas-CaloriasActivity.actmb);
                             Toast.makeText(ScrollingDetalle.this, "Te faltan "+canti+" calorias",
                                     Toast.LENGTH_LONG).show();
                             ShowTope();
                             cantidadaconsumir.dismiss();
                         }
                         else{
-                            Intent intent = new Intent(ScrollingDetalle.this,Menu_Lateral.class);
+                            Intent intent = new Intent(ScrollingDetalle.this,Inicio.class);
                             startActivity(intent);
                             finish();
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -58,6 +59,9 @@ public class CaloriasActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     FirebaseApp firebaseApp;
     DatabaseReference databaseReference;
+    ArrayList<Perfil> perfil_lista = new ArrayList<Perfil>();
+    ArrayAdapter<Perfil> adaptadorperfil;
+    private ProgressBar progressBar;
 
 
 
@@ -67,6 +71,7 @@ public class CaloriasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calorias);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
+       // progressBar.findViewById(R.id.progresBar);
 
 
 
@@ -77,18 +82,46 @@ public class CaloriasActivity extends AppCompatActivity {
         validar = (Button) findViewById(R.id.validar);
         inicializarFirebase();
 
+
+
         //--------------------------  VALIDACION FORMULARIO UNA VEZ  -----------------
+
+
+
+
         Query q = databaseReference.orderByChild("nombre").equalTo(user.getDisplayName());
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                encontrousuario = encontrousuario+1;
 
-                Toast.makeText(CaloriasActivity.this, ""+encontrousuario, Toast.LENGTH_SHORT).show();
-                if (encontrousuario==1){
-                    Intent intent = new Intent(CaloriasActivity.this,Menu_Lateral.class);
-                    startActivity(intent);
+
+
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Perfil p = objSnapshot.getValue(Perfil.class);
+                    perfil_lista.add(p);
+                    adaptadorperfil = new ArrayAdapter<Perfil>(CaloriasActivity.this, android.R.layout.simple_list_item_1, perfil_lista);
+                    encontrousuario = perfil_lista.size();
+                    //Toast.makeText(CaloriasActivity.this, ""+p.getNombre(), Toast.LENGTH_SHORT).show();
+
+
+                    //Toast.makeText(CaloriasActivity.this, ""+encontrousuario, Toast.LENGTH_SHORT).show();
+                    //encontrousuario = encontrousuario+1;
+
+
+
                 }
+                //Toast.makeText(CaloriasActivity.this, ""+encontrousuario, Toast.LENGTH_SHORT).show();
+
+                if (encontrousuario>1){
+                    Intent intent = new Intent(CaloriasActivity.this,MainActivity.class);
+                    startActivity(intent);
+
+
+                }else {
+
+                }
+
 
 
             }
@@ -180,7 +213,7 @@ public class CaloriasActivity extends AppCompatActivity {
         firebaseApp.initializeApp(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         //firebaseDatabase.setPersistenceEnabled(true);
-        databaseReference = firebaseDatabase.getReference();
+        databaseReference = firebaseDatabase.getReference("Perfil");
     }
 
     private void inicializar() {
@@ -255,7 +288,7 @@ public class CaloriasActivity extends AppCompatActivity {
             imc=a/(d*d);
 
 
-            Intent intent = new Intent(CaloriasActivity.this,Menu_Lateral.class);
+            Intent intent = new Intent(CaloriasActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
             //6Toast.makeText(CaloriasActivity.this, "" + imc, Toast.LENGTH_SHORT).show();

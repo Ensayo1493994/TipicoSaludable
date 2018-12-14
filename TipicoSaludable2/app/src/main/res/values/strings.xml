@@ -173,6 +173,14 @@
     <string name="imc">Imc</string>
     <string name="talla">Talla</string>
     <string name="peso">Peso</string>
+    <string name="edadn">18+</string>
+    <string name="cerrars">Cerrar Sesion</string>
+    <string name="perfil">Perfil</string>
+    <string name="inicio">Inicio</string>
+    <string name="comidas">Antojos</string>
+    <string name="ejercicios">Ejercicios</string>
+    <string name="Afisica">Act. fisica</string>
+    <string name="deportes">Deportes</string>
 
 
 </resources>

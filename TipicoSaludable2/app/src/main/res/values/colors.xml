@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--<color name="colorPrimary">#24876D</color>-->
-    <color name="colorPrimary">#FFB42E</color>
-    <color name="colorPrimaryDark">#FFAA01</color>
+    <color name="colorPrimary">#1FAB8E</color>
+    <color name="colorPrimaryDark">#007D67</color>
     <color name="colorPrimaryDark1">#c6ffaa01</color>
-    <color name="colorAccent">#E3AC5B</color>
+
+
+
+
+    <color name="colorAccent">#006e5b</color>
     <color name="backgroundColor">#fff</color>
     <color name="naranjafondo">#ba5e02</color>
     <color name="naranja">#DB9B00</color>
@@ -32,6 +36,8 @@
     <color name="verde">#0B9900</color>
     <color name="verdePass">#69C22F</color>
     //Color de botones
-    <color name="realizar">#FFCA28</color>
-    <color name="cancelar">#EF6C00</color>
+    <color name="realizar">#1FAB8E</color>
+    <color name="cancelar">#007D67</color>
+    <color name="gris">#D1D1D1</color>
+    <color name="fondog">#00ffaa01</color>
 </resources>

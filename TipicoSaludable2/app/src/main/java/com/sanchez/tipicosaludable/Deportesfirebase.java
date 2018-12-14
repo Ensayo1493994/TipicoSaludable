@@ -2,6 +2,7 @@ package com.sanchez.tipicosaludable;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,7 +11,10 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -35,7 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class Deportesfirebase extends Fragment implements AdapterView.OnItemClickListener {
+public class Deportesfirebase extends AppCompatActivity implements AdapterView.OnItemClickListener {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     public static ArrayList<Deportes_firebase> listadeportes = new ArrayList<Deportes_firebase>();
@@ -61,14 +65,15 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_deportesfirebase, container, false);
-        final GridView gridView = view.findViewById(R.id.griddeportes);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_deportes);
+        final GridView gridView = findViewById(R.id.griddeportes);
         gridView.setOnItemClickListener(this);
-        popupdeportes = new Dialog(getContext());
-        popupdeportes2 = new Dialog(getContext());
+        popupdeportes = new Dialog(this);
+        popupdeportes2 = new Dialog(this);
+        getSupportActionBar().setTitle("Deportes");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         inicializarfirebase();
 
@@ -83,8 +88,8 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
 
                     Deportes_firebase p = objsnapshot.getValue(Deportes_firebase.class);
                     listadeportes.add(p);
-                    adaptador = new ArrayAdapter<Deportes_firebase>(getContext(),android.R.layout.simple_list_item_1,listadeportes);
-                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(getContext(),listadeportes);
+                    adaptador = new ArrayAdapter<Deportes_firebase>(Deportesfirebase.this,android.R.layout.simple_list_item_1,listadeportes);
+                    AdaptadorDeportes adaptadorDeportes = new AdaptadorDeportes(Deportesfirebase.this,listadeportes);
                     gridView.setAdapter(adaptadorDeportes);
 
                 }
@@ -108,12 +113,35 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
 
 
 
-        return view;
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_deportes, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                Intent intent = new Intent(Deportesfirebase.this, MainActivity.class);
+                startActivity(intent);
+                break;
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void inicializarfirebase() {
-        FirebaseApp.initializeApp(getContext());
+        FirebaseApp.initializeApp(this);
         firebaseDatabase= FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Deporte");
     }
@@ -164,9 +192,9 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
                 playbuttom = popupdeportes.findViewById(R.id.playbuttom);
                 stopbuttom = popupdeportes.findViewById(R.id.stopbuttom);
                 rewindbuttom = popupdeportes.findViewById(R.id.rewindbuttom);
-                alarma  = MediaPlayer.create(getContext(),R.raw.alarma);
+                alarma  = MediaPlayer.create(Deportesfirebase.this,R.raw.alarma);
 
-                Glide.with(getContext())
+                Glide.with(Deportesfirebase.this)
                         .load(item.getImagen())
                         .crossFade()
                         .centerCrop()
@@ -273,7 +301,7 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
                                     isOn = false;
                                     popupdeportes.dismiss();
                                 }
-                                getActivity().runOnUiThread(new Runnable() {
+                                runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         if (seg==30){
@@ -299,6 +327,7 @@ public class Deportesfirebase extends Fragment implements AdapterView.OnItemClic
                 seg =0;
                 mili=0;
                 min =0;
+                isOn=false;
             }
 
 

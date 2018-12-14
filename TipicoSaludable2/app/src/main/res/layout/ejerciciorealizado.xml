@@ -11,7 +11,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:cardCornerRadius="15dp">
+        app:cardCornerRadius="18dp"
+        app:cardBackgroundColor="@color/gris">
 
         <LinearLayout
             android:layout_width="340dp"

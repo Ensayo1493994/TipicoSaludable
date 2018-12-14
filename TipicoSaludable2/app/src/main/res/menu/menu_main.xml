@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/logoapp"
+        android:title="logo"
+        android:icon="@drawable/logofinal"
+        app:showAsAction="always"
+        />
+    <item
+        android:icon="@drawable/cerrar"
+        android:id="@+id/cerrasesion"
+        app:showAsAction="always"
+        android:title="@string/cerrars"
+        />
+    <item android:title="Acerca de"
+        android:id="@+id/acerca"
+        app:showAsAction="always"
+        android:icon="@drawable/acerca"/>
+
+</menu>

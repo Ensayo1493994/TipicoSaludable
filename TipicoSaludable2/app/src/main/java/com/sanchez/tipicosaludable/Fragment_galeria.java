@@ -11,8 +11,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageHelper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment_galeria extends Fragment implements AdapterView.OnItemClickListener {
+public class Fragment_galeria extends AppCompatActivity implements AdapterView.OnItemClickListener {
     public  static  String n;
     public static String nombrealimento;
     FirebaseDatabase firebaseDatabase;
@@ -46,11 +49,13 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.fragment_galeria, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_galeria);
         // Inflate the layout for this fragment
-        final GridView gridView = (GridView) vista.findViewById(R.id.grid);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Antojos");
+        final GridView gridView = (GridView) findViewById(R.id.grid);
 /*
         AdaptadorComida adaptador = new AdaptadorComida(getContext());
 
@@ -79,8 +84,8 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
                 GenericTypeIndicator<ArrayList<Comida>> t = new GenericTypeIndicator<ArrayList<Comida>>(){};
                  listacomida = dataSnapshot.getValue(t);
 
-                adaptador = new ArrayAdapter<Comida>(getContext(),android.R.layout.simple_list_item_1,listacomida);
-                AdaptadorComida adaptadorComida = new AdaptadorComida(getContext(),listacomida);
+                adaptador = new ArrayAdapter<Comida>(Fragment_galeria.this,android.R.layout.simple_list_item_1,listacomida);
+                AdaptadorComida adaptadorComida = new AdaptadorComida(Fragment_galeria.this,listacomida);
                 gridView.setAdapter(adaptadorComida);
 
             }
@@ -91,14 +96,38 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
             }
         });
         //------------------------------------------OBTENER DATOS DESDE FIREBASE-----------------------------------------
-        return vista;
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_comidas, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                Intent intent = new Intent(Fragment_galeria.this, MainActivity.class);
+                startActivity(intent);
+                break;
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
 
     private void inicializarfirebase() {
-        FirebaseApp.initializeApp(getContext());
+        FirebaseApp.initializeApp(Fragment_galeria.this);
         firebaseDatabase= FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
@@ -112,8 +141,8 @@ public class Fragment_galeria extends Fragment implements AdapterView.OnItemClic
         n = item.getIdDrawable();
         nombrealimento = item.getNombre();
 
-        Activity activity = getActivity();
-        Intent intent = new Intent(getContext(), ScrollingDetalle.class);
+        Activity activity = Fragment_galeria.this;
+        Intent intent = new Intent(Fragment_galeria.this, ScrollingDetalle.class);
         intent.putExtra(ScrollingDetalle.EXTRA_PARAM_ID, item.getId());
 
 /*        Fragment fragment = null;

@@ -27,7 +27,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                 <TextView
                     android:id="@+id/titulodepor"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:text="@string/titulo_deportes"
